@@ -1,0 +1,509 @@
+fileFormatVersion: 2
+guid: 5c7a8ef318afa974cb3ce64f05c0faee
+ModelImporter:
+  fileIDToRecycleName:
+    4300000: character
+    4300002: sword
+    4300004: shield
+    7400000: Take 001 //// character284
+    7400002: idle //// character284
+    7400004: run //// character284
+    7400006: jump //// character284
+    7400008: sideR //// character284
+    7400010: sideL //// character284
+    7400012: back //// character284
+    7400014: zombiWalk //// character284
+    7400016: salute //// character284
+    7400018: weapon //// character284
+    7400020: SwordFight_idle //// character284
+    7400022: SwordFight_attack //// character284
+    7400024: SwordFight_hit //// character284
+    7400026: mounted //// character284
+    7400028: idle1 //// character284
+    7400030: idle2 //// character284
+    7400032: walk //// character284
+    7400034: zombi_walk //// character284
+    7400036: TopBlendWave //// character284
+    7400038: TopBlendWeapon //// character284
+    7400040: idle1 //// root
+    7400042: run //// root
+    7400044: jump //// root
+    7400046: sideR //// root
+    7400048: sideL //// root
+    7400050: back //// root
+    7400052: zombi_walk //// root
+    7400054: TopBlendWave //// root
+    7400056: TopBlendWeapon //// root
+    7400058: SwordFight_idle //// root
+    7400060: SwordFight_attack //// root
+    7400062: SwordFight_hit //// root
+    7400064: mounted //// root
+    7400066: idle2 //// root
+    7400068: walk //// root
+    7400070: idle1 //// right_thigh
+    7400072: run //// right_thigh
+    7400074: jump //// right_thigh
+    7400076: sideR //// right_thigh
+    7400078: sideL //// right_thigh
+    7400080: back //// right_thigh
+    7400082: zombi_walk //// right_thigh
+    7400084: TopBlendWave //// right_thigh
+    7400086: TopBlendWeapon //// right_thigh
+    7400088: SwordFight_idle //// right_thigh
+    7400090: SwordFight_attack //// right_thigh
+    7400092: SwordFight_hit //// right_thigh
+    7400094: mounted //// right_thigh
+    7400096: idle2 //// right_thigh
+    7400098: walk //// right_thigh
+    7400100: idle1 //// right_calf
+    7400102: run //// right_calf
+    7400104: jump //// right_calf
+    7400106: sideR //// right_calf
+    7400108: sideL //// right_calf
+    7400110: back //// right_calf
+    7400112: zombi_walk //// right_calf
+    7400114: TopBlendWave //// right_calf
+    7400116: TopBlendWeapon //// right_calf
+    7400118: SwordFight_idle //// right_calf
+    7400120: SwordFight_attack //// right_calf
+    7400122: SwordFight_hit //// right_calf
+    7400124: mounted //// right_calf
+    7400126: idle2 //// right_calf
+    7400128: walk //// right_calf
+    7400130: idle1 //// right_foot
+    7400132: run //// right_foot
+    7400134: jump //// right_foot
+    7400136: sideR //// right_foot
+    7400138: sideL //// right_foot
+    7400140: back //// right_foot
+    7400142: zombi_walk //// right_foot
+    7400144: TopBlendWave //// right_foot
+    7400146: TopBlendWeapon //// right_foot
+    7400148: SwordFight_idle //// right_foot
+    7400150: SwordFight_attack //// right_foot
+    7400152: SwordFight_hit //// right_foot
+    7400154: mounted //// right_foot
+    7400156: idle2 //// right_foot
+    7400158: walk //// right_foot
+    7400160: idle1 //// spineA
+    7400162: run //// spineA
+    7400164: jump //// spineA
+    7400166: sideR //// spineA
+    7400168: sideL //// spineA
+    7400170: back //// spineA
+    7400172: zombi_walk //// spineA
+    7400174: TopBlendWave //// spineA
+    7400176: TopBlendWeapon //// spineA
+    7400178: SwordFight_idle //// spineA
+    7400180: SwordFight_attack //// spineA
+    7400182: SwordFight_hit //// spineA
+    7400184: mounted //// spineA
+    7400186: idle2 //// spineA
+    7400188: walk //// spineA
+    7400190: idle1 //// spineB
+    7400192: run //// spineB
+    7400194: jump //// spineB
+    7400196: sideR //// spineB
+    7400198: sideL //// spineB
+    7400200: back //// spineB
+    7400202: zombi_walk //// spineB
+    7400204: TopBlendWave //// spineB
+    7400206: TopBlendWeapon //// spineB
+    7400208: SwordFight_idle //// spineB
+    7400210: SwordFight_attack //// spineB
+    7400212: SwordFight_hit //// spineB
+    7400214: mounted //// spineB
+    7400216: idle2 //// spineB
+    7400218: walk //// spineB
+    7400220: idle1 //// head
+    7400222: run //// head
+    7400224: jump //// head
+    7400226: sideR //// head
+    7400228: sideL //// head
+    7400230: back //// head
+    7400232: zombi_walk //// head
+    7400234: TopBlendWave //// head
+    7400236: TopBlendWeapon //// head
+    7400238: SwordFight_idle //// head
+    7400240: SwordFight_attack //// head
+    7400242: SwordFight_hit //// head
+    7400244: mounted //// head
+    7400246: idle2 //// head
+    7400248: walk //// head
+    7400250: idle1 //// right_shoulder
+    7400252: run //// right_shoulder
+    7400254: jump //// right_shoulder
+    7400256: sideR //// right_shoulder
+    7400258: sideL //// right_shoulder
+    7400260: back //// right_shoulder
+    7400262: zombi_walk //// right_shoulder
+    7400264: TopBlendWave //// right_shoulder
+    7400266: TopBlendWeapon //// right_shoulder
+    7400268: SwordFight_idle //// right_shoulder
+    7400270: SwordFight_attack //// right_shoulder
+    7400272: SwordFight_hit //// right_shoulder
+    7400274: mounted //// right_shoulder
+    7400276: idle2 //// right_shoulder
+    7400278: walk //// right_shoulder
+    7400280: idle1 //// right_forearm
+    7400282: run //// right_forearm
+    7400284: jump //// right_forearm
+    7400286: sideR //// right_forearm
+    7400288: sideL //// right_forearm
+    7400290: back //// right_forearm
+    7400292: zombi_walk //// right_forearm
+    7400294: TopBlendWave //// right_forearm
+    7400296: TopBlendWeapon //// right_forearm
+    7400298: SwordFight_idle //// right_forearm
+    7400300: SwordFight_attack //// right_forearm
+    7400302: SwordFight_hit //// right_forearm
+    7400304: mounted //// right_forearm
+    7400306: idle2 //// right_forearm
+    7400308: walk //// right_forearm
+    7400310: idle1 //// right_hand
+    7400312: run //// right_hand
+    7400314: jump //// right_hand
+    7400316: sideR //// right_hand
+    7400318: sideL //// right_hand
+    7400320: back //// right_hand
+    7400322: zombi_walk //// right_hand
+    7400324: TopBlendWave //// right_hand
+    7400326: TopBlendWeapon //// right_hand
+    7400328: SwordFight_idle //// right_hand
+    7400330: SwordFight_attack //// right_hand
+    7400332: SwordFight_hit //// right_hand
+    7400334: mounted //// right_hand
+    7400336: idle2 //// right_hand
+    7400338: walk //// right_hand
+    7400340: idle1 //// left_shoulder
+    7400342: run //// left_shoulder
+    7400344: jump //// left_shoulder
+    7400346: sideR //// left_shoulder
+    7400348: sideL //// left_shoulder
+    7400350: back //// left_shoulder
+    7400352: zombi_walk //// left_shoulder
+    7400354: TopBlendWave //// left_shoulder
+    7400356: TopBlendWeapon //// left_shoulder
+    7400358: SwordFight_idle //// left_shoulder
+    7400360: SwordFight_attack //// left_shoulder
+    7400362: SwordFight_hit //// left_shoulder
+    7400364: mounted //// left_shoulder
+    7400366: idle2 //// left_shoulder
+    7400368: walk //// left_shoulder
+    7400370: idle1 //// left_forearm
+    7400372: run //// left_forearm
+    7400374: jump //// left_forearm
+    7400376: sideR //// left_forearm
+    7400378: sideL //// left_forearm
+    7400380: back //// left_forearm
+    7400382: zombi_walk //// left_forearm
+    7400384: TopBlendWave //// left_forearm
+    7400386: TopBlendWeapon //// left_forearm
+    7400388: SwordFight_idle //// left_forearm
+    7400390: SwordFight_attack //// left_forearm
+    7400392: SwordFight_hit //// left_forearm
+    7400394: mounted //// left_forearm
+    7400396: idle2 //// left_forearm
+    7400398: walk //// left_forearm
+    7400400: idle1 //// left_hand
+    7400402: run //// left_hand
+    7400404: jump //// left_hand
+    7400406: sideR //// left_hand
+    7400408: sideL //// left_hand
+    7400410: back //// left_hand
+    7400412: zombi_walk //// left_hand
+    7400414: TopBlendWave //// left_hand
+    7400416: TopBlendWeapon //// left_hand
+    7400418: SwordFight_idle //// left_hand
+    7400420: SwordFight_attack //// left_hand
+    7400422: SwordFight_hit //// left_hand
+    7400424: mounted //// left_hand
+    7400426: idle2 //// left_hand
+    7400428: walk //// left_hand
+    7400430: idle1 //// left_thigh
+    7400432: run //// left_thigh
+    7400434: jump //// left_thigh
+    7400436: sideR //// left_thigh
+    7400438: sideL //// left_thigh
+    7400440: back //// left_thigh
+    7400442: zombi_walk //// left_thigh
+    7400444: TopBlendWave //// left_thigh
+    7400446: TopBlendWeapon //// left_thigh
+    7400448: SwordFight_idle //// left_thigh
+    7400450: SwordFight_attack //// left_thigh
+    7400452: SwordFight_hit //// left_thigh
+    7400454: mounted //// left_thigh
+    7400456: idle2 //// left_thigh
+    7400458: walk //// left_thigh
+    7400460: idle1 //// left_calf
+    7400462: run //// left_calf
+    7400464: jump //// left_calf
+    7400466: sideR //// left_calf
+    7400468: sideL //// left_calf
+    7400470: back //// left_calf
+    7400472: zombi_walk //// left_calf
+    7400474: TopBlendWave //// left_calf
+    7400476: TopBlendWeapon //// left_calf
+    7400478: SwordFight_idle //// left_calf
+    7400480: SwordFight_attack //// left_calf
+    7400482: SwordFight_hit //// left_calf
+    7400484: mounted //// left_calf
+    7400486: idle2 //// left_calf
+    7400488: walk //// left_calf
+    7400490: idle1 //// left_foot
+    7400492: run //// left_foot
+    7400494: jump //// left_foot
+    7400496: sideR //// left_foot
+    7400498: sideL //// left_foot
+    7400500: back //// left_foot
+    7400502: zombi_walk //// left_foot
+    7400504: TopBlendWave //// left_foot
+    7400506: TopBlendWeapon //// left_foot
+    7400508: SwordFight_idle //// left_foot
+    7400510: SwordFight_attack //// left_foot
+    7400512: SwordFight_hit //// left_foot
+    7400514: mounted //// left_foot
+    7400516: idle2 //// left_foot
+    7400518: walk //// left_foot
+    100100000: DataTemplate __Singleton__
+  serializedVersion: 10
+  materials:
+    importMaterials: 1
+    materialName: 3
+    materialSearch: 1
+  animations:
+    generateAnimations: 3
+    bakeSimulation: 0
+    splitAnimations: 1
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 2
+    clipAnimations:
+    - name: idle1
+      firstFrame: 1
+      lastFrame: 39
+      wrapMode: 4
+      loop: 1
+    - name: run
+      firstFrame: 41
+      lastFrame: 60
+      wrapMode: 0
+      loop: 1
+    - name: jump
+      firstFrame: 61
+      lastFrame: 65
+      wrapMode: 0
+      loop: 0
+    - name: sideR
+      firstFrame: 66
+      lastFrame: 75
+      wrapMode: 0
+      loop: 1
+    - name: sideL
+      firstFrame: 76
+      lastFrame: 85
+      wrapMode: 0
+      loop: 1
+    - name: back
+      firstFrame: 86
+      lastFrame: 105
+      wrapMode: 0
+      loop: 1
+    - name: zombi_walk
+      firstFrame: 106
+      lastFrame: 145
+      wrapMode: 0
+      loop: 1
+    - name: TopBlendWave
+      firstFrame: 147
+      lastFrame: 163
+      wrapMode: 0
+      loop: 1
+    - name: TopBlendWeapon
+      firstFrame: 165
+      lastFrame: 170
+      wrapMode: 0
+      loop: 1
+    - name: SwordFight_idle
+      firstFrame: 180
+      lastFrame: 220
+      wrapMode: 0
+      loop: 1
+    - name: SwordFight_attack
+      firstFrame: 231
+      lastFrame: 235
+      wrapMode: 0
+      loop: 0
+    - name: SwordFight_hit
+      firstFrame: 240
+      lastFrame: 245
+      wrapMode: 0
+      loop: 0
+    - name: mounted
+      firstFrame: 250
+      lastFrame: 270
+      wrapMode: 0
+      loop: 1
+    - name: idle2
+      firstFrame: 280
+      lastFrame: 320
+      wrapMode: 4
+      loop: 1
+    - name: walk
+      firstFrame: 321
+      lastFrame: 360
+      wrapMode: 0
+      loop: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .0149999997
+    meshCompression: 0
+    addColliders: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMesh: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 0
+    normalImportMode: 0
+    tangentImportMode: 1
+  textMetaNamesToFileIDs:
+    //RootNode:
+      data:
+        first: 1
+        second: a2860100
+      data:
+        first: 4
+        second: 821a0600
+      data:
+        first: 111
+        second: 605fa900
+    character:
+      data:
+        first: 1
+        second: a0860100
+      data:
+        first: 4
+        second: 801a0600
+      data:
+        first: 137
+        second: a00bd100
+    head:
+      data:
+        first: 1
+        second: a4860100
+      data:
+        first: 4
+        second: 841a0600
+    left_calf:
+      data:
+        first: 1
+        second: a6860100
+      data:
+        first: 4
+        second: 861a0600
+    left_foot:
+      data:
+        first: 1
+        second: a8860100
+      data:
+        first: 4
+        second: 881a0600
+    left_forearm:
+      data:
+        first: 1
+        second: aa860100
+      data:
+        first: 4
+        second: 8a1a0600
+    left_hand:
+      data:
+        first: 1
+        second: ac860100
+      data:
+        first: 4
+        second: 8c1a0600
+    left_shoulder:
+      data:
+        first: 1
+        second: ae860100
+      data:
+        first: 4
+        second: 8e1a0600
+    left_thigh:
+      data:
+        first: 1
+        second: b0860100
+      data:
+        first: 4
+        second: 901a0600
+    right_calf:
+      data:
+        first: 1
+        second: b2860100
+      data:
+        first: 4
+        second: 921a0600
+    right_foot:
+      data:
+        first: 1
+        second: b4860100
+      data:
+        first: 4
+        second: 941a0600
+    right_forearm:
+      data:
+        first: 1
+        second: b6860100
+      data:
+        first: 4
+        second: 961a0600
+    right_hand:
+      data:
+        first: 1
+        second: b8860100
+      data:
+        first: 4
+        second: 981a0600
+    right_shoulder:
+      data:
+        first: 1
+        second: ba860100
+      data:
+        first: 4
+        second: 9a1a0600
+    right_thigh:
+      data:
+        first: 1
+        second: bc860100
+      data:
+        first: 4
+        second: 9c1a0600
+    root:
+      data:
+        first: 1
+        second: be860100
+      data:
+        first: 4
+        second: 9e1a0600
+    spineA:
+      data:
+        first: 1
+        second: c0860100
+      data:
+        first: 4
+        second: a01a0600
+    spineB:
+      data:
+        first: 1
+        second: c2860100
+      data:
+        first: 4
+        second: a21a0600
