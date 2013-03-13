@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using Pathfinding;
 
 public class GridWorldMap : MonoBehaviour {
 	
@@ -10,7 +11,8 @@ public class GridWorldMap : MonoBehaviour {
 	public GameObject wall;
 	public GameObject floor;
 	public GameObject bot;
-	
+
+	private GameObject astar;
 	private int[] staticMap;
 	private int rsize;
 	private int csize;
@@ -18,11 +20,32 @@ public class GridWorldMap : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		BuildMap();
+		CreatePathfindingGrid ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	private void CreatePathfindingGrid() {
+		astar = GameObject.Find ("A*");
+		AstarPath astarpath = astar.GetComponent<AstarPath> ();
+		GridGraph gridgraph = astarpath.astarData.AddGraph (typeof(GridGraph)) as GridGraph;
+		// LayerMask
+		int obstacles = 1 << LayerMask.NameToLayer ("Obstacles");
+		int walkable = 1 << LayerMask.NameToLayer ("Walkable");
+		// GridGraph Configuration
+		gridgraph.width = csize;
+		gridgraph.depth = rsize;
+		gridgraph.nodeSize = gridSize;
+		gridgraph.UpdateSizeFromWidthDepth ();
+		gridgraph.center = new Vector3 (rsize * gridSize / 2.0f, -0.2f, csize * gridSize / 2.0f);
+		gridgraph.collision.mask = obstacles;
+		gridgraph.collision.diameter = 0.8f;
+		gridgraph.collision.height = 1f;
+		gridgraph.collision.heightMask = walkable;
+		astarpath.Scan ();
 	}
 
 	/*!
