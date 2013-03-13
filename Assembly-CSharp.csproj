@@ -98,7 +98,10 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\PathUtilities.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\SizeProfiler.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
+     <Compile Include="Assets\Script\BaseBrain.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
+     <Compile Include="Assets\Script\IBotBrain.cs" />
+     <Compile Include="Assets\Script\ObjectAttributes.cs" />
      <Compile Include="Assets\Script\Perception.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />

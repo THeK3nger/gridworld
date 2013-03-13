@@ -53,7 +53,13 @@ public class GridWorldMap : MonoBehaviour {
 	/*!
 	 * Build map from the internal representation.
 	 *
-	 * TODO: Add more map item
+	 * LEGEND (provisory)
+	 * 	- 0 : Void
+	 *  - 1 : Wall
+	 *  - 100 : Floor
+	 *  - 201 : Bot
+	 * 
+	 * TODO: Add more map items
 	 */
 	private void BuildMap() {
 		LoadMapFromFile();
@@ -76,8 +82,12 @@ public class GridWorldMap : MonoBehaviour {
 
 	/*!
 	 * Compute matrix indexes from world position.
+	 * 
+	 * \param x World x coordinate
+	 * \param z World z coordinate
+	 * \return A size two array with the <i,j> indexes.
 	 */
-	public int[] getIndexFromWorld(float x, float z) {
+	public int[] getIndexesFromWorld(float x, float z) {
 		int i = (int) (x/gridSize - 0.5);
 		int j = (int) (z/gridSize - 0.5);
 		int[] res = {i,j};
@@ -85,15 +95,57 @@ public class GridWorldMap : MonoBehaviour {
 	}
 
 	/*!
+	 * Compute matrix indexes from world position.
+	 * 
+	 * \param x World x coordinate
+	 * \param z World z coordinate
+	 * \return Index of the linearized map array.
+	 */
+	public int getArrayIndexFromWorld(float x, float z) {
+		int i = (int) (x/gridSize - 0.5);
+		int j = (int) (z/gridSize - 0.5);
+		return i * csize + j;
+    }
+
+	/*!
 	 * Get the map element in the current world position.
+	 * 
+	 * \param x World x coordinate.
+	 * \param z World z coordinate.
 	 */
 	public int getMapElement(float x, float z) {
-		int[] idx = getIndexFromWorld (x, z);
-		return staticMap[idx[0]*csize+idx[1]];
+		int idx = getArrayIndexFromWorld (x, z);
+		return staticMap[idx];
+	}
+
+	/*!
+	 * Convert a pair of matrix indexes <i,j> in the corresponding
+	 * index of the linearized array associated to the map matrix.
+	 * 
+	 * \param i The row index.
+	 * \param j The column index.
+	 * \return The associated linearized array index.
+	 */
+	public int getArrayIndex(int i, int j) {
+		return i * csize + j;
+	}
+
+	/*!
+	 * Convert a pair of matrix indexes <i,j> in the corresponding
+	 * index of the linearized array associated to the map matrix.
+	 * 
+	 * \param idxs A pair <i,j> of indexes.
+	 * \return The associated linearized array index.
+	 */
+    public int getArrayIndex(int[] idxs) {
+		return idxs [0] * csize + idxs [1];
 	}
 
 	/*!
 	 * Return the map size.
+	 * 
+	 * \return A pair <rsize,csize> where rsize is the number of rows in the matrix and
+	 * csize is the number of columns.
 	 */
 	public int[] getMapSize() {
 		int[] res = {this.rsize,this.csize};
