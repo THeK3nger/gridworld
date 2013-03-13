@@ -99,6 +99,7 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\SizeProfiler.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\Script\BaseBrain.cs" />
+     <Compile Include="Assets\Script\BotActions.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
      <Compile Include="Assets\Script\IBotBrain.cs" />
      <Compile Include="Assets\Script\ObjectAttributes.cs" />
