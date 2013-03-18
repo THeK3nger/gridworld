@@ -354,7 +354,7 @@ ModelImporter:
     - name: walk
       firstFrame: 321
       lastFrame: 360
-      wrapMode: 0
+      wrapMode: 2
       loop: 1
   meshes:
     lODScreenPercentages: []

@@ -7,6 +7,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	private int[] myMap;			//Store local map perception.
 	private int rsize, csize;		//Map size.
 	private GridWorldMap mapworld;	//A reference to the original map.
+	private BotActions botActions;
 	
 	private List<GameObject> objectInFov; // Contains the list of object in the FOV.
 
@@ -18,9 +19,9 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		csize = sizes [1];
 		myMap = new int[rsize * csize];
 		objectInFov = new List<GameObject>();
-
+		botActions = gameObject.GetComponent<BotActions> ();
 		// Run Thread Function Every 1 second
-		InvokeRepeating("test", 0, 1);
+		InvokeRepeating("test", 10, 1);
 	}
 	 
 	 // Update is called once per frame
@@ -31,7 +32,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	// Implementation of IBotBrain.objectEnteringFOV
 	public void objectEnteringFOV(GameObject obj) {
 	 	// Extract Type and update the map.
-		ObjectAttributes attributes = obj.GetComponent<ObjectAttributes> ();
+		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
 		int type = attributes.type;
 		int idx = mapworld.getArrayIndexFromWorld (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
@@ -48,12 +49,13 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 
 	}
 
-	// Temporary test function
+	// Temporary test function 
 	public void test() {
 		Debug.Log ("----------");
 		foreach (GameObject go in objectInFov) {
 			Debug.Log (go);
 		}
+		botActions.DoAction ("move");
 	}
 
 	/*!

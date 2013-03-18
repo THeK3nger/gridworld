@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ObjectAttributes : MonoBehaviour {
+public class SmartObjects : MonoBehaviour {
 
 	public int type = 0;
 	public bool isStatic = true;

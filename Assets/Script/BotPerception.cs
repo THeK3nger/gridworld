@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent (typeof (Collider))]
-public class Perception : MonoBehaviour {
+public class BotPerception : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

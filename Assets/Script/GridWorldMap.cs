@@ -89,8 +89,9 @@ public class GridWorldMap : MonoBehaviour {
 		for (int i=0;i<rsize;i++) {
 			for (int j=0;j<csize;j++) {
 				int map_element = staticMap[i*csize+j];
-				float x = gridSize*(i+0.5f); 
-				float z = gridSize*(j+0.5f);
+				float[] worldcoords = getWorldFromIndexes(i,j);
+				float x = worldcoords[0];
+				float z = worldcoords[1];
 				if (map_element!=0){
 					if (map_element==1)
 						Instantiate(wall,new Vector3(x,1,z),Quaternion.identity);
@@ -116,6 +117,13 @@ public class GridWorldMap : MonoBehaviour {
 		int[] res = {i,j};
 		return res;
 	}
+
+	public float[] getWorldFromIndexes(int i, int j) {
+		float x = gridSize*(i+0.5f); 
+		float z = gridSize*(j+0.5f);
+		float[] res = {x, z};
+		return res;
+    }
 
 	/*!
 	 * Compute matrix indexes from world position.

@@ -104,6 +104,7 @@
      <Compile Include="Assets\Script\GridWorldMap.cs" />
      <Compile Include="Assets\Script\IBotControl.cs" />
      <Compile Include="Assets\Script\SmartObjects.cs" />
+     <Compile Include="Assets\Script\iTween.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
      <None Include="Assets\Maps\simple_map.map.txt" />
