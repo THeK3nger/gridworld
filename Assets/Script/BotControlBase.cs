@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class BaseBrain : MonoBehaviour, IBotBrain {
+public class BotControlBase : MonoBehaviour, IBotControl {
 
 	private int[] myMap;			//Store local map perception.
 	private int rsize, csize;		//Map size.

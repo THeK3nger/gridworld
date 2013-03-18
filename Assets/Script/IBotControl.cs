@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public interface IBotBrain {
+public interface IBotControl {
 
 	/*!
 	 * objectEntringFOV is a callback function called by the Perception component
