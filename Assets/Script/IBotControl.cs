@@ -24,4 +24,6 @@ public interface IBotControl {
 	 */
 	void botDoAction(string action);
 
+	bool CheckCondition(string conditionName);
+
 }

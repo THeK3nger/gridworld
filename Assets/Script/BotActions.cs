@@ -13,13 +13,17 @@ using Pathfinding;
 public class BotActions : MonoBehaviour {
 
 	public float moveSpeed = 1;
+	public string controllerName = "BotControlBase";
 
 	private bool actionComplete = true;
 	private bool actionSuccess = true;
 
+	private IBotControl parentControl;
+
 	// Use this for initialization
 	void Start () {
-	
+		// TODO: There is a way to make this generic?
+		parentControl = gameObject.GetComponent(controllerName) as IBotControl;
 	}
 
 	/*!
@@ -63,7 +67,6 @@ public class BotActions : MonoBehaviour {
 	void PathFoundCallback(Path path) {
 		animation.CrossFade("walk");
 		Vector3[] array_path = path.vectorPath.ToArray ();
-		Debug.Log (array_path.Length);
 		iTween.MoveTo(gameObject, iTween.Hash
 		              (
 			"path", array_path,
@@ -82,13 +85,14 @@ public class BotActions : MonoBehaviour {
 		animation.CrossFade ("idle1");
 		actionComplete = true;
 		actionSuccess = true;
+		LookAt(new Vector3(0,0,0));
 	}
 
 	/*!
 	 * Face in 'dir' direction.
 	 */
-	void FaceDirection(Vector3 dir) {
-
+	void LookAt(Vector3 dir) {
+		iTween.LookTo(gameObject,dir,1.0f);
 	}
 
 	/*!
@@ -102,7 +106,10 @@ public class BotActions : MonoBehaviour {
 	 * Grab the object in current location.
 	 */
 	void Grab() {
-
+		if (parentControl.CheckCondition("grabbing")) {
+			Debug.Log("GRAB!");
+		}
+		// TODO: How to invoke a return value?
 	}
 
 	/*!

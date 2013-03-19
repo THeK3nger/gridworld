@@ -11,6 +11,9 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	
 	private List<GameObject> objectInFov; // Contains the list of object in the FOV.
 
+	// CONDITIONS
+	private bool grabbing = false;
+
 	// Use this for initialization
 	void Awake() {
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
@@ -24,7 +27,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		InvokeRepeating("test", 10, 1);
 	}
 	 
-	 // Update is called once per frame
+	// Update is called once per frame
 	void Update () {
 	 
 	}
@@ -47,6 +50,15 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	// Implementation of IBotBrain.botDoAction
 	public void botDoAction(string action) {
 
+	}
+
+	public bool CheckCondition(string conditionName) {
+		switch (conditionName) {
+		case "grabbing" :
+			return grabbing;
+		default :
+			return false; //TODO: Default true or default false?
+		}
 	}
 
 	// Temporary test function 
