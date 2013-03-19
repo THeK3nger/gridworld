@@ -4,9 +4,13 @@ using System.Collections;
 [RequireComponent (typeof (Collider))]
 public class BotPerception : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	public string controllerName = "BotControlBase";
 
+	private IBotControl parentControl;
+
+	// Use this for initialization
+	void Awake () {
+		parentControl = gameObject.transform.parent.gameObject.GetComponent(controllerName) as IBotControl;
 	}
 	
 	// Update is called once per frame
@@ -20,12 +24,12 @@ public class BotPerception : MonoBehaviour {
 	 */
 	void OnTriggerEnter(Collider other) {
 		GameObject obj = other.gameObject;
-		transform.parent.gameObject.SendMessage ("objectEnteringFOV", obj);
+		parentControl.objectEnteringFOV(obj);
     }
 
 	void OnTriggerExit(Collider other) {
 		GameObject obj = other.gameObject;
-		transform.parent.gameObject.SendMessage ("objectLeavingFOV", obj);
+		parentControl.objectLeavingFOV(obj);
     }
 	
 }
