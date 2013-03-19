@@ -13,6 +13,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 
 	// CONDITIONS
 	private bool grabbing = false;
+	private bool test1 = true;
 
 	// Use this for initialization
 	void Awake() {
@@ -24,7 +25,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
 		// Run Thread Function Every 1 second
-		InvokeRepeating("test", 10, 1);
+		InvokeRepeating("test", 3, 1);
 	}
 	 
 	// Update is called once per frame
@@ -52,10 +53,31 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 
 	}
 
-	public bool CheckCondition(string conditionName) {
-		switch (conditionName) {
+	public bool CheckCondition(string condition) {
+		// PARSE AND
+		string[] andConditions = condition.Split('&');
+		if (andConditions.Length > 1) {
+			foreach (string c in andConditions) {
+				if (!CheckCondition(c)) return false;
+			}
+			return true;
+		}
+		// PARSE OR
+		string[] orConditions = condition.Split('|');
+		if (orConditions.Length > 1) {
+			foreach (string c in orConditions) {
+				if (CheckCondition(c)) return true;
+			}
+			return false;
+		}
+		// PARSE CONDITION
+		bool not = condition.StartsWith("!");
+		if (not) condition = condition.Substring(1);
+		switch (condition) {
 		case "grabbing" :
-			return grabbing;
+			return not ^ grabbing;
+		case "test1" :
+			return not ^ test1;
 		default :
 			return false; //TODO: Default true or default false?
 		}
@@ -63,11 +85,23 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 
 	// Temporary test function 
 	public void test() {
-		Debug.Log ("----------");
-		foreach (GameObject go in objectInFov) {
-			Debug.Log (go);
+//		Debug.Log ("----------");
+//		foreach (GameObject go in objectInFov) {
+//			Debug.Log (go);
+//		}
+		//botActions.DoAction ("move");
+		botActions.DoAction ("grab");
+	}
+
+	public void NotifyAction(string action) {
+		switch (action) {
+		case "grab":
+			grabbing = true;
+			Debug.Log("Grab Completed");
+			break;
+		default :
+			break;
 		}
-		botActions.DoAction ("move");
 	}
 
 	/*!

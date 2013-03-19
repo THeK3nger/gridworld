@@ -25,6 +25,7 @@ public class BotPerception : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		GameObject obj = other.gameObject;
 		parentControl.objectEnteringFOV(obj);
+		// TODO: Check for visibility test (is the object hidden by another object?); 
     }
 
 	void OnTriggerExit(Collider other) {

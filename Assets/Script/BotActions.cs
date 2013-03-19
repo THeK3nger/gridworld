@@ -33,11 +33,21 @@ public class BotActions : MonoBehaviour {
 	 */
 	public bool DoAction(string action) {
 		if (actionComplete) {
-			// TODO: Switch among actions.
-			actionComplete = false;
-			actionSuccess = false;
-			MoveTo(8.5f,8.5f);			
-			return true;
+		switch (action) {
+			case "move" :
+				// TODO: Switch among actions.
+				actionComplete = false;
+				actionSuccess = false;
+				MoveTo(8.5f,8.5f);			
+				return true;
+			case "grab" :
+				actionComplete = false;
+				actionSuccess = false;
+				Grab();
+				return true;
+			default :
+				return false;
+			}
 		}
 		return false;
 	}
@@ -106,9 +116,12 @@ public class BotActions : MonoBehaviour {
 	 * Grab the object in current location.
 	 */
 	void Grab() {
-		if (parentControl.CheckCondition("grabbing")) {
-			Debug.Log("GRAB!");
+		Debug.Log("GRAB ACTION");
+		if (parentControl.CheckCondition("!grabbing")) {
+			parentControl.NotifyAction("grab");
 		}
+		actionComplete = true;
+		actionSuccess = true;
 		// TODO: How to invoke a return value?
 	}
 
