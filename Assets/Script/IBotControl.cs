@@ -20,13 +20,20 @@ public interface IBotControl {
 	void objectLeavingFOV(GameObject obj);
 
 	/*!
-	 * botDoAction invokes an action on the Bot
+	 * CheckCondition parse a condition formula and return a single boolean value.
+	 *
+	 * TODO: Define formula syntax.
+	 * 
+	 * @param condition The input condition.
+	 * @return The thruth value for the condition formula.
 	 */
-	void botDoAction(string action);
-
-
 	bool CheckCondition(string condition);
 
+	/*!
+	 * Used by BotAction to notify the controller about the success of the given action.
+	 * 
+	 * @param action The action notification string (TODO: to be defined).
+	 */
 	void NotifyAction(string action);
 
 }

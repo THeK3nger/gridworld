@@ -118,6 +118,13 @@ public class GridWorldMap : MonoBehaviour {
 		return res;
 	}
 
+	/*!
+	 * Return the world position <x,z> given the index position <i,j>.
+	 * 
+	 * \param i Matrix i-th row.
+	 * \param j Matrix j-th row.
+	 * \return The world position <x,z>.
+	 */
 	public float[] getWorldFromIndexes(int i, int j) {
 		float x = gridSize*(i+0.5f); 
 		float z = gridSize*(j+0.5f);

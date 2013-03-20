@@ -7,11 +7,11 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	private int[] myMap;			//Store local map perception.
 	private int rsize, csize;		//Map size.
 	private GridWorldMap mapworld;	//A reference to the original map.
-	private BotActions botActions;
+	private BotActions botActions;  //Reference to the BotAction component.
 	
 	private List<GameObject> objectInFov; // Contains the list of object in the FOV.
 
-	// CONDITIONS
+	// CONDITIONS TODO: to be defined
 	private bool grabbing = false;
 	private bool test1 = true;
 
@@ -48,11 +48,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		objectInFov.Remove (obj);
 	}
 
-	// Implementation of IBotBrain.botDoAction
-	public void botDoAction(string action) {
-
-	}
-
+	// Implementation of IBotBrain.CheckCondition
 	public bool CheckCondition(string condition) {
 		// PARSE AND
 		string[] andConditions = condition.Split('&');
@@ -93,6 +89,7 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		botActions.DoAction ("grab");
 	}
 
+	// Implementation of IBotBrain.NotifyAction
 	public void NotifyAction(string action) {
 		switch (action) {
 		case "grab":
