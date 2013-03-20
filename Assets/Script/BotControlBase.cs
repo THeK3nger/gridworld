@@ -2,6 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * Basic implementation fo IBotControl.
+ * 
+ * \author Davide Aversa
+ * \version 1.0
+ * \date 2013
+ */
 public class BotControlBase : MonoBehaviour, IBotControl {
 
 	private int[] myMap;			//Store local map perception.

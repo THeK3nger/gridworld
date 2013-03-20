@@ -3,19 +3,30 @@ using System.Collections;
 using System;
 using Pathfinding;
 
+/**
+ * Loads and stores information about the world map.
+ * 
+ * This class contains the real representation of the world and includes
+ * a seti of utility functions to convert world point into the <i,j> matrix
+ * representations.
+ * 
+ * \author Davide Aversa
+ * \version 1.0
+ * \date 2013
+ */
 public class GridWorldMap : MonoBehaviour {
 	
 	// MapFile to load.
-	public TextAsset mapFile;
-	public float gridSize;
-	public GameObject wall;
-	public GameObject floor;
-	public GameObject bot;
+	public TextAsset mapFile; 	/**< Map file to load. */
+	public float gridSize; 		/**< The base size of the grid. */
+	public GameObject wall;		/**< The object prefab used as "wall". */
+	public GameObject floor;	/**< The object prebab used as "floor". */
+	public GameObject bot;		/**< The object prefab used as "bot". */
 
-	private GameObject astar;
-	private int[] staticMap;
-	private int rsize;
-	private int csize;
+	private GameObject astar;	/**< A reference to the A* object (for pathfinding). */
+	private int[] staticMap;	/**< The internal representation of the world map. */
+	private int rsize;			/**< Number of rows. **/
+	private int csize;			/**< Number of columns. **/
 
 	// Use this for initialization
 	void Start () {
@@ -28,6 +39,9 @@ public class GridWorldMap : MonoBehaviour {
 	
 	}
 
+	/**
+	 * Initialize the pathfinding GridGrpah on the GrodWorld.
+	 */
 	private void CreatePathfindingGrid() {
 		astar = GameObject.Find ("A*");
 		AstarPath astarpath = astar.GetComponent<AstarPath> ();
@@ -48,8 +62,8 @@ public class GridWorldMap : MonoBehaviour {
 		astarpath.Scan ();
 	}
 
-	/*!
-	 * LoadMapFile loads the map definition from file.
+	/**
+	 * Loads the map definition from the linked file.
 	 */
 	private void LoadMapFromFile() {
 		// Load text file from TextAsset.
@@ -73,8 +87,8 @@ public class GridWorldMap : MonoBehaviour {
 		if (i<rsize*csize-1) Debug.Log("ERROR: Invalid Map!");
 	}
 
-	/*!
-	 * Build map from the internal representation.
+	/**
+	 * Builds map from the internal representation.
 	 *
 	 * LEGEND (provisory)
 	 * 	- 0 : Void
@@ -104,8 +118,8 @@ public class GridWorldMap : MonoBehaviour {
 		}	
 	}
 
-	/*!
-	 * Compute matrix indexes from world position.
+	/**
+	 * Computes matrix indexes from world position.
 	 * 
 	 * \param x World x coordinate
 	 * \param z World z coordinate
@@ -118,8 +132,8 @@ public class GridWorldMap : MonoBehaviour {
 		return res;
 	}
 
-	/*!
-	 * Return the world position <x,z> given the index position <i,j>.
+	/**
+	 * Returns the world position <x,z> given the index position <i,j>.
 	 * 
 	 * \param i Matrix i-th row.
 	 * \param j Matrix j-th row.
@@ -132,8 +146,8 @@ public class GridWorldMap : MonoBehaviour {
 		return res;
     }
 
-	/*!
-	 * Compute matrix indexes from world position.
+	/**
+	 * Computes matrix indexes from world position.
 	 * 
 	 * \param x World x coordinate
 	 * \param z World z coordinate
@@ -145,7 +159,7 @@ public class GridWorldMap : MonoBehaviour {
 		return i * csize + j;
     }
 
-	/*!
+	/**
 	 * Get the map element in the current world position.
 	 * 
 	 * \param x World x coordinate.
@@ -156,8 +170,8 @@ public class GridWorldMap : MonoBehaviour {
 		return staticMap[idx];
 	}
 
-	/*!
-	 * Convert a pair of matrix indexes <i,j> in the corresponding
+	/**
+	 * Converts a pair of matrix indexes <i,j> in the corresponding
 	 * index of the linearized array associated to the map matrix.
 	 * 
 	 * \param i The row index.
@@ -168,8 +182,8 @@ public class GridWorldMap : MonoBehaviour {
 		return i * csize + j;
 	}
 
-	/*!
-	 * Convert a pair of matrix indexes <i,j> in the corresponding
+	/**
+	 * Converts a pair of matrix indexes <i,j> in the corresponding
 	 * index of the linearized array associated to the map matrix.
 	 * 
 	 * \param idxs A pair <i,j> of indexes.
@@ -179,8 +193,8 @@ public class GridWorldMap : MonoBehaviour {
 		return idxs [0] * csize + idxs [1];
 	}
 
-	/*!
-	 * Return the map size.
+	/**
+	 * Returns the map size.
 	 * 
 	 * \return A pair <rsize,csize> where rsize is the number of rows in the matrix and
 	 * csize is the number of columns.
