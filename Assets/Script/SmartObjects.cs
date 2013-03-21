@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SmartObjects : MonoBehaviour {
 
-	public int type = 0;
+	public string type = " ";
 	public bool isStatic = true;
 
 	// Use this for initialization
