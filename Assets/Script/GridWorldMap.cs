@@ -24,7 +24,7 @@ public class GridWorldMap : MonoBehaviour {
 	public GameObject bot;		/**< The object prefab used as "bot". */
 
 	private GameObject astar;	/**< A reference to the A* object (for pathfinding). */
-	private int[] staticMap;	/**< The internal representation of the world map. */
+	private char[] staticMap;	/**< The internal representation of the world map. */
 	private int rsize;			/**< Number of rows. **/
 	private int csize;			/**< Number of columns. **/
 
@@ -69,32 +69,50 @@ public class GridWorldMap : MonoBehaviour {
 		// Load text file from TextAsset.
 		string map_string = mapFile.text;
 		string[] lines = map_string.Split('\n');
-		// Parse map size. MapSize is in the first line of a map file.
-		string[] tmp = lines[0].Split('x');
-		rsize = int.Parse(tmp[0]);
-		csize = int.Parse(tmp[1]);
+		// Parse map size.
+		int lidx = 0; // Parsing line index
+		string current = "";
+		while (current != "map") {
+			current = lines[lidx];
+			string[] par = current.Split(' '); // Map Parameters, Ignore "type".
+			switch (par[0]) {
+			case "height" :
+				rsize = int.Parse(par[1]);
+				break;
+			case "width" :
+				csize = int.Parse(par[1]);
+				break;
+			default :
+				break;
+			}
+			lidx++;
+		}
+		if (rsize == 0 || csize == 0) {
+			Debug.Log("Invalid Map"); //TODO: Raise Exception
+			return;
+		}
 		// Initialize map array
-		staticMap = new int[rsize*csize];
+		staticMap = new char[rsize*csize];
 		// Fill the map 
 		int i = 0;
-		for (int line=1;line<lines.Length;line++) {
-			string[] map_items = lines[line].Split(',');
+		for (int line=lidx;line<lines.Length;line++) {
+			string map_items = lines[line];
 			for (int j=0;j<map_items.Length;j++) {
-				staticMap[i] = int.Parse(map_items[j]);
+				staticMap[i] = map_items[j];
 				i++;
 			}
 		}
-		if (i<rsize*csize-1) Debug.Log("ERROR: Invalid Map!");
+		if (i<rsize*csize-1) Debug.Log("ERROR: Invalid Map!"); //TODO: Raise Exception.
 	}
 
 	/**
 	 * Builds map from the internal representation.
 	 *
 	 * LEGEND (provisory)
-	 * 	- 0 : Void
-	 *  - 1 : Wall
-	 *  - 100 : Floor
-	 *  - 201 : Bot
+	 * 	- 'space' : Void
+	 *  - @ : Wall
+	 *  - . : Floor
+	 *  - X : Bot
 	 * 
 	 * TODO: Add more map items
 	 */
@@ -102,17 +120,23 @@ public class GridWorldMap : MonoBehaviour {
 		LoadMapFromFile();
 		for (int i=0;i<rsize;i++) {
 			for (int j=0;j<csize;j++) {
-				int map_element = staticMap[i*csize+j];
+				char map_element = staticMap[i*csize+j];
 				float[] worldcoords = getWorldFromIndexes(i,j);
 				float x = worldcoords[0];
 				float z = worldcoords[1];
-				if (map_element!=0){
-					if (map_element==1)
-						Instantiate(wall,new Vector3(x,1,z),Quaternion.identity);
-					if (map_element>=100)
-						Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
-					if (map_element==201)
-						Instantiate(bot, new Vector3(x,0.1f,z),Quaternion.Euler(Vector3.up * 90));
+				switch (map_element) {
+				case '@' :
+					Instantiate(wall,new Vector3(x,1,z),Quaternion.identity);
+					break;
+				case '.' :
+					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
+					break;
+				case 'X' :
+					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
+					Instantiate(bot, new Vector3(x,0.1f,z),Quaternion.Euler(Vector3.up * 90));
+					break;
+				default:
+					break;
 				}
 			}
 		}	
