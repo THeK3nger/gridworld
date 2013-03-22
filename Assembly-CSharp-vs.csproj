@@ -99,11 +99,10 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\SizeProfiler.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\Script\BotActions.cs" />
-     <Compile Include="Assets\Script\BotControlBase.cs" />
+     <Compile Include="Assets\Script\BotControl.cs" />
      <Compile Include="Assets\Script\BotPerception.cs" />
      <Compile Include="Assets\Script\ClickListener.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
-     <Compile Include="Assets\Script\IBotControl.cs" />
      <Compile Include="Assets\Script\SmartObjects.cs" />
      <Compile Include="Assets\Script\iTween.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />

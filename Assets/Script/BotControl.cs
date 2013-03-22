@@ -3,13 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 
 /**
- * Basic implementation fo IBotControl.
+ * The main brain of a Bot.
+ *
+ * The Bot Controller class is the core of the Bot AI. It is the nexus between all the AI elements
+ * like perception, action and planning/behavior components.
  * 
  * \author Davide Aversa
  * \version 1.0
  * \date 2013
  */
-public class BotControlBase : MonoBehaviour, IBotControl {
+public class BotControl : MonoBehaviour {
 
 	private char[] myMap;			//Store local map perception.
 	private int rsize, csize;		//Map size.
@@ -40,7 +43,12 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	 
 	}
 
-	// Implementation of IBotBrain.objectEnteringFOV
+	/**
+	 * Callback function called by the Perception component
+	 * when an object enter in the collision FOV object.
+	 * 
+	 * \param obj The entering GameObject.
+	 */
 	public void objectEnteringFOV(GameObject obj) {
 	 	// Extract Type and update the map.
 		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
@@ -50,12 +58,24 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		myMap [idx] = type;		
 	}
 
-	// Implementation of IBotBrain.objectLeavingFOV
+	/**
+	 * Callback function called by the Perception component
+	 * when an object leaves the collision FOV object.
+	 * 
+	 * \param obj The leaving GameObject.
+	 */
 	public void objectLeavingFOV(GameObject obj) {
 		objectInFov.Remove (obj);
 	}
 
-	// Implementation of IBotBrain.CheckCondition
+	/**
+	 * CheckCondition parse a condition formula and return a single boolean value.
+	 *
+	 * TODO: Define formula syntax.
+	 * 
+	 * \param condition The input condition.
+	 * \return The thruth value for the condition formula.
+	 */
 	public bool CheckCondition(string condition) {
 		// PARSE AND
 		string[] andConditions = condition.Split('&');
@@ -96,7 +116,11 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		//botActions.DoAction ("grab");
 	}
 
-	// Implementation of IBotBrain.NotifyAction
+	/**
+	 * Used by BotAction to notify the controller about the success of the given action.
+	 * 
+	 * \param action The action notification string (TODO: to be defined).
+	 */
 	public void NotifyAction(string action) {
 		switch (action) {
 		case "grab":
