@@ -90,9 +90,9 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	public void test() {
 		Debug.Log ("----------");
 		foreach (GameObject go in objectInFov) {
-			Debug.Log (go);
+			Debug.Log ((go.GetComponent<SmartObjects>()).type);
 		}
-		botActions.DoAction ("move");
+		//botActions.DoAction ("move");
 		//botActions.DoAction ("grab");
 	}
 
