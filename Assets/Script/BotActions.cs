@@ -45,13 +45,14 @@ public class BotActions : MonoBehaviour {
 	 * \retval false If the action can not be executed.
 	 */
 	public bool DoAction(string action) {
+		Debug.Log("Action Received: " + action);
+		string[] command = action.Split(' ');
 		if (actionComplete) {
-		switch (action) {
+		switch (command[0]) {
 			case "move" :
-				// TODO: Switch among actions.
 				actionComplete = false;
 				actionSuccess = false;
-				MoveTo(8.5f,8.5f);			
+				MoveTo(float.Parse(command[1]),float.Parse(command[2]));			
 				return true;
 			case "grab" :
 				actionComplete = false;
