@@ -14,6 +14,9 @@ using System.Collections.Generic;
  */
 public class BotControl : MonoBehaviour {
 
+	// CONTROL INSPECTOR PARAMETERS
+	public float thinkTick = 1;
+
 	private char[] myMap;			//Store local map perception.
 	private int rsize, csize;		//Map size.
 	private GridWorldMap mapworld;	//A reference to the original map.
@@ -34,8 +37,8 @@ public class BotControl : MonoBehaviour {
 		myMap = new char[rsize * csize];
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
-		// Run Thread Function Every 1 second
-		InvokeRepeating("test", 3, 1);
+		// Run Thread Function Every `n` second
+		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
 	 
 	// Update is called once per frame
@@ -106,8 +109,8 @@ public class BotControl : MonoBehaviour {
 		}
 	}
 
-	// Temporary test function 
-	public void test() {
+	// TODO: ThinkLoop 
+	public void ThinkLoop() {
 		Debug.Log ("----------");
 		foreach (GameObject go in objectInFov) {
 			Debug.Log ((go.GetComponent<SmartObjects>()).type);
