@@ -46,15 +46,13 @@ public class BotActions : MonoBehaviour {
 		Debug.Log("Action Received: " + action);
 		string[] command = action.Split(' ');
 		if (actionComplete) {
-		switch (command[0]) {
+			actionComplete = false;
+			actionSuccess = false;
+			switch (command[0]) {
 			case "move" :
-				actionComplete = false;
-				actionSuccess = false;
 				MoveTo(float.Parse(command[1]),float.Parse(command[2]));			
 				return true;
 			case "grab" :
-				actionComplete = false;
-				actionSuccess = false;
 				Grab();
 				return true;
 			default :
@@ -124,7 +122,8 @@ public class BotActions : MonoBehaviour {
 		animation.CrossFade ("idle1");
 		actionComplete = true;
 		actionSuccess = true;
-		LookAt(new Vector3(0,0,0));
+		//LookAt(new Vector3(0,0,0));
+		parentControl.NotifyAction("move");
 	}
 
 	/**

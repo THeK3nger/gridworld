@@ -104,6 +104,7 @@
      <Compile Include="Assets\Script\ClickListener.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
      <Compile Include="Assets\Script\IBotDeliberator.cs" />
+     <Compile Include="Assets\Script\RandomWalker.cs" />
      <Compile Include="Assets\Script\SmartObjects.cs" />
      <Compile Include="Assets\Script\iTween.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />

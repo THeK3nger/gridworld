@@ -15,21 +15,29 @@ using System.Collections.Generic;
 public class BotControl : MonoBehaviour {
 
 	// CONTROL INSPECTOR PARAMETERS
-	public float thinkTick = 1;
+	public float thinkTick = 1;				//Time interval between a think cicle.
+	public string deliberatorName;			//Name of the IBotDeliberator implementation.
+	public bool deliberatorOn;				//True if deliberator is ON. 
 
-	private char[] myMap;			//Store local map perception.
-	private int rsize, csize;		//Map size.
-	private GridWorldMap mapworld;	//A reference to the original map.
-	private BotActions botActions;  //Reference to the BotAction component.
+	private char[] myMap;					//Store local map perception.
+	private int rsize, csize;				//Map size.
+	private GridWorldMap mapworld;			//A reference to the original map.
+	private BotActions botActions;  		//Reference to the BotAction component.
+	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
 	
-	private List<GameObject> objectInFov; // Contains the list of object in the FOV.
+	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
 
 	// CONDITIONS TODO: to be defined
 	private bool grabbing = false;
 	private bool test1 = true;
 
+	// STATE
+	private enum Status { IDLE, EXECUTING };
+	private Status controlStatus;			// Controller Status.
+
 	// Use this for initialization
 	void Awake() {
+		controlStatus = Status.IDLE;
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 		int[] sizes = mapworld.getMapSize ();
 		rsize = sizes [0];
@@ -37,6 +45,8 @@ public class BotControl : MonoBehaviour {
 		myMap = new char[rsize * csize];
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
+		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
+		Debug.Log(deliberator);
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
@@ -111,9 +121,11 @@ public class BotControl : MonoBehaviour {
 
 	// TODO: ThinkLoop 
 	public void ThinkLoop() {
-		Debug.Log ("----------");
-		foreach (GameObject go in objectInFov) {
-			Debug.Log ((go.GetComponent<SmartObjects>()).type);
+		if (controlStatus == Status.IDLE && deliberatorOn) {
+			string nextaction = deliberator.GetNextAction();
+			Debug.Log("Get " + nextaction);
+			controlStatus = Status.EXECUTING;
+			botActions.DoAction(nextaction);
 		}
 		//botActions.DoAction ("move");
 		//botActions.DoAction ("grab");
@@ -125,6 +137,7 @@ public class BotControl : MonoBehaviour {
 	 * \param action The action notification string (TODO: to be defined).
 	 */
 	public void NotifyAction(string action) {
+		controlStatus = Status.IDLE;
 		switch (action) {
 		case "grab":
 			grabbing = true;
