@@ -3,27 +3,41 @@ using System.Collections;
 using System.Collections.Generic;
 
 /**
- * Basic implementation fo IBotControl.
+ * The main brain of a Bot.
+ *
+ * The Bot Controller class is the core of the Bot AI. It is the nexus between all the AI elements
+ * like perception, action and planning/behavior components.
  * 
  * \author Davide Aversa
  * \version 1.0
  * \date 2013
  */
-public class BotControlBase : MonoBehaviour, IBotControl {
+public class BotControl : MonoBehaviour {
 
-	private char[] myMap;			//Store local map perception.
-	private int rsize, csize;		//Map size.
-	private GridWorldMap mapworld;	//A reference to the original map.
-	private BotActions botActions;  //Reference to the BotAction component.
+	// CONTROL INSPECTOR PARAMETERS
+	public float thinkTick = 1;				//Time interval between a think cicle.
+	public string deliberatorName;			//Name of the IBotDeliberator implementation.
+	public bool deliberatorOn;				//True if deliberator is ON. 
+
+	private char[] myMap;					//Store local map perception.
+	private int rsize, csize;				//Map size.
+	private GridWorldMap mapworld;			//A reference to the original map.
+	private BotActions botActions;  		//Reference to the BotAction component.
+	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
 	
-	private List<GameObject> objectInFov; // Contains the list of object in the FOV.
+	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
 
 	// CONDITIONS TODO: to be defined
 	private bool grabbing = false;
 	private bool test1 = true;
 
+	// STATE
+	private enum Status { IDLE, EXECUTING };
+	private Status controlStatus;			// Controller Status.
+
 	// Use this for initialization
 	void Awake() {
+		controlStatus = Status.IDLE;
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 		int[] sizes = mapworld.getMapSize ();
 		rsize = sizes [0];
@@ -31,8 +45,10 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		myMap = new char[rsize * csize];
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
-		// Run Thread Function Every 1 second
-		InvokeRepeating("test", 3, 1);
+		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
+		Debug.Log(deliberator);
+		// Run Thread Function Every `n` second
+		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
 	 
 	// Update is called once per frame
@@ -40,7 +56,12 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 	 
 	}
 
-	// Implementation of IBotBrain.objectEnteringFOV
+	/**
+	 * Callback function called by the Perception component
+	 * when an object enter in the collision FOV object.
+	 * 
+	 * \param obj The entering GameObject.
+	 */
 	public void objectEnteringFOV(GameObject obj) {
 	 	// Extract Type and update the map.
 		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
@@ -50,12 +71,24 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		myMap [idx] = type;		
 	}
 
-	// Implementation of IBotBrain.objectLeavingFOV
+	/**
+	 * Callback function called by the Perception component
+	 * when an object leaves the collision FOV object.
+	 * 
+	 * \param obj The leaving GameObject.
+	 */
 	public void objectLeavingFOV(GameObject obj) {
 		objectInFov.Remove (obj);
 	}
 
-	// Implementation of IBotBrain.CheckCondition
+	/**
+	 * CheckCondition parse a condition formula and return a single boolean value.
+	 *
+	 * TODO: Define formula syntax.
+	 * 
+	 * \param condition The input condition.
+	 * \return The thruth value for the condition formula.
+	 */
 	public bool CheckCondition(string condition) {
 		// PARSE AND
 		string[] andConditions = condition.Split('&');
@@ -86,18 +119,25 @@ public class BotControlBase : MonoBehaviour, IBotControl {
 		}
 	}
 
-	// Temporary test function 
-	public void test() {
-		Debug.Log ("----------");
-		foreach (GameObject go in objectInFov) {
-			Debug.Log ((go.GetComponent<SmartObjects>()).type);
+	// TODO: ThinkLoop 
+	public void ThinkLoop() {
+		if (controlStatus == Status.IDLE && deliberatorOn) {
+			string nextaction = deliberator.GetNextAction();
+			Debug.Log("Get " + nextaction);
+			controlStatus = Status.EXECUTING;
+			botActions.DoAction(nextaction);
 		}
 		//botActions.DoAction ("move");
 		//botActions.DoAction ("grab");
 	}
 
-	// Implementation of IBotBrain.NotifyAction
+	/**
+	 * Used by BotAction to notify the controller about the success of the given action.
+	 * 
+	 * \param action The action notification string (TODO: to be defined).
+	 */
 	public void NotifyAction(string action) {
+		controlStatus = Status.IDLE;
 		switch (action) {
 		case "grab":
 			grabbing = true;

@@ -6,8 +6,7 @@ using Pathfinding;
 /**
  * This class is a collection of low-level actions that a bot can do.
  * 
- * These actions can be invoked by an IBotBrain implementation to perform
- * high-level actions.
+ * These actions can be invoked by BotControl to perform high-level actions.
  * 
  * The avaiable actions are:
  * 	- `move x z` : Move the bot to the <x,0,z> world position.
@@ -19,22 +18,21 @@ using Pathfinding;
  * \author Davide Aversa
  * \version 1.0
  * \date 2013
- * \pre This class needs an instance of GridWorldMap and IBotControl.
+ * \pre This class needs an instance of GridWorldMap and BotControl.
  */
 public class BotActions : MonoBehaviour {
 
 	public float moveSpeed = 1; 			/**< Walk speed in m/s. */
-	public string controllerName;			/**< Name of the BotController instance. */
 
 	private bool actionComplete = true;		/**< True if the last action is completed. */
 	private bool actionSuccess = true;		/**< True if the last action is completed successfully. */ 
 
-	private IBotControl parentControl;		/**< A reference to a BotController instance. */
+	private BotControl parentControl;		/**< A reference to a BotControl instance. */
 
 	// Use this for initialization
 	void Start () {
 		// TODO: There is a way to make this generic?
-		parentControl = gameObject.GetComponent(controllerName) as IBotControl;
+		parentControl = gameObject.GetComponent<BotControl>();
 	}
 
 	/**
@@ -48,15 +46,13 @@ public class BotActions : MonoBehaviour {
 		Debug.Log("Action Received: " + action);
 		string[] command = action.Split(' ');
 		if (actionComplete) {
-		switch (command[0]) {
+			actionComplete = false;
+			actionSuccess = false;
+			switch (command[0]) {
 			case "move" :
-				actionComplete = false;
-				actionSuccess = false;
 				MoveTo(float.Parse(command[1]),float.Parse(command[2]));			
 				return true;
 			case "grab" :
-				actionComplete = false;
-				actionSuccess = false;
 				Grab();
 				return true;
 			default :
@@ -126,7 +122,8 @@ public class BotActions : MonoBehaviour {
 		animation.CrossFade ("idle1");
 		actionComplete = true;
 		actionSuccess = true;
-		LookAt(new Vector3(0,0,0));
+		//LookAt(new Vector3(0,0,0));
+		parentControl.NotifyAction("move");
 	}
 
 	/**
