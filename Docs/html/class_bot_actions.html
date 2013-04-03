@@ -73,13 +73,10 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:aa228015a66f241793da9f4cbb52a9f67"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#aa228015a66f241793da9f4cbb52a9f67">moveSpeed</a> = 1</td></tr>
 <tr class="memdesc:aa228015a66f241793da9f4cbb52a9f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Walk speed in m/s.  <a href="#aa228015a66f241793da9f4cbb52a9f67">More...</a><br/></td></tr>
 <tr class="separator:aa228015a66f241793da9f4cbb52a9f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad10734d3d071f4d8991027231354e1a7"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#ad10734d3d071f4d8991027231354e1a7">controllerName</a></td></tr>
-<tr class="memdesc:ad10734d3d071f4d8991027231354e1a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of the BotController instance.  <a href="#ad10734d3d071f4d8991027231354e1a7">More...</a><br/></td></tr>
-<tr class="separator:ad10734d3d071f4d8991027231354e1a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is a collection of low-level actions that a bot can do. </p>
-<p>These actions can be invoked by an IBotBrain implementation to perform high-level actions.</p>
+<p>These actions can be invoked by <a class="el" href="class_bot_control.html" title="The main brain of a Bot.">BotControl</a> to perform high-level actions.</p>
 <p>The avaiable actions are:</p>
 <ul>
 <li><code>move x z</code> : Move the bot to the &lt;x,0,z&gt; world position.</li>
@@ -92,7 +89,7 @@ Public Attributes</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Davide Aversa </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2013 </dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd>This class needs an instance of <a class="el" href="class_grid_world_map.html" title="Loads and stores information about the world map.">GridWorldMap</a> and <a class="el" href="interface_i_bot_control.html" title="Basic interface for a Bot Controller class.">IBotControl</a>. </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd>This class needs an instance of <a class="el" href="class_grid_world_map.html" title="Loads and stores information about the world map.">GridWorldMap</a> and <a class="el" href="class_bot_control.html" title="The main brain of a Bot.">BotControl</a>. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="aa7ba49958385e15675eb4e26d5cc6cc6"></a>
 <div class="memitem">
@@ -173,20 +170,6 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="ad10734d3d071f4d8991027231354e1a7"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">string BotActions.controllerName</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Name of the BotController instance. </p>
-
-</div>
-</div>
 <a class="anchor" id="aa228015a66f241793da9f4cbb52a9f67"></a>
 <div class="memitem">
 <div class="memproto">
@@ -207,7 +190,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Mar 21 2013 15:59:59 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Apr 3 2013 12:55:20 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
