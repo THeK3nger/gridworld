@@ -8,18 +8,16 @@ using System.Collections;
  * \version 1.0
  * \date 2013
  * \pre This component must be attached to a *perception mesh* attached to the bot.
- * The bot must have an IBotControl instance attached to itself.
+ * The bot must have a BotControl instance attached to itself.
  */
 [RequireComponent (typeof (Collider))]
 public class BotPerception : MonoBehaviour {
 
-	public string controllerName; 		/**< The name of the IBotControl implementation attached to the bot. */
-
-	private IBotControl parentControl;	/**< A reference to the IBotControl instance attache to the bot. */
+	private BotControl parentControl;	/**< A reference to the IBotControl instance attache to the bot. */
 
 	// Use this for initialization
 	void Awake () {
-		parentControl = gameObject.transform.parent.gameObject.GetComponent(controllerName) as IBotControl;
+		parentControl = gameObject.transform.parent.gameObject.GetComponent<BotControl>();
 	}
 	
 	// Update is called once per frame
