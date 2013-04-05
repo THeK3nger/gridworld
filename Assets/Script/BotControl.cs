@@ -127,6 +127,7 @@ public class BotControl : MonoBehaviour {
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}
+		Debug.Log(objectInFov.Count);
 		//botActions.DoAction ("move");
 		//botActions.DoAction ("grab");
 	}

@@ -13,6 +13,8 @@ using System.Collections;
 [RequireComponent (typeof (Collider))]
 public class BotPerception : MonoBehaviour {
 
+	public bool raycastTest = true;
+
 	private BotControl parentControl;	/**< A reference to the IBotControl instance attache to the bot. */
 
 	// Use this for initialization
@@ -29,9 +31,19 @@ public class BotPerception : MonoBehaviour {
 	 * Collision callback for entering objects.
 	 */
 	void OnTriggerEnter(Collider other) {
-		GameObject obj = other.gameObject;
-		parentControl.objectEnteringFOV(obj);
-		// TODO: Check for visibility test (is the object hidden by another object?); 
+		GameObject obj = other.gameObject;	// Reference to the entering object.
+		if (raycastTest) {
+			GameObject bot = gameObject.transform.parent.gameObject; // Reference to the bot object.
+			RaycastHit hit = new RaycastHit();
+			Vector3 offset = new Vector3(0,1,0);
+			Vector3 direction = (obj.transform.position - (bot.transform.position + offset)).normalized; // Direction between bot and other.
+			Physics.Raycast(bot.transform.position + offset, direction, out hit);
+			if (hit.transform.gameObject.Equals(obj)) { // If there are no objects between the bot and the entering object,
+				parentControl.objectEnteringFOV(obj);
+			}
+		} else {
+			parentControl.objectEnteringFOV(obj);
+		}
     }
 
 	/**
