@@ -22,6 +22,7 @@ public class GridWorldMap : MonoBehaviour {
 	public GameObject wall;		/**< The object prefab used as "wall". */
 	public GameObject floor;	/**< The object prebab used as "floor". */
 	public GameObject bot;		/**< The object prefab used as "bot". */
+	public GameObject door;		/**< The object prefab used as "door". */
 
 	private GameObject astar;	/**< A reference to the A* object (for pathfinding). */
 	private char[] staticMap;	/**< The internal representation of the world map. */
@@ -127,6 +128,9 @@ public class GridWorldMap : MonoBehaviour {
 				switch (map_element) {
 				case '@' :
 					Instantiate(wall,new Vector3(x,1,z),Quaternion.identity);
+					break;
+				case 'D' :
+					Instantiate(door,new Vector3(x,1,z),Quaternion.identity);
 					break;
 				case '.' :
 					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
