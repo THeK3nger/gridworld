@@ -102,6 +102,7 @@
      <Compile Include="Assets\Script\BotControl.cs" />
      <Compile Include="Assets\Script\BotPerception.cs" />
      <Compile Include="Assets\Script\ClickListener.cs" />
+     <Compile Include="Assets\Script\Door.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
      <Compile Include="Assets\Script\IBotDeliberator.cs" />
      <Compile Include="Assets\Script\RandomWalker.cs" />
