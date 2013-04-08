@@ -107,6 +107,7 @@
      <Compile Include="Assets\Script\IBotDeliberator.cs" />
      <Compile Include="Assets\Script\RandomWalker.cs" />
      <Compile Include="Assets\Script\SmartObjects.cs" />
+     <Compile Include="Assets\Script\Utility\AreaFinder.cs" />
      <Compile Include="Assets\Script\iTween.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />

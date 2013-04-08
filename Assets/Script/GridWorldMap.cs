@@ -25,7 +25,8 @@ public class GridWorldMap : MonoBehaviour {
 	public GameObject door;		/**< The object prefab used as "door". */
 
 	private GameObject astar;	/**< A reference to the A* object (for pathfinding). */
-	private char[] staticMap;	/**< The internal representation of the world map. */
+	private char[] staticMap;	/**< The global representation of the world map. */
+	private int[] areasMap;		/**< Areas representation of the world map. */
 	private int rsize;			/**< Number of rows. **/
 	private int csize;			/**< Number of columns. **/
 
@@ -104,6 +105,20 @@ public class GridWorldMap : MonoBehaviour {
 			}
 		}
 		if (i<rsize*csize-1) Debug.Log("ERROR: Invalid Map!"); //TODO: Raise Exception.
+
+		// Find Areas
+		AreaFinder af = new AreaFinder(staticMap,rsize,csize);
+		int[] labelled = af.FindAreas();
+		/* TMP */
+		string res = "";
+		for (int x=0;x<rsize;x++) {
+			for (int y=0;y<csize;y++) {
+				res += labelled [x * csize + y] + " ";
+			}
+			res += "\n";
+		}
+		Debug.Log(res);
+		/* END */
 	}
 
 	/**
