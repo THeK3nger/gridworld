@@ -2,17 +2,31 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+/**
+ * An utility class for automatic areas extraction from a bidimentional map.
+ * 
+ * \author Davide Aversa
+ * \version 1.0
+ * \date 2013
+ */
 public class AreaFinder {
 
-	private string obstacles = "@D ";
-	private string walkable = ".X";
+	private string obstacles = "@D ";   /**< Characters representing an obstacle. */
+	private string walkable = ".X";     /**< Characters representing a walkable area. */
 
-	private char[] input;
-	private int rsize;
-	private int csize;
+	private char[] input;               /**< The input map. */
+	private int rsize;                  /**< The number of rows. */
+	private int csize;                  /**< The number of columns. */
 
-	private Dictionary<int,int> equivalence;
+	private Dictionary<int,int> equivalence; /**< A dictionary that stores the equivalence class between labels. */
 
+    /**
+     * Constructor.
+     * 
+     * /param input The input chars map.
+     * /param rsize The number of rows in the map.
+     * /param csize The number of columns in the map.
+     */
 	public AreaFinder(char[] input, int rsize, int csize) {
 		this.input = input;
 		this.rsize = rsize;
@@ -124,6 +138,8 @@ public class AreaFinder {
 
 	/**
 	 * Find all the connencted areas in the map.
+     * 
+     * Based on the Connected-Component Labelling Algorithm.
 	 *
 	 * \return A labelled version of the input map.
 	 */
