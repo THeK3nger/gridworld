@@ -11,7 +11,7 @@ using System.Collections.Generic;
  */
 public class AreaFinder {
 
-	private string obstacles = "@D ";   /**< Characters representing an obstacle. */
+	private string doors = "D";   		/**< Characters representing a door. */
 	private string walkable = ".X";     /**< Characters representing a walkable area. */
 
 	private char[] input;               /**< The input map. */
@@ -35,10 +35,10 @@ public class AreaFinder {
 	}
 
 	/**
-	 * Return true if and only if the char `c` is an obstacle.
+	 * Return true if and only if the char `c` is a door.
 	 */
-	private bool isObstacle(char c) {
-		return obstacles.IndexOf(c) != -1;
+	private bool isDoor(char c) {
+		return doors.IndexOf(c) != -1;
 	}
 
 	/**
@@ -83,8 +83,16 @@ public class AreaFinder {
 			if (neighbourvalue != 0)
 				res.Add(neighbourvalue);
 		}
-		// Ignore down and right because during the scan there is no way that
-		// these points are labelled.
+		if (i+1 < rsize) {
+			neighbourvalue = labelled[GetArrayIndex(i+1,j)];
+			if (neighbourvalue != 0)
+				res.Add(neighbourvalue);
+		}
+		if (j+1 < csize) {
+			neighbourvalue = labelled[GetArrayIndex(i,j+1)];
+			if (neighbourvalue != 0)
+				res.Add(neighbourvalue);
+		}
 		return res;
 	}
 
@@ -177,6 +185,28 @@ public class AreaFinder {
 			}
 		}
 
+		return result;
+	}
+
+	/**
+	 * Extract from the labelled map a list of doors.
+	 *
+	 * A door is a walkable point where two or more areas are connected.
+	 *
+	 * \param labelled The labelled map version.
+	 * \return A dictionary that map a door with the list of connected areas.
+	 */
+	public Dictionary<int,List<int>> FindeAreaDoors(int[] labelled) {
+		Dictionary<int,List<int>> result = new Dictionary<int,List<int>>();
+		for (int i=0;i<rsize;i++) {
+			for (int j=0;j<csize;j++) {
+				char current = input[GetArrayIndex(i,j)];
+				if (isDoor(current)) {
+					List<int> neightbours = GetNeighbours(i,j,labelled);
+					result.Add(GetArrayIndex(i,j),neightbours);
+				} 
+			}
+		}
 		return result;
 	}
 

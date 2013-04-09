@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 using Pathfinding;
 
@@ -27,6 +28,7 @@ public class GridWorldMap : MonoBehaviour {
 	private GameObject astar;	/**< A reference to the A* object (for pathfinding). */
 	private char[] staticMap;	/**< The global representation of the world map. */
 	private int[] areasMap;		/**< Areas representation of the world map. */
+	Dictionary<int,List<int>> doors; /**< List of doors between areas. */
 	private int rsize;			/**< Number of rows. **/
 	private int csize;			/**< Number of columns. **/
 
@@ -108,12 +110,13 @@ public class GridWorldMap : MonoBehaviour {
 
 		// Find Areas
 		AreaFinder af = new AreaFinder(staticMap,rsize,csize);
-		int[] labelled = af.FindAreas();
+		this.areasMap = af.FindAreas();
+		this.doors = af.FindeAreaDoors(areasMap);
 		/* TMP */
 		string res = "";
 		for (int x=0;x<rsize;x++) {
 			for (int y=0;y<csize;y++) {
-				res += labelled [x * csize + y] + " ";
+				res += areasMap [x * csize + y] + " ";
 			}
 			res += "\n";
 		}
