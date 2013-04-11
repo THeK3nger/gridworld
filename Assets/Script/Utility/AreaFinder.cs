@@ -196,7 +196,7 @@ public class AreaFinder {
 	 * \param labelled The labelled map version.
 	 * \return A dictionary that map a door with the list of connected areas.
 	 */
-	public Dictionary<int,List<int>> FindeAreaDoors(int[] labelled) {
+	public Dictionary<int,List<int>> FindAreaDoors(int[] labelled) {
 		Dictionary<int,List<int>> result = new Dictionary<int,List<int>>();
 		for (int i=0;i<rsize;i++) {
 			for (int j=0;j<csize;j++) {

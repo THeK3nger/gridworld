@@ -26,6 +26,7 @@ public class BotControl : MonoBehaviour {
 	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
 	
 	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
+	private Dictionary<int,bool> doorsState;// Contains the doors status (open or closed).
 
 	// CONDITIONS TODO: to be defined
 	private bool grabbing = false;
@@ -40,13 +41,17 @@ public class BotControl : MonoBehaviour {
 		controlStatus = Status.IDLE;
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 		int[] sizes = mapworld.getMapSize ();
+		doorsState = new Dictionary<int,bool>();
 		rsize = sizes [0];
 		csize = sizes [1];
 		myMap = new char[rsize * csize];
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
 		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
-		Debug.Log(deliberator);
+        // Update current position in myMap
+        Vector3 current = gameObject.transform.position;
+        int idx = mapworld.getArrayIndexFromWorld(current.x, current.z);
+        myMap[idx] = mapworld.getMapElement(current.x, current.z);
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
@@ -68,7 +73,11 @@ public class BotControl : MonoBehaviour {
 		char type = attributes.type[0];
 		int idx = mapworld.getArrayIndexFromWorld (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
-		myMap [idx] = type;		
+		myMap [idx] = type;
+		if (type=='D') {
+			Door d = obj.GetComponent<Door> ();
+			doorsState[idx] = d.isOpen;
+		}
 	}
 
 	/**
@@ -127,7 +136,7 @@ public class BotControl : MonoBehaviour {
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}
-		Debug.Log(objectInFov.Count);
+		//Debug.Log(objectInFov.Count);
 		//botActions.DoAction ("move");
 		//botActions.DoAction ("grab");
 	}
@@ -149,7 +158,7 @@ public class BotControl : MonoBehaviour {
 		}
 	}
 
-	/*!
+	/**
 	 * An auxiliary function to print the local map in the Debug.Log
 	 */
 	public void printMap() {
@@ -162,4 +171,44 @@ public class BotControl : MonoBehaviour {
 		}
 		Debug.Log(res);
 	}
+
+	/**
+	 * Return the connected areas (acording to the bot internal knowledge)
+	 * to the given area label.
+	 *
+	 * \param area The input area.
+	 * \return The list of the connected area.
+	 */
+	public HashSet<int> ConnectedAreas(int area) {
+		List<int> open_doors = GetOpenDoors();
+		List<int> result = new List<int>();
+        result.Add(area); // An area is always connected to itself.
+		foreach (int door in open_doors) {
+			List<int> doorAreas = mapworld.GetAreasByDoor(door);
+			if (doorAreas.IndexOf(area) != -1)
+				result.AddRange(doorAreas);
+		}
+		return new HashSet<int>(result);
+	}
+
+	/**
+	 * Return a list of the open doors (according to the bot internal knowledge).
+	 *
+	 * \return The list of open doors.
+	 */
+	public List<int> GetOpenDoors() {
+		List<int> result = new List<int>();
+		foreach (KeyValuePair<int,bool> entry in doorsState) {
+			if (doorsState[entry.Key]) {
+				result.Add(entry.Key);
+			}
+		}
+		return result;
+	}
+
+    public char[] GetInternalMap()
+    {
+        return myMap; // TODO: Check if is better (and efficient) to return a copy
+    }
+
 }

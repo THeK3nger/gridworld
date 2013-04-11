@@ -111,7 +111,7 @@ public class GridWorldMap : MonoBehaviour {
 		// Find Areas
 		AreaFinder af = new AreaFinder(staticMap,rsize,csize);
 		this.areasMap = af.FindAreas();
-		this.doors = af.FindeAreaDoors(areasMap);
+		this.doors = af.FindAreaDoors(areasMap);
 		/* TMP */
 		string res = "";
 		for (int x=0;x<rsize;x++) {
@@ -210,8 +210,9 @@ public class GridWorldMap : MonoBehaviour {
 	 * 
 	 * \param x World x coordinate.
 	 * \param z World z coordinate.
+     * \return The element in grid <x,z>.
 	 */
-	public int getMapElement(float x, float z) {
+	public char getMapElement(float x, float z) {
 		int idx = getArrayIndexFromWorld (x, z);
 		return staticMap[idx];
 	}
@@ -238,6 +239,19 @@ public class GridWorldMap : MonoBehaviour {
     public int getArrayIndex(int[] idxs) {
 		return idxs [0] * csize + idxs [1];
 	}
+    
+    /**
+     * Convert the linear array index into the original <i,j> pairs.
+     * 
+     * \param idx The input linearized array index.
+     * \return The corresponding <i,j> pair.
+     */
+    public int[] GetPositionFromArrayIndex(int idx) {
+        int[] result = new int[2];
+        result[0] = idx/csize;
+        result[1] = idx % csize;
+        return result;
+    }
 
 	/**
 	 * Returns the map size.
@@ -249,4 +263,67 @@ public class GridWorldMap : MonoBehaviour {
 		int[] res = {this.rsize,this.csize};
 		return res;
 	}
+
+	/**
+	 * Return the area label for the point <i,j>.
+	 *
+	 * \param i The row index.
+	 * \param j The cols index.
+	 * \return The label of the <i,j> point.
+	 */
+	public int GetAreaFromPosition(int i, int j) {
+		return areasMap[getArrayIndex(i,j)];
+	}
+
+    /**
+     * Return the area label for the index.
+     *
+     * \param idx The linearized array position.
+     * \return The label of the <i,j> point.
+     */
+    public int GetAreaFromPosition(int idx)
+    {
+        return areasMap[idx];
+    }
+
+	/**
+	 * Return the areas connected by the given door.
+	 *
+	 * \param door The given door.
+	 * \return The areas connected by door.
+	 */
+	public List<int> GetAreasByDoor(int door) {
+		return doors[door];
+	}
+
+    /**
+     * Return the nearesr door that connect a1 with a2 (if any).
+     * 
+     * \param a1 The first area.
+     * \param a2 The second area.
+     * \param i The bot row.
+     * \param j The bot column.
+     * \return The nearest door between two areas.
+     */
+    public int GetDoorByAreas(int a1, int a2, int i, int j ) {
+        if (a1 == a2) return -1;
+        List<int> resultDoors = new List<int>();
+        foreach (KeyValuePair<int,List<int>> entry in doors) {
+            if (doors[entry.Key].Contains(a1) && doors[entry.Key].Contains(a2)) {
+                resultDoors.Add(entry.Key);
+            }
+		}
+        if (resultDoors.Count == 0) return -1;
+        int result = -1;
+        int minDistance = int.MaxValue;
+        foreach (int door in resultDoors) {
+            int[] doorPos = GetPositionFromArrayIndex(door);
+            int distance = Math.Abs(doorPos[0]-i) + Math.Abs(doorPos[1]-j);
+            if (distance < minDistance) {
+                minDistance = distance;
+                result = door;
+            }
+        }
+        return result;
+    }
 }
