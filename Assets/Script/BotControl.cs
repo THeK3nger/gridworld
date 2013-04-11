@@ -45,13 +45,23 @@ public class BotControl : MonoBehaviour {
 		rsize = sizes [0];
 		csize = sizes [1];
 		myMap = new char[rsize * csize];
+        // Initialize to " " space.
+        for (int i = 0; i < rsize; i++)
+        {
+            for (int j = 0; j < csize; j++)
+            {
+                myMap[i * csize + j] = ' ';
+            }
+        }
+        // --
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
 		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
         int idx = mapworld.getArrayIndexFromWorld(current.x, current.z);
-        myMap[idx] = mapworld.getMapElement(current.x, current.z);
+        myMap[idx] = mapworld.getMapElement(idx);
+        myMap[idx + 1] = mapworld.getMapElement(idx + 1); // TODO: First map update.
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
@@ -131,6 +141,11 @@ public class BotControl : MonoBehaviour {
 	// TODO: ThinkLoop 
 	public void ThinkLoop() {
 		if (controlStatus == Status.IDLE && deliberatorOn) {
+            printMap();
+            foreach (KeyValuePair<int, bool> entry in doorsState)
+            {
+                Debug.Log("Door " + entry.Key + " " + entry.Value);
+            }
 			string nextaction = deliberator.GetNextAction();
 			Debug.Log("Get " + nextaction);
 			controlStatus = Status.EXECUTING;
@@ -162,10 +177,10 @@ public class BotControl : MonoBehaviour {
 	 * An auxiliary function to print the local map in the Debug.Log
 	 */
 	public void printMap() {
-		string res = "";
+		string res = "MAP\n";
 		for (int i=0;i<rsize;i++) {
 			for (int j=0;j<csize;j++) {
-				res += myMap [i * csize + j] + " ";
+                res += myMap[i * csize + j].ToString() +" ";
 			}
 			res += "\n";
 		}

@@ -18,6 +18,8 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
 	private GridWorldMap mapworld;			//A reference to the original map.
 	private Queue<string> commandBuffer;
 
+    private string walkable = ".X";
+
 	// Use this for initialization
 	void Start () {
 		control = gameObject.GetComponent<BotControl>();
@@ -31,18 +33,22 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
 	}
 
 	public string GetNextAction() {
+        Debug.Log("GetNextAction");
 		if (commandBuffer.Count != 0) {
 			return commandBuffer.Dequeue();
 		}
+        Debug.Log("Buffer empty! Search for new action.");
 		Vector3 current = gameObject.transform.position;
 		int[] currentGrid = mapworld.getIndexesFromWorld(current.x,current.z);
 		int currentArea = mapworld.GetAreaFromPosition(currentGrid[0],currentGrid[1]);
+        Debug.Log("Current Area = " + currentArea);
 		HashSet<int> connectedAreas = control.ConnectedAreas(currentArea);
+        Debug.Log("Found " + connectedAreas.Count + " connected areas.");
 		// Pick a random area.
         int[] areaArray = new int[connectedAreas.Count];
         connectedAreas.CopyTo(areaArray);
-        Debug.Log(areaArray.Length);
-		int randomArea = areaArray[Random.Range(0,areaArray.Length-1)];
+		int randomArea = areaArray[Random.Range(0,areaArray.Length)];
+        Debug.Log("I choose " + randomArea);
 		// Move to door and then to target position.
         int door = mapworld.GetDoorByAreas(currentArea, randomArea, currentGrid[0], currentGrid[1]);
         if (door == -1)
@@ -52,6 +58,7 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
         }
         else
         {
+            Debug.Log("Connected by " + door);
             // Else move to the door and then to the next area.
             commandBuffer.Enqueue(MoveToDoor(door));
             commandBuffer.Enqueue(MoveToRandomAreaPoint(randomArea));
@@ -67,9 +74,9 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
         int areaCount = 1;
         for (int idx = 0; idx < botMap.Length; idx++)
         {
-            if (botMap[idx] == '.' && mapworld.GetAreaFromPosition(idx) == area)
+            if (walkable.IndexOf(botMap[idx]) != -1 && mapworld.GetAreaFromPosition(idx) == area)
             {
-                if (Random.Range(0, areaCount-1) == 0)
+                if (Random.Range(0, areaCount) == 0)
                 {
                     chosenIdx = idx;
                 }

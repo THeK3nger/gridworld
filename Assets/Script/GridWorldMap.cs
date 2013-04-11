@@ -217,6 +217,17 @@ public class GridWorldMap : MonoBehaviour {
 		return staticMap[idx];
 	}
 
+    /**
+     * Get the map element in the current index.
+     * 
+     * \param idx Linearized array index.
+     * \return The element in idx position.
+     */
+    public char getMapElement(int idx)
+    {
+        return staticMap[idx];
+    }
+
 	/**
 	 * Converts a pair of matrix indexes <i,j> in the corresponding
 	 * index of the linearized array associated to the map matrix.
