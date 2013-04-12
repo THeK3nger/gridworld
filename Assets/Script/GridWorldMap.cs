@@ -99,10 +99,7 @@ public class GridWorldMap : MonoBehaviour
 		for (int line=lidx;line<lines.Length;line++) {
 			string map_items = lines[line];
 			for (int j=0;j<map_items.Length;j++) {
-                if (map_items[j] == 'X')
-                    staticMap[i] = '.';
-                else
-				    staticMap[i] = map_items[j];
+				staticMap[i] = map_items[j];
 				i++;
 			}
 		}
@@ -156,6 +153,7 @@ public class GridWorldMap : MonoBehaviour
 				case 'X' :
 					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
 					Instantiate(bot, new Vector3(x,0.1f,z),Quaternion.Euler(Vector3.up * 90));
+                    staticMap[i * csize + j] = '.';
 					break;
 				default:
 					break;
@@ -361,5 +359,52 @@ public class GridWorldMap : MonoBehaviour
             }
         }
         return result;
+    }
+
+    /**
+     * Copy a rectangular region of the static map to the destination array.
+     * 
+     * The destination array has to be of the same dimention of the "staticMap"
+     * array.
+     * 
+     * \param dest The destination array.
+     * \param i The row index of the upper left corner.
+     * \param j The column index of the upper left corner.
+     * \param width The width of the rectangular region.
+     * \param height The height of the rectangular region.
+     */
+    public void CopyRegion(char[] dest, int i, int j, int width, int height)
+    {
+        Debug.Log("Copy " + i + " " + j + " - " + width + " " + height);
+        // If dest size is not valid do nothing.
+        if (dest.Length != staticMap.Length) return;
+        // If i or j are out of bound the whole region is out of bound.
+        // So do nothing.
+        if (i > rsize || j > csize) return;
+        // If i or j are negative update width and height to keep
+        // them consistent with the original i,j.
+        if (i < 0)
+        {
+            height = height + i;
+            i = 0;
+        }
+        if (j < 0)
+        {
+            width = width + j;
+            j = 0;
+        }
+        // Do the same if the regio goes out of bounds.
+        if (i+height > rsize)
+            height = rsize - i;
+        if (j + width > csize)
+            width = csize - j;
+        // Copy the region.
+        for (int p = i; p < i + height; p++)
+        {
+            for (int q = j; q < j + width; q++)
+            {
+                dest[GetArrayIndex(p, q)] = staticMap[GetArrayIndex(p, q)];
+            }
+        }
     }
 }

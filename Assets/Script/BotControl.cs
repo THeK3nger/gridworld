@@ -59,16 +59,10 @@ public class BotControl : MonoBehaviour {
 		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
-        int idx = mapworld.GetArrayIndex(current.x, current.z);
-        myMap[idx] = mapworld.GetMapElement(idx);
-        myMap[idx + 1] = mapworld.GetMapElement(idx + 1); // TODO: First map update.
+        int[] idxs = mapworld.GetIndexesFromWorld(current.x, current.z);
+        mapworld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
-	}
-	 
-	// Update is called once per frame
-	void Update () {
-	 
 	}
 
 	/**
