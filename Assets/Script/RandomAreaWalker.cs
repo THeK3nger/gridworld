@@ -39,8 +39,8 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
 		}
         Debug.Log("Buffer empty! Search for new action.");
 		Vector3 current = gameObject.transform.position;
-		int[] currentGrid = mapworld.getIndexesFromWorld(current.x,current.z);
-		int currentArea = mapworld.GetAreaFromPosition(currentGrid[0],currentGrid[1]);
+		int[] currentGrid = mapworld.GetIndexesFromWorld(current.x,current.z);
+		int currentArea = mapworld.GetArea(currentGrid[0],currentGrid[1]);
         Debug.Log("Current Area = " + currentArea);
 		HashSet<int> connectedAreas = control.ConnectedAreas(currentArea);
         Debug.Log("Found " + connectedAreas.Count + " connected areas.");
@@ -74,7 +74,7 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
         int areaCount = 1;
         for (int idx = 0; idx < botMap.Length; idx++)
         {
-            if (walkable.IndexOf(botMap[idx]) != -1 && mapworld.GetAreaFromPosition(idx) == area)
+            if (walkable.IndexOf(botMap[idx]) != -1 && mapworld.GetArea(idx) == area)
             {
                 if (Random.Range(0, areaCount) == 0)
                 {
@@ -85,7 +85,7 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
         }
         if (chosenIdx == -1) return "";
         int[] chosenIJ = mapworld.GetPositionFromArrayIndex(chosenIdx);
-        float[] chosenXZ = mapworld.getWorldFromIndexes(chosenIJ[0], chosenIJ[1]);
+        float[] chosenXZ = mapworld.GetWorldFromIndexes(chosenIJ[0], chosenIJ[1]);
         return result + chosenXZ[0] + " " + chosenXZ[1];
     }
 
@@ -93,7 +93,7 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
     {
         string result = "move ";
         int[] doorIJ = mapworld.GetPositionFromArrayIndex(door);
-        float[] doorXZ = mapworld.getWorldFromIndexes(doorIJ[0], doorIJ[1]);
+        float[] doorXZ = mapworld.GetWorldFromIndexes(doorIJ[0], doorIJ[1]);
         result = result + doorXZ[0] + " " + doorXZ[1];
         return result;
     }

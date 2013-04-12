@@ -13,3 +13,4 @@ Build/*
 .DS_Store
 
 obj
+*.v11.suo

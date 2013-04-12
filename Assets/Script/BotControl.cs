@@ -40,7 +40,7 @@ public class BotControl : MonoBehaviour {
 	void Awake() {
 		controlStatus = Status.IDLE;
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
-		int[] sizes = mapworld.getMapSize ();
+		int[] sizes = mapworld.GetMapSize ();
 		doorsState = new Dictionary<int,bool>();
 		rsize = sizes [0];
 		csize = sizes [1];
@@ -59,9 +59,9 @@ public class BotControl : MonoBehaviour {
 		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
-        int idx = mapworld.getArrayIndexFromWorld(current.x, current.z);
-        myMap[idx] = mapworld.getMapElement(idx);
-        myMap[idx + 1] = mapworld.getMapElement(idx + 1); // TODO: First map update.
+        int idx = mapworld.GetArrayIndex(current.x, current.z);
+        myMap[idx] = mapworld.GetMapElement(idx);
+        myMap[idx + 1] = mapworld.GetMapElement(idx + 1); // TODO: First map update.
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
@@ -81,7 +81,7 @@ public class BotControl : MonoBehaviour {
 	 	// Extract Type and update the map.
 		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
 		char type = attributes.type[0];
-		int idx = mapworld.getArrayIndexFromWorld (obj.transform.position.x, obj.transform.position.z);
+		int idx = mapworld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
 		myMap [idx] = type;
 		if (type=='D') {

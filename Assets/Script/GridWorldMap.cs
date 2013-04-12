@@ -8,17 +8,17 @@ using Pathfinding;
  * Loads and stores information about the world map.
  * 
  * This class contains the real representation of the world and includes
- * a seti of utility functions to convert world point into the <i,j> matrix
+ * a set of utility functions to convert world point into the <i,j> matrix
  * representations.
  * 
  * \author Davide Aversa
  * \version 1.0
  * \date 2013
  */
-public class GridWorldMap : MonoBehaviour {
-	
-	// MapFile to load.
-	public TextAsset mapFile; 	/**< Map file to load. */
+public class GridWorldMap : MonoBehaviour
+{
+
+    public TextAsset mapFile; 	/**< Map file to load. */
 	public float gridSize; 		/**< The base size of the grid. */
 	public GameObject wall;		/**< The object prefab used as "wall". */
 	public GameObject floor;	/**< The object prebab used as "floor". */
@@ -35,16 +35,14 @@ public class GridWorldMap : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		BuildMap();
-		CreatePathfindingGrid ();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+		CreatePathfindingGrid();
 	}
 
 	/**
-	 * Initialize the pathfinding GridGrpah on the GrodWorld.
+	 * Initialize the pathfinding GridGrpah on the GridWorld.
+     * 
+     * This method build the a grid graph on the full map using the Aron
+     * Pathfinding extension.
 	 */
 	private void CreatePathfindingGrid() {
 		astar = GameObject.Find ("A*");
@@ -92,8 +90,7 @@ public class GridWorldMap : MonoBehaviour {
 			lidx++;
 		}
 		if (rsize == 0 || csize == 0) {
-			Debug.Log("Invalid Map"); //TODO: Raise Exception
-			return;
+            throw new Exception("Invalid Map File!");
 		}
 		// Initialize map array
 		staticMap = new char[rsize*csize];
@@ -102,26 +99,29 @@ public class GridWorldMap : MonoBehaviour {
 		for (int line=lidx;line<lines.Length;line++) {
 			string map_items = lines[line];
 			for (int j=0;j<map_items.Length;j++) {
-				staticMap[i] = map_items[j];
+                if (map_items[j] == 'X')
+                    staticMap[i] = '.';
+                else
+				    staticMap[i] = map_items[j];
 				i++;
 			}
 		}
-		if (i<rsize*csize-1) Debug.Log("ERROR: Invalid Map!"); //TODO: Raise Exception.
+        if (i < rsize * csize - 1) throw new Exception("Invalid Map File!");
 
 		// Find Areas
 		AreaFinder af = new AreaFinder(staticMap,rsize,csize);
 		this.areasMap = af.FindAreas();
 		this.doors = af.FindAreaDoors(areasMap);
-		/* TMP */
-		string res = "";
-		for (int x=0;x<rsize;x++) {
-			for (int y=0;y<csize;y++) {
-				res += areasMap [x * csize + y] + " ";
-			}
-			res += "\n";
-		}
-		Debug.Log(res);
-		/* END */
+        ///* TMP */
+        //string res = "";
+        //for (int x=0;x<rsize;x++) {
+        //    for (int y=0;y<csize;y++) {
+        //        res += areasMap [x * csize + y] + " ";
+        //    }
+        //    res += "\n";
+        //}
+        //Debug.Log(res);
+        ///* END */
 	}
 
 	/**
@@ -140,7 +140,7 @@ public class GridWorldMap : MonoBehaviour {
 		for (int i=0;i<rsize;i++) {
 			for (int j=0;j<csize;j++) {
 				char map_element = staticMap[i*csize+j];
-				float[] worldcoords = getWorldFromIndexes(i,j);
+				float[] worldcoords = GetWorldFromIndexes(i,j);
 				float x = worldcoords[0];
 				float z = worldcoords[1];
 				switch (map_element) {
@@ -171,7 +171,7 @@ public class GridWorldMap : MonoBehaviour {
 	 * \param z World z coordinate
 	 * \return A size two array with the <i,j> indexes.
 	 */
-	public int[] getIndexesFromWorld(float x, float z) {
+	public int[] GetIndexesFromWorld(float x, float z) {
 		int i = (int) (x/gridSize - 0.5);
 		int j = (int) (z/gridSize - 0.5);
 		int[] res = {i,j};
@@ -185,24 +185,11 @@ public class GridWorldMap : MonoBehaviour {
 	 * \param j Matrix j-th row.
 	 * \return The world position <x,z>.
 	 */
-	public float[] getWorldFromIndexes(int i, int j) {
+	public float[] GetWorldFromIndexes(int i, int j) {
 		float x = gridSize*(i+0.5f); 
 		float z = gridSize*(j+0.5f);
 		float[] res = {x, z};
 		return res;
-    }
-
-	/**
-	 * Computes matrix indexes from world position.
-	 * 
-	 * \param x World x coordinate
-	 * \param z World z coordinate
-	 * \return Index of the linearized map array.
-	 */
-	public int getArrayIndexFromWorld(float x, float z) {
-		int i = (int) (x/gridSize - 0.5);
-		int j = (int) (z/gridSize - 0.5);
-		return i * csize + j;
     }
 
 	/**
@@ -212,10 +199,22 @@ public class GridWorldMap : MonoBehaviour {
 	 * \param z World z coordinate.
      * \return The element in grid <x,z>.
 	 */
-	public char getMapElement(float x, float z) {
-		int idx = getArrayIndexFromWorld (x, z);
+	public char GetMapElement(float x, float z) {
+		int idx = GetArrayIndex (x, z);
 		return staticMap[idx];
 	}
+
+    /**
+     * Get the map element in the cell <i,j>.
+     * 
+     * \param i The row.
+     * \param j The column.
+     * \return The element in <i,j> position.
+     */
+    public char GetMapElement(int i, int j)
+    {
+        return staticMap[GetArrayIndex(i, j)];
+    }
 
     /**
      * Get the map element in the current index.
@@ -223,9 +222,22 @@ public class GridWorldMap : MonoBehaviour {
      * \param idx Linearized array index.
      * \return The element in idx position.
      */
-    public char getMapElement(int idx)
+    public char GetMapElement(int idx)
     {
         return staticMap[idx];
+    }
+
+    /**
+     * Computes matrix indexes from world position.
+     * 
+     * \param x World x coordinate
+     * \param z World z coordinate
+     * \return Index of the linearized map array.
+     */
+    public int GetArrayIndex(float x, float z)
+    {
+        int[] idxs = GetIndexesFromWorld(x, z);
+        return GetArrayIndex(idxs[0], idxs[1]);
     }
 
 	/**
@@ -236,7 +248,7 @@ public class GridWorldMap : MonoBehaviour {
 	 * \param j The column index.
 	 * \return The associated linearized array index.
 	 */
-	public int getArrayIndex(int i, int j) {
+	public int GetArrayIndex(int i, int j) {
 		return i * csize + j;
 	}
 
@@ -247,8 +259,8 @@ public class GridWorldMap : MonoBehaviour {
 	 * \param idxs A pair <i,j> of indexes.
 	 * \return The associated linearized array index.
 	 */
-    public int getArrayIndex(int[] idxs) {
-		return idxs [0] * csize + idxs [1];
+    public int GetArrayIndex(int[] idxs) {
+        return GetArrayIndex(idxs[0], idxs[1]);
 	}
     
     /**
@@ -270,7 +282,7 @@ public class GridWorldMap : MonoBehaviour {
 	 * \return A pair <rsize,csize> where rsize is the number of rows in the matrix and
 	 * csize is the number of columns.
 	 */
-	public int[] getMapSize() {
+	public int[] GetMapSize() {
 		int[] res = {this.rsize,this.csize};
 		return res;
 	}
@@ -282,9 +294,21 @@ public class GridWorldMap : MonoBehaviour {
 	 * \param j The cols index.
 	 * \return The label of the <i,j> point.
 	 */
-	public int GetAreaFromPosition(int i, int j) {
-		return areasMap[getArrayIndex(i,j)];
+	public int GetArea(int i, int j) {
+		return areasMap[GetArrayIndex(i,j)];
 	}
+
+    /**
+     * Return the area label for the world point <x,z>.
+     *
+     * \param The x coordinate.
+     * \param The z coordinate.
+     * \return The label of the <x,z> point.
+     */
+    public int GetArea(float x, float z)
+    {
+        return areasMap[GetArrayIndex(x, z)];
+    }
 
     /**
      * Return the area label for the index.
@@ -292,7 +316,7 @@ public class GridWorldMap : MonoBehaviour {
      * \param idx The linearized array position.
      * \return The label of the <i,j> point.
      */
-    public int GetAreaFromPosition(int idx)
+    public int GetArea(int idx)
     {
         return areasMap[idx];
     }
@@ -308,13 +332,14 @@ public class GridWorldMap : MonoBehaviour {
 	}
 
     /**
-     * Return the nearesr door that connect a1 with a2 (if any).
+     * Return the nearest door that connect a1 with a2 (if any).
      * 
      * \param a1 The first area.
      * \param a2 The second area.
      * \param i The bot row.
      * \param j The bot column.
-     * \return The nearest door between two areas.
+     * \return The nearest door between two areas. Return -1 if no door
+     *      can be found.
      */
     public int GetDoorByAreas(int a1, int a2, int i, int j ) {
         if (a1 == a2) return -1;
