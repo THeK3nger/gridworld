@@ -8,6 +8,8 @@ using System.Collections.Generic;
  * \author Davide Aversa
  * \version 1.0
  * \date 2013
+ * 
+ * TODO: The argument should be a GridWorldMap instance.
  */
 public class AreaFinder {
 

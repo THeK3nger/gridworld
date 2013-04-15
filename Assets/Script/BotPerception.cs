@@ -34,11 +34,7 @@ public class BotPerception : MonoBehaviour {
 		GameObject obj = other.gameObject;	// Reference to the entering object.
 		if (raycastTest) {
 			GameObject bot = gameObject.transform.parent.gameObject; // Reference to the bot object.
-			RaycastHit hit = new RaycastHit();
-			Vector3 offset = new Vector3(0,1,0);
-			Vector3 direction = (obj.transform.position - (bot.transform.position + offset)).normalized; // Direction between bot and other.
-			Physics.Raycast(bot.transform.position + offset, direction, out hit);
-			if (hit.transform.gameObject.Equals(obj)) { // If there are no objects between the bot and the entering object,
+            if (RayCastVisibility(obj,bot)) {
 				parentControl.objectEnteringFOV(obj);
 			}
 		} else {
@@ -52,6 +48,16 @@ public class BotPerception : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		GameObject obj = other.gameObject;
 		parentControl.objectLeavingFOV(obj);
+    }
+
+    private bool RayCastVisibility(GameObject obj, GameObject bot)
+    {
+        RaycastHit hit = new RaycastHit();
+        Vector3 offset = new Vector3(0, 1, 0);
+        // Direction between obj and other.
+        Vector3 direction = (obj.transform.position - (bot.transform.position + offset)).normalized;
+        Physics.Raycast(bot.transform.position + offset, direction, out hit);
+        return hit.transform.gameObject.Equals(obj);
     }
 	
 }
