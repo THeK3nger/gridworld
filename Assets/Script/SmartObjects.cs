@@ -47,7 +47,7 @@ public class SmartObjects : MonoBehaviour {
     {
         foreach (BotControl bc in observers)
         {
-            bc.NotifyObjectChange(gameObject);
+            bc.NotifyObjectChange(gameObject, type[0]);
         }
     }
 }

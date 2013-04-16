@@ -77,6 +77,8 @@ public class BotControl : MonoBehaviour {
 		objectInFov.Add (obj);
 		myMap [idx] = type;
         attributes.AddObserver(this);
+        // Update deliberator state for the object.
+        NotifyObjectChange(obj, type);
 	}
 
 	/**
@@ -165,10 +167,12 @@ public class BotControl : MonoBehaviour {
      * 
      * \param The changing object.
      */
-    public void NotifyObjectChange(GameObject obj)
+    public void NotifyObjectChange(GameObject obj, char type)
     {
-        Debug.Log("NOTIFY!");
-        // TODO: filter according the object utility.
+        if (deliberator.interestType.IndexOf(type) != -1)
+        {
+            Debug.Log("NOTIFY!");
+        }
     }
 
 	/**

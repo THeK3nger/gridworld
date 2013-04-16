@@ -16,6 +16,7 @@ public class RandomWalker : MonoBehaviour, IBotDeliberator {
 	private BotControl control;				//A reference to the parent control.
 	private GridWorldMap mapworld;			//A reference to the original map.
 
+    public string interestType { get { return ""; } }
 
 	// Use this for initialization
 	void Start () {

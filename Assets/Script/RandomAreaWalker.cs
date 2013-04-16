@@ -21,6 +21,8 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
 
 	private Queue<string> commandBuffer;
 
+    public string interestType { get { return "D"; } }
+
 	// Use this for initialization
 	void Start () {
 		control = gameObject.GetComponent<BotControl>();
