@@ -76,6 +76,7 @@ public class BotControl : MonoBehaviour {
 		int idx = mapworld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
 		myMap [idx] = type;
+        attributes.AddObserver(this);
 	}
 
 	/**
@@ -85,6 +86,8 @@ public class BotControl : MonoBehaviour {
 	 * \param obj The leaving GameObject.
 	 */
 	public void objectLeavingFOV(GameObject obj) {
+        SmartObjects attributes = obj.GetComponent<SmartObjects>();
+        attributes.RemoveObserver(this);
 		objectInFov.Remove (obj);
 	}
 
@@ -156,6 +159,17 @@ public class BotControl : MonoBehaviour {
 			break;
 		}
 	}
+
+    /**
+     * Notification callback for an object in the FOV which are changing its state.
+     * 
+     * \param The changing object.
+     */
+    public void NotifyObjectChange(GameObject obj)
+    {
+        Debug.Log("NOTIFY!");
+        // TODO: filter according the object utility.
+    }
 
 	/**
 	 * An auxiliary function to print the local map in the Debug.Log

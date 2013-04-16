@@ -6,11 +6,13 @@ public class Door : MonoBehaviour {
 	public bool isOpen = false;
 
 	private AstarPath astarpath;
+    private SmartObjects smartObject;
 
 	// Use this for initialization
 	void Start () {
 		GameObject astar = GameObject.Find ("A*");
 		astarpath = astar.GetComponent<AstarPath> ();
+        smartObject = gameObject.GetComponent<SmartObjects>();
 	}
 	
 	// Update is called once per frame
@@ -36,6 +38,7 @@ public class Door : MonoBehaviour {
 		gameObject.layer = 8; // Walkable
 		isOpen = true;
 		astarpath.Scan();
+        smartObject.NotifyStateChange();
 	}
 
 	public void CloseDoor() {
@@ -47,6 +50,7 @@ public class Door : MonoBehaviour {
 		gameObject.layer = 9; // Obstacle
 		isOpen = false;
 		astarpath.Scan();
+        smartObject.NotifyStateChange();
 	}
 
 }
