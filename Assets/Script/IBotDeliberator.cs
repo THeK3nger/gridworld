@@ -21,7 +21,12 @@ public interface IBotDeliberator {
 	 *
 	 * \return The next valid (?) bot action.
 	 */
-	 string GetNextAction();
+	string GetNextAction();
+
+    /**
+     * Return the interesting object types for the deliberator.
+     */
+    string interestType { get; }
 
 // TODO: Define a complete IBotDeliberator interface. GetNextAction is enought?
 

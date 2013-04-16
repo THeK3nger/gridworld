@@ -26,7 +26,6 @@ public class BotControl : MonoBehaviour {
 	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
 	
 	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
-	private Dictionary<int,bool> doorsState;// Contains the doors status (open or closed).
 
 	// CONDITIONS TODO: to be defined
 	private bool grabbing = false;
@@ -41,7 +40,6 @@ public class BotControl : MonoBehaviour {
 		controlStatus = Status.IDLE;
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 		int[] sizes = mapworld.GetMapSize ();
-		doorsState = new Dictionary<int,bool>();
 		rsize = sizes [0];
 		csize = sizes [1];
 		myMap = new char[rsize * csize];
@@ -78,10 +76,9 @@ public class BotControl : MonoBehaviour {
 		int idx = mapworld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
 		myMap [idx] = type;
-		if (type=='D') {
-			Door d = obj.GetComponent<Door> ();
-			doorsState[idx] = d.isOpen;
-		}
+        attributes.AddObserver(this);
+        // Update deliberator state for the object.
+        NotifyObjectChange(obj, type);
 	}
 
 	/**
@@ -91,6 +88,8 @@ public class BotControl : MonoBehaviour {
 	 * \param obj The leaving GameObject.
 	 */
 	public void objectLeavingFOV(GameObject obj) {
+        SmartObjects attributes = obj.GetComponent<SmartObjects>();
+        attributes.RemoveObserver(this);
 		objectInFov.Remove (obj);
 	}
 
@@ -136,10 +135,6 @@ public class BotControl : MonoBehaviour {
 	public void ThinkLoop() {
 		if (controlStatus == Status.IDLE && deliberatorOn) {
             printMap();
-            foreach (KeyValuePair<int, bool> entry in doorsState)
-            {
-                Debug.Log("Door " + entry.Key + " " + entry.Value);
-            }
 			string nextaction = deliberator.GetNextAction();
 			Debug.Log("Get " + nextaction);
 			controlStatus = Status.EXECUTING;
@@ -167,6 +162,19 @@ public class BotControl : MonoBehaviour {
 		}
 	}
 
+    /**
+     * Notification callback for an object in the FOV which are changing its state.
+     * 
+     * \param The changing object.
+     */
+    public void NotifyObjectChange(GameObject obj, char type)
+    {
+        if (deliberator.interestType.IndexOf(type) != -1)
+        {
+            Debug.Log("NOTIFY!");
+        }
+    }
+
 	/**
 	 * An auxiliary function to print the local map in the Debug.Log
 	 */
@@ -179,40 +187,6 @@ public class BotControl : MonoBehaviour {
 			res += "\n";
 		}
 		Debug.Log(res);
-	}
-
-	/**
-	 * Return the connected areas (acording to the bot internal knowledge)
-	 * to the given area label.
-	 *
-	 * \param area The input area.
-	 * \return The list of the connected area.
-	 */
-	public HashSet<int> ConnectedAreas(int area) {
-		List<int> open_doors = GetOpenDoors();
-		List<int> result = new List<int>();
-        result.Add(area); // An area is always connected to itself.
-		foreach (int door in open_doors) {
-			List<int> doorAreas = mapworld.GetAreasByDoor(door);
-			if (doorAreas.IndexOf(area) != -1)
-				result.AddRange(doorAreas);
-		}
-		return new HashSet<int>(result);
-	}
-
-	/**
-	 * Return a list of the open doors (according to the bot internal knowledge).
-	 *
-	 * \return The list of open doors.
-	 */
-	public List<int> GetOpenDoors() {
-		List<int> result = new List<int>();
-		foreach (KeyValuePair<int,bool> entry in doorsState) {
-			if (doorsState[entry.Key]) {
-				result.Add(entry.Key);
-			}
-		}
-		return result;
 	}
 
     public char[] GetInternalMap()
