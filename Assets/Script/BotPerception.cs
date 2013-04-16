@@ -93,6 +93,8 @@ public class BotPerception : MonoBehaviour {
      * It use the global map to check if there are obstacles in the line
      * between the bot and the object.
      * 
+     * More reference at http://lifc.univ-fcomte.fr/~dedu/projects/bresenham/index.html
+     * 
      * \param obj The target object.
      * \param bot The bot object.
      * \return True if the object is visible from the bot. Flase otherwise.

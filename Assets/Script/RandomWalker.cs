@@ -55,4 +55,6 @@ public class RandomWalker : MonoBehaviour, IBotDeliberator {
 		}
 		return "move " + x + " " + z;
 	}
+
+    public void NotifyObjectChange(GameObject obj, char type) { }
 }

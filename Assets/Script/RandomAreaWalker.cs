@@ -24,7 +24,7 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
     public string interestType { get { return "D"; } }
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		control = gameObject.GetComponent<BotControl>();
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
         doorsState = new Dictionary<int, bool>();
@@ -70,6 +70,15 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
         }
 		return commandBuffer.Dequeue();
 	}
+
+    public void NotifyObjectChange(GameObject obj, char type)
+    {
+        Debug.Log("Deliberator Notified!");
+        Door door = obj.GetComponent<Door>();
+        Vector3 doorPos = obj.transform.position;
+        int idx = mapworld.GetArrayIndex(doorPos.x, doorPos.z);
+        doorsState[idx] = door.isOpen;
+    }
 
     private string MoveToRandomAreaPoint(int area)
     {
@@ -141,4 +150,6 @@ public class RandomAreaWalker : MonoBehaviour, IBotDeliberator {
         }
         return new HashSet<int>(result);
     }
+
+
 }

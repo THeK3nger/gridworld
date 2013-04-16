@@ -23,6 +23,8 @@ public interface IBotDeliberator {
 	 */
 	string GetNextAction();
 
+    void NotifyObjectChange(GameObject obj, char type);
+
     /**
      * Return the interesting object types for the deliberator.
      */

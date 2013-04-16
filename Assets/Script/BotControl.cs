@@ -171,7 +171,7 @@ public class BotControl : MonoBehaviour {
     {
         if (deliberator.interestType.IndexOf(type) != -1)
         {
-            Debug.Log("NOTIFY!");
+            deliberator.NotifyObjectChange(obj, type);
         }
     }
 
