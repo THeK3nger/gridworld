@@ -226,6 +226,41 @@ public class GridWorldMap : MonoBehaviour
     }
 
     /**
+     * Change the map elment in the curent linear array index.
+     * 
+     * \param idx Linearized array index.
+     * \param newElement The new element char.
+     */
+    public void SetMapElement(int idx, char newElement)
+    {
+        staticMap[idx] = newElement;
+    }
+
+    /**
+     * Change the map in the current <i,j> grid position.
+     * 
+     * \param i The row.
+     * \param j The column.
+     * \param newElement The new element char.
+     */
+    public void SetMapElement(int i, int j, char newElement)
+    {
+        SetMapElement(GetArrayIndex(i, j), newElement);
+    }
+
+    /**
+     * Change the map in the current world <x,z> position.
+     * 
+     * \param x World x coordinate.
+     * \param z World z coordinate.
+     * \param newElement The new element char.
+     */
+    public void SetMapElement(float x, float z, char newElement)
+    {
+        SetMapElement(GetArrayIndex(x, z), newElement);
+    }
+
+    /**
      * Computes matrix indexes from world position.
      * 
      * \param x World x coordinate

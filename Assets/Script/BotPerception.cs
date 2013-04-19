@@ -19,7 +19,7 @@ public class BotPerception : MonoBehaviour {
 	private BotControl parentControl;	/**< A reference to the IBotControl instance attache to the bot. */
     private GridWorldMap mapworld;		/**< A reference to the original map. */
 
-    private string opaque = "@D";
+    private string opaque = "@D";       /**< List of opaque symbols. */
 
 	// Use this for initialization
 	void Awake () {

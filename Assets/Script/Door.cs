@@ -7,12 +7,14 @@ public class Door : MonoBehaviour {
 
 	private AstarPath astarpath;
     private SmartObjects smartObject;
+    private GridWorldMap mapworld;
 
 	// Use this for initialization
 	void Start () {
 		GameObject astar = GameObject.Find ("A*");
 		astarpath = astar.GetComponent<AstarPath> ();
         smartObject = gameObject.GetComponent<SmartObjects>();
+        mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 	}
 	
 	// Update is called once per frame
@@ -38,6 +40,7 @@ public class Door : MonoBehaviour {
 		gameObject.layer = 8; // Walkable
 		isOpen = true;
 		astarpath.Scan();
+        mapworld.SetMapElement(x, z, '.');
         smartObject.NotifyStateChange();
 	}
 
@@ -50,6 +53,7 @@ public class Door : MonoBehaviour {
 		gameObject.layer = 9; // Obstacle
 		isOpen = false;
 		astarpath.Scan();
+        mapworld.SetMapElement(x, z, 'D');
         smartObject.NotifyStateChange();
 	}
 
