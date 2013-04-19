@@ -31,7 +31,6 @@ public class BotActions : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// TODO: There is a way to make this generic?
 		parentControl = gameObject.GetComponent<BotControl>();
 	}
 

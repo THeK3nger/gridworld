@@ -44,6 +44,7 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_smart_objects-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -53,6 +54,18 @@
 
 <p>Inherits MonoBehaviour.</p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a71fbc9a99f9cb3483972982129890bf4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_objects.html#a71fbc9a99f9cb3483972982129890bf4">AddObserver</a> (<a class="el" href="class_bot_control.html">BotControl</a> obs)</td></tr>
+<tr class="memdesc:a71fbc9a99f9cb3483972982129890bf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add an observer to the object.  <a href="#a71fbc9a99f9cb3483972982129890bf4">More...</a><br/></td></tr>
+<tr class="separator:a71fbc9a99f9cb3483972982129890bf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeedf9af421ffaf70b6f27524af11528"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_objects.html#afeedf9af421ffaf70b6f27524af11528">RemoveObserver</a> (<a class="el" href="class_bot_control.html">BotControl</a> obs)</td></tr>
+<tr class="memdesc:afeedf9af421ffaf70b6f27524af11528"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove an observer.  <a href="#afeedf9af421ffaf70b6f27524af11528">More...</a><br/></td></tr>
+<tr class="separator:afeedf9af421ffaf70b6f27524af11528"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7d1551e5c316494aebd4c7ce33134e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_objects.html#af7d1551e5c316494aebd4c7ce33134e0">NotifyStateChange</a> ()</td></tr>
+<tr class="memdesc:af7d1551e5c316494aebd4c7ce33134e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notify a change in the object status that has to be sent to the observers.  <a href="#af7d1551e5c316494aebd4c7ce33134e0">More...</a><br/></td></tr>
+<tr class="separator:af7d1551e5c316494aebd4c7ce33134e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:ac0cb2edb39918f75b95ee2cc19a3bfab"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_objects.html#ac0cb2edb39918f75b95ee2cc19a3bfab">type</a> = &quot; &quot;</td></tr>
@@ -60,6 +73,72 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0363a63597e9e6dfec2de4336112b9e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_smart_objects.html#a0363a63597e9e6dfec2de4336112b9e1">isStatic</a> = true</td></tr>
 <tr class="separator:a0363a63597e9e6dfec2de4336112b9e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a71fbc9a99f9cb3483972982129890bf4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SmartObjects.AddObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_bot_control.html">BotControl</a>&#160;</td>
+          <td class="paramname"><em>obs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Add an observer to the object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obs</td><td>The observer controller. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="af7d1551e5c316494aebd4c7ce33134e0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SmartObjects.NotifyStateChange </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Notify a change in the object status that has to be sent to the observers. </p>
+
+</div>
+</div>
+<a class="anchor" id="afeedf9af421ffaf70b6f27524af11528"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SmartObjects.RemoveObserver </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_bot_control.html">BotControl</a>&#160;</td>
+          <td class="paramname"><em>obs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove an observer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obs</td><td>The observer controller </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a0363a63597e9e6dfec2de4336112b9e1"></a>
 <div class="memitem">
@@ -91,7 +170,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 3 2013 12:55:20 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

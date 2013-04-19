@@ -45,11 +45,15 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_random_walker-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">RandomWalker Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using a random direction.  
+ <a href="class_random_walker.html#details">More...</a></p>
 
 <p>Inherits MonoBehaviour, and <a class="el" href="interface_i_bot_deliberator.html">IBotDeliberator</a>.</p>
 <table class="memberdecls">
@@ -58,8 +62,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a242eeb1ea3ccc686d4089a5b8555f814"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_walker.html#a242eeb1ea3ccc686d4089a5b8555f814">GetNextAction</a> ()</td></tr>
 <tr class="memdesc:a242eeb1ea3ccc686d4089a5b8555f814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the next bot action.  <a href="#a242eeb1ea3ccc686d4089a5b8555f814">More...</a><br/></td></tr>
 <tr class="separator:a242eeb1ea3ccc686d4089a5b8555f814"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a58e3042ab68c9d4ee65eaaab50fac3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_walker.html#a5a58e3042ab68c9d4ee65eaaab50fac3">NotifyObjectChange</a> (GameObject obj, char type)</td></tr>
+<tr class="separator:a5a58e3042ab68c9d4ee65eaaab50fac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:a6ed920297b5153ec0ab722edfc2ecf3b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_walker.html#a6ed920297b5153ec0ab722edfc2ecf3b">interestType</a><code> [get]</code></td></tr>
+<tr class="separator:a6ed920297b5153ec0ab722edfc2ecf3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header properties_interface_i_bot_deliberator"><td colspan="2" onclick="javascript:toggleInherit('properties_interface_i_bot_deliberator')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="interface_i_bot_deliberator.html">IBotDeliberator</a></td></tr>
+<tr class="memitem:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_bot_deliberator.html#a4c9e3bd454a9b3bfd536f5b4709b0530">interestType</a><code> [get]</code></td></tr>
+<tr class="memdesc:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the interesting object types for the deliberator.  <a href="#a4c9e3bd454a9b3bfd536f5b4709b0530">More...</a><br/></td></tr>
+<tr class="separator:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using a random direction. </p>
+<p>At every step a random direction from the current point is choosen.</p>
+<dl class="section author"><dt>Author</dt><dd>Davide Aversa </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2013 </dd></dl>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a class="anchor" id="a242eeb1ea3ccc686d4089a5b8555f814"></a>
 <div class="memitem">
 <div class="memproto">
@@ -81,13 +102,62 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5a58e3042ab68c9d4ee65eaaab50fac3"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RandomWalker.NotifyObjectChange </td>
+          <td>(</td>
+          <td class="paramtype">GameObject&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interface_i_bot_deliberator.html#a5ddb9995ab44941f7e74efc4e47e9d81">IBotDeliberator</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Property Documentation</h2>
+<a class="anchor" id="a6ed920297b5153ec0ab722edfc2ecf3b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string RandomWalker.interestType</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">get</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>C:/Users/Davide/Dropbox/Documents/Code/Giochi/Unity3/SimpleGridWorld/Assets/Script/<a class="el" href="_random_walker_8cs.html">RandomWalker.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 3 2013 12:55:20 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

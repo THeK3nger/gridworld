@@ -47,6 +47,7 @@
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
+      <li><a href="functions_prop.html"><span>Properties</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -64,6 +65,7 @@
       <li><a href="#index_n"><span>n</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
       <li><a href="#index_p"><span>p</span></a></li>
+      <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
       <li><a href="#index_w"><span>w</span></a></li>
     </ul>
@@ -75,6 +77,12 @@
 <h3><a class="anchor" id="index_a"></a>- a -</h3><ul>
 <li>action
 : <a class="el" href="class_click_listener.html#aced048934c1dc27a2f68c27072323f2b">ClickListener</a>
+</li>
+<li>AddObserver()
+: <a class="el" href="class_smart_objects.html#a71fbc9a99f9cb3483972982129890bf4">SmartObjects</a>
+</li>
+<li>AreaFinder()
+: <a class="el" href="class_area_finder.html#a97832504f9d7b85ef3790d95e944b1cf">AreaFinder</a>
 </li>
 </ul>
 
@@ -93,6 +101,12 @@
 <li>CheckCondition()
 : <a class="el" href="class_bot_control.html#afabf789fea2cc3a5f088e4c38ab6a528">BotControl</a>
 </li>
+<li>CloseDoor()
+: <a class="el" href="class_door.html#a453a0e9eaae9f70f5405347b14f1a559">Door</a>
+</li>
+<li>CopyRegion()
+: <a class="el" href="class_grid_world_map.html#aa765b6b675abf8a7a2df1fddc7c59ca5">GridWorldMap</a>
+</li>
 </ul>
 
 
@@ -106,6 +120,9 @@
 <li>DoAction()
 : <a class="el" href="class_bot_actions.html#aa7ba49958385e15675eb4e26d5cc6cc6">BotActions</a>
 </li>
+<li>door
+: <a class="el" href="class_grid_world_map.html#a2b413c379e9804fe817817e154908d0a">GridWorldMap</a>
+</li>
 </ul>
 
 
@@ -117,6 +134,12 @@
 
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>FindAreaDoors()
+: <a class="el" href="class_area_finder.html#a53a6de420367b39299f4d184c0b8346d">AreaFinder</a>
+</li>
+<li>FindAreas()
+: <a class="el" href="class_area_finder.html#a88b791c9d16dbd406038f09bdfb79198">AreaFinder</a>
+</li>
 <li>floor
 : <a class="el" href="class_grid_world_map.html#aac0361b1fc64267dd1d45cf7dc35c61e">GridWorldMap</a>
 </li>
@@ -124,27 +147,41 @@
 
 
 <h3><a class="anchor" id="index_g"></a>- g -</h3><ul>
-<li>getArrayIndex()
-: <a class="el" href="class_grid_world_map.html#a9242455239fe9ad2d29c47171dcd533b">GridWorldMap</a>
+<li>GetArea()
+: <a class="el" href="class_grid_world_map.html#a909465b019b8b1520ff164bdfe1a2ab9">GridWorldMap</a>
 </li>
-<li>getArrayIndexFromWorld()
-: <a class="el" href="class_grid_world_map.html#aedf9883b348064f0104daefca1934bf2">GridWorldMap</a>
+<li>GetAreasByDoor()
+: <a class="el" href="class_grid_world_map.html#a6a3c7eb9a349d7fabfcf6678d76d2f68">GridWorldMap</a>
 </li>
-<li>getIndexesFromWorld()
-: <a class="el" href="class_grid_world_map.html#ad78655528b65f7c03f0d6f74a866faa9">GridWorldMap</a>
+<li>GetArrayIndex()
+: <a class="el" href="class_area_finder.html#a53850abe9c16bbae078dc9eeef8fe93d">AreaFinder</a>
+, <a class="el" href="class_grid_world_map.html#acec7a0e271cde4a698cd57af609995e4">GridWorldMap</a>
 </li>
-<li>getMapElement()
-: <a class="el" href="class_grid_world_map.html#a61095a76a57c6f3e99e97a012ac5458e">GridWorldMap</a>
+<li>GetDoorByAreas()
+: <a class="el" href="class_grid_world_map.html#a403bbde991ce565b633abe810f03a359">GridWorldMap</a>
 </li>
-<li>getMapSize()
-: <a class="el" href="class_grid_world_map.html#ac5fc6955513e398197a069ff45961f08">GridWorldMap</a>
+<li>GetIndexesFromWorld()
+: <a class="el" href="class_grid_world_map.html#aedd98abb19d89cf777cb4a2697819ed0">GridWorldMap</a>
+</li>
+<li>GetInternalMap()
+: <a class="el" href="class_bot_control.html#a7db77c131c8145d028f4c95441249e25">BotControl</a>
+</li>
+<li>GetMapElement()
+: <a class="el" href="class_grid_world_map.html#a4fc9761f2ce84b412d33613d4fb16324">GridWorldMap</a>
+</li>
+<li>GetMapSize()
+: <a class="el" href="class_grid_world_map.html#acd9fc2ad1cb45b4eb8aca5babbaa0db4">GridWorldMap</a>
 </li>
 <li>GetNextAction()
 : <a class="el" href="interface_i_bot_deliberator.html#a0186342cc5d7df6fa8de12a2d6cd73a9">IBotDeliberator</a>
+, <a class="el" href="class_random_area_walker.html#ac53bca526f0fd70b14579ea6dba8cb67">RandomAreaWalker</a>
 , <a class="el" href="class_random_walker.html#a242eeb1ea3ccc686d4089a5b8555f814">RandomWalker</a>
 </li>
-<li>getWorldFromIndexes()
-: <a class="el" href="class_grid_world_map.html#a928c423fb5d48753a6514f2bdfbaff5f">GridWorldMap</a>
+<li>GetPositionFromArrayIndex()
+: <a class="el" href="class_grid_world_map.html#aadf926a254e73ac5490df09d404753f7">GridWorldMap</a>
+</li>
+<li>GetWorldFromIndexes()
+: <a class="el" href="class_grid_world_map.html#ac02d561c689a0bd09a8d2a05feab0f07">GridWorldMap</a>
 </li>
 <li>gridSize
 : <a class="el" href="class_grid_world_map.html#a1bbd011566884a64521df27f88e30b7e">GridWorldMap</a>
@@ -155,6 +192,14 @@
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>IDLE
 : <a class="el" href="class_bot_control.html#a76a92be505660cb8fff55e79b1345019aa5daf7f2ebbba4975d61dab1c40188c7">BotControl</a>
+</li>
+<li>interestType
+: <a class="el" href="interface_i_bot_deliberator.html#a4c9e3bd454a9b3bfd536f5b4709b0530">IBotDeliberator</a>
+, <a class="el" href="class_random_walker.html#a6ed920297b5153ec0ab722edfc2ecf3b">RandomWalker</a>
+, <a class="el" href="class_random_area_walker.html#a7ede80be7b330894093c38b2488c7a94">RandomAreaWalker</a>
+</li>
+<li>isOpen
+: <a class="el" href="class_door.html#aa2d909dad9369d6e557357db882bf33a">Door</a>
 </li>
 <li>isStatic
 : <a class="el" href="class_smart_objects.html#a0363a63597e9e6dfec2de4336112b9e1">SmartObjects</a>
@@ -186,6 +231,15 @@
 <li>NotifyAction()
 : <a class="el" href="class_bot_control.html#a8644e58a50f2271b90a1dd5abe1cddab">BotControl</a>
 </li>
+<li>NotifyObjectChange()
+: <a class="el" href="class_bot_control.html#acf3e02be006829651aeb399a025c271f">BotControl</a>
+, <a class="el" href="class_random_walker.html#a5a58e3042ab68c9d4ee65eaaab50fac3">RandomWalker</a>
+, <a class="el" href="class_random_area_walker.html#ab7aac9c076ce1045c911161a5cad9527">RandomAreaWalker</a>
+, <a class="el" href="interface_i_bot_deliberator.html#a5ddb9995ab44941f7e74efc4e47e9d81">IBotDeliberator</a>
+</li>
+<li>NotifyStateChange()
+: <a class="el" href="class_smart_objects.html#af7d1551e5c316494aebd4c7ce33134e0">SmartObjects</a>
+</li>
 </ul>
 
 
@@ -196,12 +250,28 @@
 <li>objectLeavingFOV()
 : <a class="el" href="class_bot_control.html#a4d8e099eb9747bc716e40c8a49637978">BotControl</a>
 </li>
+<li>OpenDoor()
+: <a class="el" href="class_door.html#ac8296b04df6d7b54f0cb85e19870d9ef">Door</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>printMap()
 : <a class="el" href="class_bot_control.html#a5f8fba4df0c3ea5acdbf28ee858e8db0">BotControl</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>rasterTest
+: <a class="el" href="class_bot_perception.html#a3a375ae909c7c050f27a1be6e0bfe64b">BotPerception</a>
+</li>
+<li>raycastTest
+: <a class="el" href="class_bot_perception.html#ab4eecd9ff9c397e467edcb71acce00d1">BotPerception</a>
+</li>
+<li>RemoveObserver()
+: <a class="el" href="class_smart_objects.html#afeedf9af421ffaf70b6f27524af11528">SmartObjects</a>
 </li>
 </ul>
 
@@ -227,7 +297,7 @@
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 3 2013 12:55:21 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

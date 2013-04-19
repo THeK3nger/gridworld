@@ -1,11 +1,22 @@
 using UnityEngine;
 using System.Collections;
 
+/**
+ * Implementation of IBotDeliberator that navigate the map using a
+ * random direction.
+ *
+ * At every step a random direction from the current point is choosen.
+ *
+ * \author Davide Aversa
+ * \version 1.0
+ * \date 2013
+ */
 public class RandomWalker : MonoBehaviour, IBotDeliberator {
 
 	private BotControl control;				//A reference to the parent control.
 	private GridWorldMap mapworld;			//A reference to the original map.
 
+    public string interestType { get { return ""; } }
 
 	// Use this for initialization
 	void Start () {
@@ -44,4 +55,6 @@ public class RandomWalker : MonoBehaviour, IBotDeliberator {
 		}
 		return "move " + x + " " + z;
 	}
+
+    public void NotifyObjectChange(GameObject obj, char type) { }
 }

@@ -11,3 +11,6 @@ Build/*
 *.userprefs
 
 .DS_Store
+
+obj
+*.v11.suo

@@ -73,8 +73,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a8644e58a50f2271b90a1dd5abe1cddab"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_control.html#a8644e58a50f2271b90a1dd5abe1cddab">NotifyAction</a> (string action)</td></tr>
 <tr class="memdesc:a8644e58a50f2271b90a1dd5abe1cddab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used by BotAction to notify the controller about the success of the given action.  <a href="#a8644e58a50f2271b90a1dd5abe1cddab">More...</a><br/></td></tr>
 <tr class="separator:a8644e58a50f2271b90a1dd5abe1cddab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf3e02be006829651aeb399a025c271f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_control.html#acf3e02be006829651aeb399a025c271f">NotifyObjectChange</a> (GameObject obj, char type)</td></tr>
+<tr class="memdesc:acf3e02be006829651aeb399a025c271f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Notification callback for an object in the FOV which are changing its state.  <a href="#acf3e02be006829651aeb399a025c271f">More...</a><br/></td></tr>
+<tr class="separator:acf3e02be006829651aeb399a025c271f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f8fba4df0c3ea5acdbf28ee858e8db0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_control.html#a5f8fba4df0c3ea5acdbf28ee858e8db0">printMap</a> ()</td></tr>
+<tr class="memdesc:a5f8fba4df0c3ea5acdbf28ee858e8db0"><td class="mdescLeft">&#160;</td><td class="mdescRight">An auxiliary function to print the local map in the Debug.Log.  <a href="#a5f8fba4df0c3ea5acdbf28ee858e8db0">More...</a><br/></td></tr>
 <tr class="separator:a5f8fba4df0c3ea5acdbf28ee858e8db0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7db77c131c8145d028f4c95441249e25"><td class="memItemLeft" align="right" valign="top">char[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_control.html#a7db77c131c8145d028f4c95441249e25">GetInternalMap</a> ()</td></tr>
+<tr class="separator:a7db77c131c8145d028f4c95441249e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -118,6 +124,21 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a7db77c131c8145d028f4c95441249e25"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char [] BotControl.GetInternalMap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="a8644e58a50f2271b90a1dd5abe1cddab"></a>
 <div class="memitem">
 <div class="memproto">
@@ -136,6 +157,40 @@ Public Attributes</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">action</td><td>The action notification string (TODO: to be defined). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="acf3e02be006829651aeb399a025c271f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BotControl.NotifyObjectChange </td>
+          <td>(</td>
+          <td class="paramtype">GameObject&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Notification callback for an object in the FOV which are changing its state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">The</td><td>changing object. </td></tr>
   </table>
   </dd>
 </dl>
@@ -202,7 +257,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>An auxiliary function to print the local map in the Debug.Log </p>
+
+<p>An auxiliary function to print the local map in the Debug.Log. </p>
 
 </div>
 </div>
@@ -264,7 +320,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Apr 3 2013 12:55:20 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

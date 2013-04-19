@@ -39,21 +39,28 @@ public class BotControl : MonoBehaviour {
 	void Awake() {
 		controlStatus = Status.IDLE;
 		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
-		int[] sizes = mapworld.getMapSize ();
+		int[] sizes = mapworld.GetMapSize ();
 		rsize = sizes [0];
 		csize = sizes [1];
 		myMap = new char[rsize * csize];
+        // Initialize to " " space.
+        for (int i = 0; i < rsize; i++)
+        {
+            for (int j = 0; j < csize; j++)
+            {
+                myMap[i * csize + j] = ' ';
+            }
+        }
+        // --
 		objectInFov = new List<GameObject>();
 		botActions = gameObject.GetComponent<BotActions> ();
 		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
-		Debug.Log(deliberator);
+        // Update current position in myMap
+        Vector3 current = gameObject.transform.position;
+        int[] idxs = mapworld.GetIndexesFromWorld(current.x, current.z);
+        mapworld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
-	}
-	 
-	// Update is called once per frame
-	void Update () {
-	 
 	}
 
 	/**
@@ -66,9 +73,12 @@ public class BotControl : MonoBehaviour {
 	 	// Extract Type and update the map.
 		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
 		char type = attributes.type[0];
-		int idx = mapworld.getArrayIndexFromWorld (obj.transform.position.x, obj.transform.position.z);
+		int idx = mapworld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
-		myMap [idx] = type;		
+		myMap [idx] = type;
+        attributes.AddObserver(this);
+        // Update deliberator state for the object.
+        NotifyObjectChange(obj, type);
 	}
 
 	/**
@@ -78,6 +88,8 @@ public class BotControl : MonoBehaviour {
 	 * \param obj The leaving GameObject.
 	 */
 	public void objectLeavingFOV(GameObject obj) {
+        SmartObjects attributes = obj.GetComponent<SmartObjects>();
+        attributes.RemoveObserver(this);
 		objectInFov.Remove (obj);
 	}
 
@@ -122,11 +134,13 @@ public class BotControl : MonoBehaviour {
 	// TODO: ThinkLoop 
 	public void ThinkLoop() {
 		if (controlStatus == Status.IDLE && deliberatorOn) {
+            printMap();
 			string nextaction = deliberator.GetNextAction();
 			Debug.Log("Get " + nextaction);
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}
+		//Debug.Log(objectInFov.Count);
 		//botActions.DoAction ("move");
 		//botActions.DoAction ("grab");
 	}
@@ -148,17 +162,36 @@ public class BotControl : MonoBehaviour {
 		}
 	}
 
-	/*!
+    /**
+     * Notification callback for an object in the FOV which are changing its state.
+     * 
+     * \param The changing object.
+     */
+    public void NotifyObjectChange(GameObject obj, char type)
+    {
+        if (deliberator.interestType.IndexOf(type) != -1)
+        {
+            deliberator.NotifyObjectChange(obj, type);
+        }
+    }
+
+	/**
 	 * An auxiliary function to print the local map in the Debug.Log
 	 */
 	public void printMap() {
-		string res = "";
+		string res = "MAP\n";
 		for (int i=0;i<rsize;i++) {
 			for (int j=0;j<csize;j++) {
-				res += myMap [i * csize + j] + " ";
+                res += myMap[i * csize + j].ToString() +" ";
 			}
 			res += "\n";
 		}
 		Debug.Log(res);
 	}
+
+    public char[] GetInternalMap()
+    {
+        return myMap; // TODO: Check if is better (and efficient) to return a copy
+    }
+
 }
