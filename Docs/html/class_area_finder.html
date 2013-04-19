@@ -50,10 +50,14 @@
 <div class="title">AreaFinder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An utility class for automatic areas extraction from a bidimentional map.  
+ <a href="class_area_finder.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a97832504f9d7b85ef3790d95e944b1cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a97832504f9d7b85ef3790d95e944b1cf">AreaFinder</a> (char[] input, int rsize, int csize)</td></tr>
+<tr class="memdesc:a97832504f9d7b85ef3790d95e944b1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a97832504f9d7b85ef3790d95e944b1cf">More...</a><br/></td></tr>
 <tr class="separator:a97832504f9d7b85ef3790d95e944b1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53850abe9c16bbae078dc9eeef8fe93d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a53850abe9c16bbae078dc9eeef8fe93d">GetArrayIndex</a> (int i, int j)</td></tr>
 <tr class="memdesc:a53850abe9c16bbae078dc9eeef8fe93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a pair of matrix indexes &lt;i,j&gt; in the corresponding index of the linearized array associated to the map matrix.  <a href="#a53850abe9c16bbae078dc9eeef8fe93d">More...</a><br/></td></tr>
@@ -61,8 +65,17 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a88b791c9d16dbd406038f09bdfb79198"><td class="memItemLeft" align="right" valign="top">int[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a88b791c9d16dbd406038f09bdfb79198">FindAreas</a> ()</td></tr>
 <tr class="memdesc:a88b791c9d16dbd406038f09bdfb79198"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find all the connencted areas in the map.  <a href="#a88b791c9d16dbd406038f09bdfb79198">More...</a><br/></td></tr>
 <tr class="separator:a88b791c9d16dbd406038f09bdfb79198"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53a6de420367b39299f4d184c0b8346d"><td class="memItemLeft" align="right" valign="top">Dictionary&lt; int, List&lt; int &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a53a6de420367b39299f4d184c0b8346d">FindAreaDoors</a> (int[] labelled)</td></tr>
+<tr class="memdesc:a53a6de420367b39299f4d184c0b8346d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract from the labelled map a list of doors.  <a href="#a53a6de420367b39299f4d184c0b8346d">More...</a><br/></td></tr>
+<tr class="separator:a53a6de420367b39299f4d184c0b8346d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An utility class for automatic areas extraction from a bidimentional map. </p>
+<dl class="section author"><dt>Author</dt><dd>Davide Aversa </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>2013</dd></dl>
+<p>TODO: The argument should be a <a class="el" href="class_grid_world_map.html" title="Loads and stores information about the world map.">GridWorldMap</a> instance. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a97832504f9d7b85ef3790d95e944b1cf"></a>
 <div class="memitem">
 <div class="memproto">
@@ -93,9 +106,38 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructor. </p>
+<p>/param input The input chars map. /param rsize The number of rows in the map. /param csize The number of columns in the map. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a53a6de420367b39299f4d184c0b8346d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Dictionary&lt;int,List&lt;int&gt; &gt; AreaFinder.FindAreaDoors </td>
+          <td>(</td>
+          <td class="paramtype">int[]&#160;</td>
+          <td class="paramname"><em>labelled</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Extract from the labelled map a list of doors. </p>
+<p>A door is a walkable point where two or more areas are connected.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">labelled</td><td>The labelled map version. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A dictionary that map a door with the list of connected areas. </dd></dl>
+
+</div>
+</div>
 <a class="anchor" id="a88b791c9d16dbd406038f09bdfb79198"></a>
 <div class="memitem">
 <div class="memproto">
@@ -110,6 +152,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Find all the connencted areas in the map. </p>
+<p>Based on the Connected-Component Labelling Algorithm.</p>
 <dl class="section return"><dt>Returns</dt><dd>A labelled version of the input map. </dd></dl>
 
 </div>
@@ -157,7 +200,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Apr 8 2013 14:09:57 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

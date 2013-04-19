@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.3.1"/>
-<title>SimpleGridWorld: RandomWalker Class Reference</title>
+<title>SimpleGridWorld: RandomAreaWalker Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -46,47 +46,47 @@
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
-<a href="class_random_walker-members.html">List of all members</a>  </div>
+<a href="class_random_area_walker-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">RandomWalker Class Reference</div>  </div>
+<div class="title">RandomAreaWalker Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using a random direction.  
- <a href="class_random_walker.html#details">More...</a></p>
+<p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using the hierarchical areas representation.  
+ <a href="class_random_area_walker.html#details">More...</a></p>
 
 <p>Inherits MonoBehaviour, and <a class="el" href="interface_i_bot_deliberator.html">IBotDeliberator</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a242eeb1ea3ccc686d4089a5b8555f814"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_walker.html#a242eeb1ea3ccc686d4089a5b8555f814">GetNextAction</a> ()</td></tr>
-<tr class="memdesc:a242eeb1ea3ccc686d4089a5b8555f814"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the next bot action.  <a href="#a242eeb1ea3ccc686d4089a5b8555f814">More...</a><br/></td></tr>
-<tr class="separator:a242eeb1ea3ccc686d4089a5b8555f814"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a58e3042ab68c9d4ee65eaaab50fac3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_walker.html#a5a58e3042ab68c9d4ee65eaaab50fac3">NotifyObjectChange</a> (GameObject obj, char type)</td></tr>
-<tr class="separator:a5a58e3042ab68c9d4ee65eaaab50fac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac53bca526f0fd70b14579ea6dba8cb67"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_area_walker.html#ac53bca526f0fd70b14579ea6dba8cb67">GetNextAction</a> ()</td></tr>
+<tr class="memdesc:ac53bca526f0fd70b14579ea6dba8cb67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the next bot action.  <a href="#ac53bca526f0fd70b14579ea6dba8cb67">More...</a><br/></td></tr>
+<tr class="separator:ac53bca526f0fd70b14579ea6dba8cb67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7aac9c076ce1045c911161a5cad9527"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_area_walker.html#ab7aac9c076ce1045c911161a5cad9527">NotifyObjectChange</a> (GameObject obj, char type)</td></tr>
+<tr class="separator:ab7aac9c076ce1045c911161a5cad9527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
-<tr class="memitem:a6ed920297b5153ec0ab722edfc2ecf3b"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_walker.html#a6ed920297b5153ec0ab722edfc2ecf3b">interestType</a><code> [get]</code></td></tr>
-<tr class="separator:a6ed920297b5153ec0ab722edfc2ecf3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ede80be7b330894093c38b2488c7a94"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_area_walker.html#a7ede80be7b330894093c38b2488c7a94">interestType</a><code> [get]</code></td></tr>
+<tr class="separator:a7ede80be7b330894093c38b2488c7a94"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header properties_interface_i_bot_deliberator"><td colspan="2" onclick="javascript:toggleInherit('properties_interface_i_bot_deliberator')"><img src="closed.png" alt="-"/>&#160;Properties inherited from <a class="el" href="interface_i_bot_deliberator.html">IBotDeliberator</a></td></tr>
 <tr class="memitem:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_bot_deliberator.html#a4c9e3bd454a9b3bfd536f5b4709b0530">interestType</a><code> [get]</code></td></tr>
 <tr class="memdesc:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the interesting object types for the deliberator.  <a href="#a4c9e3bd454a9b3bfd536f5b4709b0530">More...</a><br/></td></tr>
 <tr class="separator:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using a random direction. </p>
-<p>At every step a random direction from the current point is choosen.</p>
+<div class="textblock"><p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using the hierarchical areas representation. </p>
+<p>At every step a random point in a random adiacent area is choosen.</p>
 <dl class="section author"><dt>Author</dt><dd>Davide Aversa </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2013 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a242eeb1ea3ccc686d4089a5b8555f814"></a>
+<a class="anchor" id="ac53bca526f0fd70b14579ea6dba8cb67"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">string RandomWalker.GetNextAction </td>
+          <td class="memname">string RandomAreaWalker.GetNextAction </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -102,12 +102,12 @@ Properties</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a5a58e3042ab68c9d4ee65eaaab50fac3"></a>
+<a class="anchor" id="ab7aac9c076ce1045c911161a5cad9527"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void RandomWalker.NotifyObjectChange </td>
+          <td class="memname">void RandomAreaWalker.NotifyObjectChange </td>
           <td>(</td>
           <td class="paramtype">GameObject&#160;</td>
           <td class="paramname"><em>obj</em>, </td>
@@ -131,7 +131,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Property Documentation</h2>
-<a class="anchor" id="a6ed920297b5153ec0ab722edfc2ecf3b"></a>
+<a class="anchor" id="a7ede80be7b330894093c38b2488c7a94"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -139,7 +139,7 @@ Properties</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">string RandomWalker.interestType</td>
+          <td class="memname">string RandomAreaWalker.interestType</td>
         </tr>
       </table>
   </td>
@@ -152,7 +152,7 @@ Properties</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>C:/Users/Davide/Dropbox/Documents/Code/Giochi/Unity3/SimpleGridWorld/Assets/Script/<a class="el" href="_random_walker_8cs.html">RandomWalker.cs</a></li>
+<li>C:/Users/Davide/Dropbox/Documents/Code/Giochi/Unity3/SimpleGridWorld/Assets/Script/<a class="el" href="_random_area_walker_8cs.html">RandomAreaWalker.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
