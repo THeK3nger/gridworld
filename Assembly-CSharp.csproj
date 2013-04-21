@@ -101,6 +101,7 @@
      <Compile Include="Assets\Script\BotActions.cs" />
      <Compile Include="Assets\Script\BotControl.cs" />
      <Compile Include="Assets\Script\BotPerception.cs" />
+     <Compile Include="Assets\Script\CameraScript.cs" />
      <Compile Include="Assets\Script\ClickListener.cs" />
      <Compile Include="Assets\Script\Door.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
