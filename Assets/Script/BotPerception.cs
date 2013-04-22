@@ -11,20 +11,19 @@ using System.Collections;
  * The bot must have a BotControl instance attached to itself.
  */
 [RequireComponent (typeof (Collider))]
-public class BotPerception : MonoBehaviour {
+public class BotPerception : GridWorldBehaviour {
 
 	public bool raycastTest = false;
     public bool rasterTest = true;
 
 	private BotControl parentControl;	/**< A reference to the IBotControl instance attache to the bot. */
-    private GridWorldMap mapworld;		/**< A reference to the original map. */
 
     private string opaque = "@D";       /**< List of opaque symbols. */
 
 	// Use this for initialization
-	void Awake () {
+	protected override void Awake () {
+        base.Awake();
 		parentControl = gameObject.transform.parent.gameObject.GetComponent<BotControl>();
-        mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 	}
 	
 	// Update is called once per frame
@@ -103,8 +102,8 @@ public class BotPerception : MonoBehaviour {
     {
         Vector3 botPos = bot.transform.position;
         Vector3 objPos = obj.transform.position;
-        int[] botIJ = mapworld.GetIndexesFromWorld(botPos.x, botPos.z);
-        int[] objIJ = mapworld.GetIndexesFromWorld(objPos.x, objPos.z);
+        int[] botIJ = mapWorld.GetIndexesFromWorld(botPos.x, botPos.z);
+        int[] objIJ = mapWorld.GetIndexesFromWorld(objPos.x, objPos.z);
         int y = botIJ[0];
         int x = botIJ[1];
         int dx = objIJ[1] - botIJ[1];
@@ -158,7 +157,7 @@ public class BotPerception : MonoBehaviour {
 
     private bool IsOpaque(int i, int j)
     {
-        return opaque.IndexOf(mapworld.GetMapElement(i, j)) != -1;
+        return opaque.IndexOf(mapWorld.GetMapElement(i, j)) != -1;
     }
 	
 }

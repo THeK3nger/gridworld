@@ -104,6 +104,7 @@
      <Compile Include="Assets\Script\CameraScript.cs" />
      <Compile Include="Assets\Script\ClickListener.cs" />
      <Compile Include="Assets\Script\Door.cs" />
+     <Compile Include="Assets\Script\GridWorldBehaviour.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
      <Compile Include="Assets\Script\IBotDeliberator.cs" />
      <Compile Include="Assets\Script\RandomAreaWalker.cs" />
