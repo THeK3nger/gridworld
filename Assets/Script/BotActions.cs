@@ -20,7 +20,7 @@ using Pathfinding;
  * \date 2013
  * \pre This class needs an instance of GridWorldMap and BotControl.
  */
-public class BotActions : MonoBehaviour {
+public class BotActions : GridWorldBehaviour {
 
 	public float moveSpeed = 1; 			/**< Walk speed in m/s. */
 
@@ -28,12 +28,11 @@ public class BotActions : MonoBehaviour {
 	private bool actionSuccess = true;		/**< True if the last action is completed successfully. */ 
 
 	private BotControl parentControl;		/**< A reference to a BotControl instance. */
-    private GridWorldMap mapWorld;
 
 	// Use this for initialization
-	void Awake () {
+	protected override void Awake () {
+        base.Awake();
 		parentControl = gameObject.GetComponent<BotControl>();
-        mapWorld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 	}
 
 	/**

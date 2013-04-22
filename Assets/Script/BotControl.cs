@@ -12,7 +12,8 @@ using System.Collections.Generic;
  * \version 1.0
  * \date 2013
  */
-public class BotControl : MonoBehaviour {
+public class BotControl : GridWorldBehaviour
+{
 
 	// CONTROL INSPECTOR PARAMETERS
 	public float thinkTick = 1;				//Time interval between a think cicle.
@@ -21,7 +22,6 @@ public class BotControl : MonoBehaviour {
 
 	private char[] myMap;					//Store local map perception.
 	private int rsize, csize;				//Map size.
-	private GridWorldMap mapworld;			//A reference to the original map.
 	private BotActions botActions;  		//Reference to the BotAction component.
 	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
 	
@@ -36,10 +36,10 @@ public class BotControl : MonoBehaviour {
 	private Status controlStatus;			// Controller Status.
 
 	// Use this for initialization
-	void Awake() {
+	protected override void Awake() {
+        base.Awake();
 		controlStatus = Status.IDLE;
-		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
-		int[] sizes = mapworld.GetMapSize ();
+		int[] sizes = mapWorld.GetMapSize ();
 		rsize = sizes [0];
 		csize = sizes [1];
 		myMap = new char[rsize * csize];
@@ -57,8 +57,8 @@ public class BotControl : MonoBehaviour {
 		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
-        int[] idxs = mapworld.GetIndexesFromWorld(current.x, current.z);
-        mapworld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
+        int[] idxs = mapWorld.GetIndexesFromWorld(current.x, current.z);
+        mapWorld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
 		// Run Thread Function Every `n` second
 		InvokeRepeating("ThinkLoop", 3, thinkTick);
 	}
@@ -73,7 +73,7 @@ public class BotControl : MonoBehaviour {
 	 	// Extract Type and update the map.
 		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
 		char type = attributes.type[0];
-		int idx = mapworld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
+		int idx = mapWorld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
 		myMap [idx] = type;
         attributes.AddObserver(this);
