@@ -30,6 +30,6 @@ public class ClickListener : MonoBehaviour {
 		float z = transform.position.z;
 		BotActions botActions = bot.GetComponent<BotActions>();
 		string command = action + " " + x + " " + z; 
-		botActions.DoAction(command);
+		botActions.DoAction("stop");
 	}
 }

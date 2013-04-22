@@ -28,10 +28,12 @@ public class BotActions : MonoBehaviour {
 	private bool actionSuccess = true;		/**< True if the last action is completed successfully. */ 
 
 	private BotControl parentControl;		/**< A reference to a BotControl instance. */
+    private GridWorldMap mapWorld;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 		parentControl = gameObject.GetComponent<BotControl>();
+        mapWorld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
 	}
 
 	/**
@@ -41,25 +43,47 @@ public class BotActions : MonoBehaviour {
 	 * \retval true If the action can be executed.
 	 * \retval false If the action can not be executed.
 	 */
-	public bool DoAction(string action) {
-		Debug.Log("Action Received: " + action);
-		string[] command = action.Split(' ');
-		if (actionComplete) {
-			actionComplete = false;
-			actionSuccess = false;
-			switch (command[0]) {
-			case "move" :
-				MoveTo(float.Parse(command[1]),float.Parse(command[2]));			
-				return true;
-			case "grab" :
-				Grab();
-				return true;
-			default :
-				return false;
-			}
-		}
-		return false;
-	}
+    public bool DoAction(string action)
+    {
+        Debug.Log("Action Received: " + action);
+        string[] command = action.Split(' ');
+        if (action == "stop")
+        {
+            AbortCurrentAction();
+            return true;
+        }
+        if (actionComplete)
+        {
+            actionComplete = false;
+            actionSuccess = false;
+            Debug.Log(command[0]);
+            switch (command[0])
+            {
+                case "move":
+                    MoveTo(float.Parse(command[1]), float.Parse(command[2]));
+                    return true;
+                case "grab":
+                    Grab();
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        return false;
+    }
+
+    public void AbortCurrentAction()
+    {
+        if (!actionComplete)
+        {
+            // If there are any animation running, stop it.
+            iTween.Stop(gameObject);
+            // Snap to the nearest grid point.
+            Vector3 current = gameObject.transform.position;
+            Debug.Log(mapWorld);
+            MoveTo(mapWorld.SnapCoord(current.x), mapWorld.SnapCoord(current.z));
+        }
+    }
 
 	/*!
 	 * Check if the last action is completed.

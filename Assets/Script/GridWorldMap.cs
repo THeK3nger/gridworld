@@ -354,6 +354,17 @@ public class GridWorldMap : MonoBehaviour
         return areasMap[idx];
     }
 
+    /**
+     * Snap the given coordinate to the neares grid center.
+     * 
+     * \param x The give coordinate.
+     * \return The coordinate of the nearest grid center.
+     */
+    public float SnapCoord(float x)
+    {
+        return (float) (Math.Round(x / gridSize - 0.5f) + 0.5f) * gridSize;
+    }
+
 	/**
 	 * Return the areas connected by the given door.
 	 *
