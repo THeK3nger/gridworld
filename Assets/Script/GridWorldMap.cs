@@ -32,6 +32,15 @@ public class GridWorldMap : MonoBehaviour
 	private int rsize;			/**< Number of rows. **/
 	private int csize;			/**< Number of columns. **/
 
+    /**< Catalogue of the various chars categories in the map textual description. */
+    private Dictionary<string, string> itemsCatalogue = new Dictionary<string, string>() 
+    {
+        {"opaque","@D"},
+        {"walls","@"},
+        {"doors","D"},
+        {"walkable",".X"}
+    };
+
 	// Use this for initialization
 	void Start () {
 		BuildMap();
@@ -106,7 +115,7 @@ public class GridWorldMap : MonoBehaviour
         if (i < rsize * csize - 1) throw new Exception("Invalid Map File!");
 
 		// Find Areas
-		AreaFinder af = new AreaFinder(staticMap,rsize,csize);
+		AreaFinder af = new AreaFinder(staticMap,rsize,csize, this);
 		this.areasMap = af.FindAreas();
 		this.doors = af.FindAreaDoors(areasMap);
         ///* TMP */
@@ -421,7 +430,6 @@ public class GridWorldMap : MonoBehaviour
      */
     public void CopyRegion(char[] dest, int i, int j, int width, int height)
     {
-        Debug.Log("Copy " + i + " " + j + " - " + width + " " + height);
         // If dest size is not valid do nothing.
         if (dest.Length != staticMap.Length) return;
         // If i or j are out of bound the whole region is out of bound.
@@ -452,5 +460,33 @@ public class GridWorldMap : MonoBehaviour
                 dest[GetArrayIndex(p, q)] = staticMap[GetArrayIndex(p, q)];
             }
         }
+    }
+
+    /**
+     * Check if a given elements belongs to a desired category.
+     * 
+     * \param type The category name.
+     * \param element The element to be checked.
+     * \return True if element belong to type. False otherwise.
+     */
+    public bool ElementIs(string type, char element)
+    {
+        string elementsList = itemsCatalogue[type];
+        return elementsList.IndexOf(element) != -1;
+    }
+
+    /**
+     * Check if a given poisition contains an element that belongs to a 
+     * desired category.
+     * 
+     * \param type The category name.
+     * \param i The element row.
+     * \param j The element column.
+     * \return True if element belong to type. False otherwise.
+     */
+    public bool ElementIs(string type, int i, int j)
+    {
+        string elementsList = itemsCatalogue[type];
+        return elementsList.IndexOf(GetMapElement(i,j)) != -1;
     }
 }

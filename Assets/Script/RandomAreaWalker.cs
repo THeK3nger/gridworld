@@ -37,7 +37,6 @@ public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
 	}
 
 	public string GetNextAction() {
-        Debug.Log("GetNextAction");
 		if (commandBuffer.Count != 0) {
 			return commandBuffer.Dequeue();
 		}

@@ -157,7 +157,7 @@ public class BotPerception : GridWorldBehaviour {
 
     private bool IsOpaque(int i, int j)
     {
-        return opaque.IndexOf(mapWorld.GetMapElement(i, j)) != -1;
+        return mapWorld.ElementIs("opaque", i, j);
     }
 	
 }
