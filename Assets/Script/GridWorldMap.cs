@@ -355,7 +355,7 @@ public class GridWorldMap : MonoBehaviour
     }
 
     /**
-     * Snap the given coordinate to the neares grid center.
+     * Snap the given coordinate to the nearest grid center.
      * 
      * \param x The give coordinate.
      * \return The coordinate of the nearest grid center.
