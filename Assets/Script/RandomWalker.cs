@@ -13,13 +13,10 @@ using System.Collections;
  */
 public class RandomWalker : GridWorldBehaviour, IBotDeliberator {
 
-	private BotControl control;				//A reference to the parent control.
-
     public string interestType { get { return ""; } }
 
 	// Use this for initialization
 	void Start () {
-		control = gameObject.GetComponent<BotControl>();
 	}
 	
 	// Update is called once per frame

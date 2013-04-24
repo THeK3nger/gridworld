@@ -14,9 +14,8 @@ using System.Collections.Generic;
  */
 public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
 
-	private BotControl control;				    //A reference to the parent control.
+	//private BotControl control;				    //A reference to the parent control.
     private Dictionary<int, bool> doorsState;   // Contains the doors status (open or closed).
-    private int[] mapsize;
 
 	private Queue<string> commandBuffer;
 
@@ -25,10 +24,9 @@ public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
-		control = gameObject.GetComponent<BotControl>();
+		//control = gameObject.GetComponent<BotControl>();
         doorsState = new Dictionary<int, bool>();
 		commandBuffer = new Queue<string>();
-        mapsize = mapWorld.GetMapSize();
 	}
 	
 	// Update is called once per frame
@@ -81,21 +79,7 @@ public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
     private string MoveToRandomAreaPoint(int area)
     {
         string result = "move ";
-        int chosenIdx = -1;
-        int areaCount = 1;
-        int totalSize = mapsize[0]*mapsize[1];
-        for (int idx = 0; idx < totalSize; idx++)
-        {
-            if (mapWorld.GetArea(idx) == area)
-            {
-                if (Random.Range(0, areaCount) == 0)
-                {
-                    chosenIdx = idx;
-                }
-                areaCount++;
-            }
-        }
-        if (chosenIdx == -1) return "";
+        int chosenIdx = mapWorld.SelectRandomAreaPosition(area);
         int[] chosenIJ = mapWorld.GetPositionFromArrayIndex(chosenIdx);
         float[] chosenXZ = mapWorld.GetWorldFromIndexes(chosenIJ[0], chosenIJ[1]);
         return result + chosenXZ[0] + " " + chosenXZ[1];

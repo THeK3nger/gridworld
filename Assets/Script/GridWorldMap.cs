@@ -38,7 +38,8 @@ public class GridWorldMap : MonoBehaviour
         {"opaque","@D"},
         {"walls","@"},
         {"doors","D"},
-        {"walkable",".X"}
+        {"walkable",".X"},
+        {"collectable","GKS"}
     };
 
 	// Use this for initialization
@@ -488,5 +489,44 @@ public class GridWorldMap : MonoBehaviour
     {
         string elementsList = itemsCatalogue[type];
         return elementsList.IndexOf(GetMapElement(i,j)) != -1;
+    }
+
+    /**
+     * Select a random position in the given area.
+     * 
+     * \param area The desired area.
+     * \return A random position index.
+     */
+    public int SelectRandomAreaPosition(int area)
+    {
+        int chosenIdx = -1;
+        int areaCount = 1;
+        int totalSize = csize * rsize;
+        for (int idx = 0; idx < totalSize; idx++)
+        {
+            if (areasMap[idx] == area)
+            {
+                if (UnityEngine.Random.Range(0, areaCount) == 0)
+                {
+                    chosenIdx = idx;
+                }
+                areaCount++;
+            }
+        }
+        return chosenIdx;
+    }
+
+    /**
+     * Select a random area.
+     * 
+     * \return A random chosen aresa.
+     */
+    public int SelectRandomArea()
+    {
+        HashSet<int> areas = new HashSet<int>(areasMap);
+        areas.Remove(0);
+        int[] areaArray = new int[areas.Count];
+        areas.CopyTo(areaArray);
+        return areaArray[UnityEngine.Random.Range(0, areaArray.Length)];
     }
 }

@@ -18,8 +18,6 @@ public class BotPerception : GridWorldBehaviour {
 
 	private BotControl parentControl;	/**< A reference to the IBotControl instance attache to the bot. */
 
-    private string opaque = "@D";       /**< List of opaque symbols. */
-
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();

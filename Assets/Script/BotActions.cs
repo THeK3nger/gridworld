@@ -185,6 +185,4 @@ public class BotActions : GridWorldBehaviour {
 	}
 
 	// TODO: Define more actions if needed!
-
-
 }
