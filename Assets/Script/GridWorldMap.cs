@@ -179,12 +179,13 @@ public class GridWorldMap : MonoBehaviour
 	 * \param z World z coordinate
 	 * \return A size two array with the <i,j> indexes.
 	 */
-	public int[] GetIndexesFromWorld(float x, float z) {
-		int i = (int) (x/gridSize - 0.5);
-		int j = (int) (z/gridSize - 0.5);
-		int[] res = {i,j};
-		return res;
-	}
+    public int[] GetIndexesFromWorld(float x, float z)
+    {
+        int i = (int)Math.Round(x / gridSize - 0.5);
+        int j = (int)Math.Round(z / gridSize - 0.5);
+        int[] res = { i, j };
+        return res;
+    }
 
 	/**
 	 * Returns the world position <x,z> given the index position <i,j>.
@@ -209,6 +210,7 @@ public class GridWorldMap : MonoBehaviour
 	 */
 	public char GetMapElement(float x, float z) {
 		int idx = GetArrayIndex (x, z);
+        Debug.Log(idx);
 		return staticMap[idx];
 	}
 

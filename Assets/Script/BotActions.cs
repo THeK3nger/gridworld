@@ -22,7 +22,7 @@ using Pathfinding;
  */
 public class BotActions : GridWorldBehaviour {
 
-	public float moveSpeed = 1; 			/**< Walk speed in m/s. */
+	public float moveBaseSpeed = 2; 		/**< Walk speed in m/s. */
 
 	private bool actionComplete = true;		/**< True if the last action is completed. */
 	private bool actionSuccess = true;		/**< True if the last action is completed successfully. */ 
@@ -57,7 +57,6 @@ public class BotActions : GridWorldBehaviour {
         {
             actionComplete = false;
             actionSuccess = false;
-            Debug.Log(command[0]);
             switch (command[0])
             {
                 case "move":
@@ -81,7 +80,6 @@ public class BotActions : GridWorldBehaviour {
             iTween.Stop(gameObject);
             // Snap to the nearest grid point.
             Vector3 current = gameObject.transform.position;
-            Debug.Log(mapWorld);
             MoveTo(mapWorld.SnapCoord(current.x), mapWorld.SnapCoord(current.z));
         }
     }
@@ -123,6 +121,7 @@ public class BotActions : GridWorldBehaviour {
 	 * \param path The desired path.
 	 */
 	void PathFoundCallback(Path path) {
+        float moveSpeed = moveBaseSpeed; // TODO: get slower with gold.
 		animation.CrossFade("walk");
 		Vector3[] array_path = path.vectorPath.ToArray ();
 		iTween.MoveTo(gameObject, iTween.Hash
@@ -173,7 +172,7 @@ public class BotActions : GridWorldBehaviour {
     {
         Vector3 current = gameObject.transform.position;
         char currentItem = mapWorld.GetMapElement(current.x, current.z);
-        Debug.Log("GRAB ACTION");
+        Debug.Log(current.x + " " + current.z + " " + currentItem);
         if (mapWorld.ElementIs("collectable", currentItem))
         {
             DestroyGameObjectByPosition(current, 'G');

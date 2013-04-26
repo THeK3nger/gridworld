@@ -15,6 +15,6 @@ public class BotAttributes : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        //Debug.Log("GOLD CARRYING: " + goldCarrying);
 	}
 }

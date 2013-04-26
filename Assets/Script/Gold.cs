@@ -4,7 +4,7 @@ using System.Collections;
 public class Gold : GridWorldBehaviour {
 
 	// Use this for initialization
-	void Awake () {
+	protected override void Awake () {
         base.Awake();
 	}
 	
