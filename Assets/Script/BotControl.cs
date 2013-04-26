@@ -132,7 +132,6 @@ public class BotControl : GridWorldBehaviour
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}
-		botActions.DoAction ("grab");
 	}
 
 	/**

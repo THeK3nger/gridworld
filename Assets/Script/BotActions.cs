@@ -181,13 +181,14 @@ public class BotActions : GridWorldBehaviour {
             attributes.goldCarrying += 100;
             mapWorld.SetMapElement(current.x, current.z, '.');
             parentControl.NotifyAction("grab");
+            actionSuccess = true;
         }
         else
         {
             Debug.Log("Nothing to Grab!!!");
+            actionSuccess = false;
         }
         actionComplete = true;
-        actionSuccess = true;
         // TODO: How to invoke a return value?
     }
 
@@ -203,7 +204,13 @@ public class BotActions : GridWorldBehaviour {
             attributes.goldCarrying = 0;
             Debug.Log("SCORE: " + attributes.goldStored);
             parentControl.NotifyAction("drop");
+            actionSuccess = true;
         }
+        else
+        {
+            actionSuccess = false;
+        }
+        actionComplete = true;
     }
 
 	/**
