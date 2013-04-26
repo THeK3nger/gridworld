@@ -18,12 +18,12 @@ public class BotControl : GridWorldBehaviour
 	// CONTROL INSPECTOR PARAMETERS
 	public float thinkTick = 1;				//Time interval between a think cicle.
 	public string deliberatorName;			//Name of the IBotDeliberator implementation.
-	public bool deliberatorOn;				//True if deliberator is ON. 
 
 	private char[] myMap;					//Store local map perception.
 	private int rsize, csize;				//Map size.
 	private BotActions botActions;  		//Reference to the BotAction component.
 	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
+    private bool deliberatorOn;				//True if deliberator is ON. 
 	
 	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
 
@@ -52,6 +52,11 @@ public class BotControl : GridWorldBehaviour
         objectInFov = new List<GameObject>();
         botActions = gameObject.GetComponent<BotActions>();
         deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
+        // Disable deliberator if deliberator exist or manual control is enabled.
+        ManualControl mc = gameObject.GetComponent<ManualControl>();
+        deliberatorOn = (deliberator != null) &&
+            (mc != null) &&
+            !gameObject.GetComponent<ManualControl>().enabled;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
         int[] idxs = mapWorld.GetIndexesFromWorld(current.x, current.z);
