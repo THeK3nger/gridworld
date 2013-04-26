@@ -28,11 +28,13 @@ public class BotActions : GridWorldBehaviour {
 	private bool actionSuccess = true;		/**< True if the last action is completed successfully. */ 
 
 	private BotControl parentControl;		/**< A reference to a BotControl instance. */
+    private BotAttributes attributes;
 
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
 		parentControl = gameObject.GetComponent<BotControl>();
+        attributes = gameObject.GetComponent<BotAttributes>();
 	}
 
 	/**
@@ -167,15 +169,26 @@ public class BotActions : GridWorldBehaviour {
 	/**
 	 * Grab the object in current location.
 	 */
-	void Grab() {
-		Debug.Log("GRAB ACTION");
-		if (parentControl.CheckCondition("!grabbing")) {
-			parentControl.NotifyAction("grab");
-		}
-		actionComplete = true;
-		actionSuccess = true;
-		// TODO: How to invoke a return value?
-	}
+    void Grab()
+    {
+        Vector3 current = gameObject.transform.position;
+        char currentItem = mapWorld.GetMapElement(current.x, current.z);
+        Debug.Log("GRAB ACTION");
+        if (mapWorld.ElementIs("collectable", currentItem))
+        {
+            DestroyGameObjectByPosition(current, 'G');
+            attributes.goldCarrying += 100;
+            mapWorld.SetMapElement(current.x, current.z, '.');
+            parentControl.NotifyAction("grab");
+        }
+        else
+        {
+            Debug.Log("Nothing to Grab!!!");
+        }
+        actionComplete = true;
+        actionSuccess = true;
+        // TODO: How to invoke a return value?
+    }
 
 	/**
 	 * Release the object in current location.
@@ -184,5 +197,30 @@ public class BotActions : GridWorldBehaviour {
 
 	}
 
-	// TODO: Define more actions if needed!
+    /**
+     * Destroy an object of a given type in the given position.
+     * 
+     * \param position The desired object position.
+     * \param type The desired object type.
+     */
+    private void DestroyGameObjectByPosition(Vector3 position, char type)
+    {
+        Debug.Log("Destroy!");
+        Collider[] hitColliders = Physics.OverlapSphere(position, 1.5f);
+        foreach (Collider c in hitColliders)
+        {
+            SmartObjects so = c.gameObject.GetComponent<SmartObjects>();
+            if (so != null)
+            {
+                if (so.type[0] == type &&
+                    System.Math.Abs(c.gameObject.transform.position.x - position.x) < 0.1 &&
+                    System.Math.Abs(c.gameObject.transform.position.z - position.z) < 0.1)
+                {
+                    Debug.Log("Destroy: " + so.type[0]);
+                    Destroy(c.gameObject);
+                    return;
+                }
+            }
+        }
+    }
 }

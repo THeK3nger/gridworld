@@ -26,10 +26,10 @@ public class ClickListener : MonoBehaviour {
 
 	void OnMouseDown() {
 		bot = GameObject.Find(botName);
-		//float x = transform.position.x;
-		//float z = transform.position.z;
+		float x = transform.position.x;
+		float z = transform.position.z;
 		BotActions botActions = bot.GetComponent<BotActions>();
-		//string command = action + " " + x + " " + z; 
-		botActions.DoAction("stop");
+		string command = action + " " + x + " " + z; 
+		botActions.DoAction(command);
 	}
 }

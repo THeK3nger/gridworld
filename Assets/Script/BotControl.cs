@@ -27,22 +27,19 @@ public class BotControl : GridWorldBehaviour
 	
 	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
 
-	// CONDITIONS TODO: to be defined
-	private bool grabbing = false;
-	private bool test1 = true;
-
 	// STATE
 	private enum Status { IDLE, EXECUTING };
 	private Status controlStatus;			// Controller Status.
 
 	// Use this for initialization
-	protected override void Awake() {
+    protected override void Awake()
+    {
         base.Awake();
-		controlStatus = Status.IDLE;
-		int[] sizes = mapWorld.GetMapSize ();
-		rsize = sizes [0];
-		csize = sizes [1];
-		myMap = new char[rsize * csize];
+        controlStatus = Status.IDLE;
+        int[] sizes = mapWorld.GetMapSize();
+        rsize = sizes[0];
+        csize = sizes[1];
+        myMap = new char[rsize * csize];
         // Initialize to " " space.
         for (int i = 0; i < rsize; i++)
         {
@@ -52,16 +49,16 @@ public class BotControl : GridWorldBehaviour
             }
         }
         // --
-		objectInFov = new List<GameObject>();
-		botActions = gameObject.GetComponent<BotActions> ();
-		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
+        objectInFov = new List<GameObject>();
+        botActions = gameObject.GetComponent<BotActions>();
+        deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
         int[] idxs = mapWorld.GetIndexesFromWorld(current.x, current.z);
         mapWorld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
-		// Run Thread Function Every `n` second
-		InvokeRepeating("ThinkLoop", 3, thinkTick);
-	}
+        // Run Thread Function Every `n` second
+        InvokeRepeating("ThinkLoop", 3, thinkTick);
+    }
 
 	/**
 	 * Callback function called by the Perception component
@@ -122,10 +119,6 @@ public class BotControl : GridWorldBehaviour
 		bool not = condition.StartsWith("!");
 		if (not) condition = condition.Substring(1);
 		switch (condition) {
-		case "grabbing" :
-			return not ^ grabbing;
-		case "test1" :
-			return not ^ test1;
 		default :
 			return false; //TODO: Default true or default false?
 		}
@@ -140,9 +133,7 @@ public class BotControl : GridWorldBehaviour
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}
-		//Debug.Log(objectInFov.Count);
-		//botActions.DoAction ("move");
-		//botActions.DoAction ("grab");
+		botActions.DoAction ("grab");
 	}
 
 	/**
@@ -152,14 +143,14 @@ public class BotControl : GridWorldBehaviour
 	 */
 	public void NotifyAction(string action) {
 		controlStatus = Status.IDLE;
-		switch (action) {
-		case "grab":
-			grabbing = true;
-			Debug.Log("Grab Completed");
-			break;
-		default :
-			break;
-		}
+        switch (action)
+        {
+            case "grab":
+                Debug.Log("Grab Completed");
+                break;
+            default:
+                break;
+        }
 	}
 
     /**
