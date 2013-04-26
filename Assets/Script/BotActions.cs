@@ -23,6 +23,7 @@ using Pathfinding;
 public class BotActions : GridWorldBehaviour {
 
 	public float moveBaseSpeed = 2; 		/**< Walk speed in m/s. */
+    public float speedDecreaseRate;         /**< Speed decrease rate by gold. */
 
 	private bool actionComplete = true;		/**< True if the last action is completed. */
 	private bool actionSuccess = true;		/**< True if the last action is completed successfully. */ 
@@ -124,7 +125,8 @@ public class BotActions : GridWorldBehaviour {
 	 * \param path The desired path.
 	 */
 	void PathFoundCallback(Path path) {
-        float moveSpeed = moveBaseSpeed; // TODO: get slower with gold.
+        float moveSpeed = moveBaseSpeed * (float) System.Math.Exp(-speedDecreaseRate * attributes.goldCarrying);
+        moveSpeed = System.Math.Max(0.5f, moveSpeed);
 		animation.CrossFade("walk");
 		Vector3[] array_path = path.vectorPath.ToArray ();
 		iTween.MoveTo(gameObject, iTween.Hash
