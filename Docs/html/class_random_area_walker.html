@@ -45,6 +45,7 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#properties">Properties</a> &#124;
 <a href="class_random_area_walker-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -55,7 +56,7 @@
 <p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using the hierarchical areas representation.  
  <a href="class_random_area_walker.html#details">More...</a></p>
 
-<p>Inherits MonoBehaviour, and <a class="el" href="interface_i_bot_deliberator.html">IBotDeliberator</a>.</p>
+<p>Inherits <a class="el" href="class_grid_world_behaviour.html">GridWorldBehaviour</a>, and <a class="el" href="interface_i_bot_deliberator.html">IBotDeliberator</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -65,6 +66,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab7aac9c076ce1045c911161a5cad9527"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_area_walker.html#ab7aac9c076ce1045c911161a5cad9527">NotifyObjectChange</a> (GameObject obj, char type)</td></tr>
 <tr class="separator:ab7aac9c076ce1045c911161a5cad9527"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a125218f2cfadf3818e485f723dab64fa"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_area_walker.html#a125218f2cfadf3818e485f723dab64fa">Awake</a> ()</td></tr>
+<tr class="separator:a125218f2cfadf3818e485f723dab64fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
 <tr class="memitem:a7ede80be7b330894093c38b2488c7a94"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_random_area_walker.html#a7ede80be7b330894093c38b2488c7a94">interestType</a><code> [get]</code></td></tr>
@@ -73,6 +79,12 @@ Properties</h2></td></tr>
 <tr class="memitem:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_i_bot_deliberator.html#a4c9e3bd454a9b3bfd536f5b4709b0530">interestType</a><code> [get]</code></td></tr>
 <tr class="memdesc:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the interesting object types for the deliberator.  <a href="#a4c9e3bd454a9b3bfd536f5b4709b0530">More...</a><br/></td></tr>
 <tr class="separator:a4c9e3bd454a9b3bfd536f5b4709b0530 inherit properties_interface_i_bot_deliberator"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_grid_world_behaviour"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_grid_world_behaviour')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_grid_world_behaviour.html">GridWorldBehaviour</a></td></tr>
+<tr class="memitem:a524b9f96c63ff0deb2b6692d67fd001a inherit pro_attribs_class_grid_world_behaviour"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grid_world_map.html">GridWorldMap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_world_behaviour.html#a524b9f96c63ff0deb2b6692d67fd001a">mapWorld</a></td></tr>
+<tr class="separator:a524b9f96c63ff0deb2b6692d67fd001a inherit pro_attribs_class_grid_world_behaviour"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implementation of <a class="el" href="interface_i_bot_deliberator.html" title="A public interface for the bot higher level.">IBotDeliberator</a> that navigate the map using the hierarchical areas representation. </p>
@@ -81,6 +93,31 @@ Properties</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2013 </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a125218f2cfadf3818e485f723dab64fa"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void RandomAreaWalker.Awake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_grid_world_behaviour.html#abdf044f83ce797b5bce9aafa2a1ac447">GridWorldBehaviour</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="ac53bca526f0fd70b14579ea6dba8cb67"></a>
 <div class="memitem">
 <div class="memproto">
@@ -157,7 +194,7 @@ Properties</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 26 2013 19:34:31 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

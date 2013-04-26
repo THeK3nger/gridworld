@@ -46,6 +46,7 @@
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_bot_actions-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BotActions Class Reference</div>  </div>
@@ -55,13 +56,15 @@
 <p>This class is a collection of low-level actions that a bot can do.  
  <a href="class_bot_actions.html#details">More...</a></p>
 
-<p>Inherits MonoBehaviour.</p>
+<p>Inherits <a class="el" href="class_grid_world_behaviour.html">GridWorldBehaviour</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aa7ba49958385e15675eb4e26d5cc6cc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#aa7ba49958385e15675eb4e26d5cc6cc6">DoAction</a> (string action)</td></tr>
 <tr class="memdesc:aa7ba49958385e15675eb4e26d5cc6cc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the given action (if exists).  <a href="#aa7ba49958385e15675eb4e26d5cc6cc6">More...</a><br/></td></tr>
 <tr class="separator:aa7ba49958385e15675eb4e26d5cc6cc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee62f749a763e37fb64a56e476e055e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#aee62f749a763e37fb64a56e476e055e9">AbortCurrentAction</a> ()</td></tr>
+<tr class="separator:aee62f749a763e37fb64a56e476e055e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b2e96a183ef98a6ac6c262c8003c3f8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#a1b2e96a183ef98a6ac6c262c8003c3f8">LastActionComplete</a> ()</td></tr>
 <tr class="separator:a1b2e96a183ef98a6ac6c262c8003c3f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f54fbe1f4559d89fc56dda299249944"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#a7f54fbe1f4559d89fc56dda299249944">LastActionCompletedSuccessfully</a> ()</td></tr>
@@ -70,9 +73,20 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa228015a66f241793da9f4cbb52a9f67"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#aa228015a66f241793da9f4cbb52a9f67">moveSpeed</a> = 1</td></tr>
-<tr class="memdesc:aa228015a66f241793da9f4cbb52a9f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Walk speed in m/s.  <a href="#aa228015a66f241793da9f4cbb52a9f67">More...</a><br/></td></tr>
-<tr class="separator:aa228015a66f241793da9f4cbb52a9f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a368011494f5aef7969340b7d392ae131"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#a368011494f5aef7969340b7d392ae131">moveBaseSpeed</a> = 2</td></tr>
+<tr class="memdesc:a368011494f5aef7969340b7d392ae131"><td class="mdescLeft">&#160;</td><td class="mdescRight">Walk speed in m/s.  <a href="#a368011494f5aef7969340b7d392ae131">More...</a><br/></td></tr>
+<tr class="separator:a368011494f5aef7969340b7d392ae131"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:afa6e5a9d0f8a115fce7d77c9e63e8332"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_actions.html#afa6e5a9d0f8a115fce7d77c9e63e8332">Awake</a> ()</td></tr>
+<tr class="separator:afa6e5a9d0f8a115fce7d77c9e63e8332"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_grid_world_behaviour"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_grid_world_behaviour')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_grid_world_behaviour.html">GridWorldBehaviour</a></td></tr>
+<tr class="memitem:a524b9f96c63ff0deb2b6692d67fd001a inherit pro_attribs_class_grid_world_behaviour"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grid_world_map.html">GridWorldMap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_world_behaviour.html#a524b9f96c63ff0deb2b6692d67fd001a">mapWorld</a></td></tr>
+<tr class="separator:a524b9f96c63ff0deb2b6692d67fd001a inherit pro_attribs_class_grid_world_behaviour"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class is a collection of low-level actions that a bot can do. </p>
@@ -91,6 +105,46 @@ Public Attributes</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2013 </dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>This class needs an instance of <a class="el" href="class_grid_world_map.html" title="Loads and stores information about the world map.">GridWorldMap</a> and <a class="el" href="class_bot_control.html" title="The main brain of a Bot.">BotControl</a>. </dd></dl>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aee62f749a763e37fb64a56e476e055e9"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BotActions.AbortCurrentAction </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="afa6e5a9d0f8a115fce7d77c9e63e8332"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void BotActions.Awake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_grid_world_behaviour.html#abdf044f83ce797b5bce9aafa2a1ac447">GridWorldBehaviour</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aa7ba49958385e15675eb4e26d5cc6cc6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -170,12 +224,12 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a class="anchor" id="aa228015a66f241793da9f4cbb52a9f67"></a>
+<a class="anchor" id="a368011494f5aef7969340b7d392ae131"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">float BotActions.moveSpeed = 1</td>
+          <td class="memname">float BotActions.moveBaseSpeed = 2</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -190,7 +244,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 26 2013 19:34:30 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>
