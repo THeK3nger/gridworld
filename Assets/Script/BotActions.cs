@@ -172,7 +172,6 @@ public class BotActions : GridWorldBehaviour {
     {
         Vector3 current = gameObject.transform.position;
         char currentItem = mapWorld.GetMapElement(current.x, current.z);
-        Debug.Log(current.x + " " + current.z + " " + currentItem);
         if (mapWorld.ElementIs("collectable", currentItem))
         {
             DestroyGameObjectByPosition(current, 'G');
@@ -204,7 +203,6 @@ public class BotActions : GridWorldBehaviour {
      */
     private void DestroyGameObjectByPosition(Vector3 position, char type)
     {
-        Debug.Log("Destroy!");
         Collider[] hitColliders = Physics.OverlapSphere(position, 1.5f);
         foreach (Collider c in hitColliders)
         {
@@ -215,7 +213,6 @@ public class BotActions : GridWorldBehaviour {
                     System.Math.Abs(c.gameObject.transform.position.x - position.x) < 0.1 &&
                     System.Math.Abs(c.gameObject.transform.position.z - position.z) < 0.1)
                 {
-                    Debug.Log("Destroy: " + so.type[0]);
                     Destroy(c.gameObject);
                     return;
                 }

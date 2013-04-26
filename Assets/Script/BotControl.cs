@@ -129,7 +129,6 @@ public class BotControl : GridWorldBehaviour
 		if (controlStatus == Status.IDLE && deliberatorOn) {
             printMap();
 			string nextaction = deliberator.GetNextAction();
-			Debug.Log("Get " + nextaction);
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}

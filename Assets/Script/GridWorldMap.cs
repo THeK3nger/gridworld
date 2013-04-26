@@ -210,7 +210,6 @@ public class GridWorldMap : MonoBehaviour
 	 */
 	public char GetMapElement(float x, float z) {
 		int idx = GetArrayIndex (x, z);
-        Debug.Log(idx);
 		return staticMap[idx];
 	}
 

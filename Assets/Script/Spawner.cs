@@ -31,8 +31,6 @@ public class Spawner : GridWorldBehaviour {
             float[] idxWorld = mapWorld.GetWorldFromIndexes(idx[0], idx[1]);
             Instantiate(obj, new Vector3(idxWorld[0], 0.5f, idxWorld[1]), Quaternion.Euler(rotation));
             mapWorld.SetMapElement(randomIdx, itemChar[0]); // Set gold in the global map. 
-            Debug.Log(mapWorld.GetMapElement(randomIdx));
-            Debug.Log(randomIdx);
             itemSpawned++;
         }
     }
