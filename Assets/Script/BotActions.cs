@@ -65,6 +65,9 @@ public class BotActions : GridWorldBehaviour {
                 case "grab":
                     Grab();
                     return true;
+                case "drop" :
+                    Drop();
+                    return true;
                 default:
                     return false;
             }
@@ -186,6 +189,21 @@ public class BotActions : GridWorldBehaviour {
         actionComplete = true;
         actionSuccess = true;
         // TODO: How to invoke a return value?
+    }
+
+    /**
+     * Drop all the gold in the deposit.
+     */
+    void Drop()
+    {
+        Vector3 current = gameObject.transform.position;
+        if (mapWorld.GetArea(current.x, current.z) == attributes.spawnArea)
+        {
+            attributes.goldStored += attributes.goldCarrying;
+            attributes.goldCarrying = 0;
+            Debug.Log("SCORE: " + attributes.goldStored);
+            parentControl.NotifyAction("drop");
+        }
     }
 
 	/**

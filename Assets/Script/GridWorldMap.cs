@@ -38,7 +38,7 @@ public class GridWorldMap : MonoBehaviour
         {"opaque","@D"},
         {"walls","@"},
         {"doors","D"},
-        {"walkable",".X"},
+        {"walkable",".XGKS"},
         {"collectable","GKS"}
     };
 
