@@ -2,6 +2,14 @@ using UnityEngine;
 using System.Collections;
 using Pathfinding;
 
+/**
+ * This class is a collection of low-level actions that a bot can do.
+ * 
+ *  * The avaiable actions are:
+ * 	- `move x z` : Move the bot to the <x,0,z> world position.
+ *  - `lookat x z` : Look at the <x,0,z> point.
+ *  - `grab` : Grab an item in the current position.
+ */
 [RequireComponent(typeof(BotActions))]
 public class PlayerAction : GridWorldBehaviour
 {
@@ -60,22 +68,20 @@ public class PlayerAction : GridWorldBehaviour
     /**
      * Move the bot to the world plane <x,z> position.
      * 
-     * \param x Desired x world location.
-     * \param z Desired z world location.
+     * \param moveCommand the parsed move command.
      */
     void MoveTo(string[] moveCommand)
     {
-        Debug.Log("YEEEEEEEEEEEEEE");
         float x = float.Parse(moveCommand[1]);
         float z = float.Parse(moveCommand[2]);
         MoveTo(x, z);
     }
 
     /**
- * Calback called by Aron Pathfinding Algorithm when a path is available.
- * 
- * \param path The desired path.
- */
+     * Calback called by Aron Pathfinding Algorithm when a path is available.
+     * 
+     * \param path The desired path.
+     */
     void PathFoundCallback(Path path)
     {
         float moveSpeed = moveBaseSpeed * (float)System.Math.Exp(-speedDecreaseRate * attributes.goldCarrying);

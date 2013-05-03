@@ -4,24 +4,20 @@ using System;
 using System.Collections.Generic;
 
 /**
- * This class is a collection of low-level actions that a bot can do.
+ * This class is an action interface for the BotControl.
  * 
- * These actions can be invoked by BotControl to perform high-level actions.
+ * The action must be registerd in this class through the RegisterNewAction 
+ * function.
  * 
- * The avaiable actions are:
- * 	- `move x z` : Move the bot to the <x,0,z> world position.
- *  - `lookat x z` : Look at the <x,0,z> point.
- *  - `grab` : Grab an item in the current position.
- * 
- * TODO: Complete Action Specification
+ * These actions can be invoked by BotControl.
  * 
  * \author Davide Aversa
- * \version 1.0
+ * \version 1.9
  * \date 2013
- * \pre This class needs an instance of GridWorldMap and BotControl.
+ * \pre This class needs an instance BotControl.
  */
 [RequireComponent(typeof(BotControl))]
-public class BotActions : GridWorldBehaviour {
+public class BotActions : MonoBehaviour {
 
     private Dictionary<string,Action<string[]>> actions;
     private Action abortAction;
@@ -33,18 +29,31 @@ public class BotActions : GridWorldBehaviour {
 
 
 	// Use this for initialization
-	protected override void Awake () {
-        base.Awake();
+	void Awake () {
 		parentControl = gameObject.GetComponent<BotControl>();
         actions = new Dictionary<string, Action<string[]>>();
 	}
 
+    /**
+     * Register an action to the BotAction component.
+     * 
+     * This operation is needed in order to execute the desired action.
+     * 
+     * \param command The command associated to the action.
+     * \param action A function that execute the desired action.
+     */
     public void RegisterNewAction(string command, Action<string[]> action)
     {
         Debug.Log("BotACTIONS: Registering " + command + " command");
         actions[command] = action;
     }
 
+    /**
+     * Register the action that has to be executed to block every other action
+     * in progress.
+     * 
+     * \param The "stop" action function.
+     */
     public void RegisterAbortAction(Action abortAction)
     {
         this.abortAction = abortAction;
@@ -68,7 +77,6 @@ public class BotActions : GridWorldBehaviour {
         }
         if (actionComplete && actions.ContainsKey(commands[0]))
         {
-            Debug.Log("FUCK!");
             actionComplete = false;
             actionSuccess = false;
             actions[commands[0]].Invoke(commands);
@@ -96,16 +104,27 @@ public class BotActions : GridWorldBehaviour {
 		return actionComplete && actionSuccess;
 	}
 
+    /**
+     * Notify to BotAction that the action is complete.
+     */
     public void NotifyActionComplete()
     {
         actionComplete = true;
     }
 
+    /**
+     * Notify the BotAction that the action is completed succesfully.
+     */
     public void NotifyActionSuccess()
     {
         actionSuccess = true;
     }
 
+    /**
+     * Notify the action to the BotController.
+     * 
+     * \param action The action succesfull.
+     */
     public void NotifyAction(string action)
     {
         parentControl.NotifyAction(action);
