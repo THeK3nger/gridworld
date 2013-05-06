@@ -9,6 +9,7 @@ using Pathfinding;
  * 	- `move x z` : Move the bot to the <x,0,z> world position.
  *  - `lookat x z` : Look at the <x,0,z> point.
  *  - `grab` : Grab an item in the current position.
+ *  - `drop` : Unload the gold in the area (if the area is valid).
  */
 [RequireComponent(typeof(BotActions))]
 public class PlayerAction : GridWorldBehaviour

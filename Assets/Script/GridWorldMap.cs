@@ -62,8 +62,8 @@ public class GridWorldMap : MonoBehaviour
 		int obstacles = 1 << LayerMask.NameToLayer ("Obstacles");
 		int walkable = 1 << LayerMask.NameToLayer ("Walkable");
 		// GridGraph Configuration
-		gridgraph.width = csize;
-		gridgraph.depth = rsize;
+		gridgraph.width = rsize;
+		gridgraph.depth = csize;
 		gridgraph.nodeSize = gridSize;
 		gridgraph.UpdateSizeFromWidthDepth ();
 		gridgraph.center = new Vector3 (rsize * gridSize / 2.0f, -0.2f, csize * gridSize / 2.0f);

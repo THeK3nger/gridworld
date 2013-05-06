@@ -58,6 +58,8 @@
      <Compile Include="Assets\Doxygen\Editor\DoxygenWindow.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
+     <None Include="Assets\Maps\shortcut.txt" />
+     <None Include="Assets\Maps\doors_hell.txt" />
      <None Include="Assets\Doxygen\Editor\Resources\BaseDoxyfile.txt" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\dependencies.txt" />

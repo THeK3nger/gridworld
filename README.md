@@ -23,7 +23,7 @@ you find some problems in running GridWorld on Unity 4, plese, let me know.
 The GoldRun Game
 ----------------
 
-GridWorld implement a test game called GoldRun. 
+GridWorld implements a test game called GoldRun. 
 
 The goal of the game is to take more gold as possible to the spawn point in a certain time limit (4 minutes default).
 
