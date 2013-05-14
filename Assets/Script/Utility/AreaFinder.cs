@@ -13,12 +13,10 @@ using System.Collections.Generic;
  */
 public class AreaFinder {
 
-	private string doors = "D";   		/**< Characters representing a door. */
-	private string walkable = ".X";     /**< Characters representing a walkable area. */
-
-	private char[] input;               /**< The input map. */
+    private char[] input;               /**< The input map. */
 	private int rsize;                  /**< The number of rows. */
 	private int csize;                  /**< The number of columns. */
+    private GridWorldMap mapWorld;       /**< A link to the original GridWorldMap. */
 
 	private Dictionary<int,int> equivalence; /**< A dictionary that stores the equivalence class between labels. */
 
@@ -28,26 +26,28 @@ public class AreaFinder {
      * /param input The input chars map.
      * /param rsize The number of rows in the map.
      * /param csize The number of columns in the map.
+     * /param mapWorld A link to the original GridWorldMap class.
      */
-	public AreaFinder(char[] input, int rsize, int csize) {
+	public AreaFinder(char[] input, int rsize, int csize, GridWorldMap mapWorld) {
 		this.input = input;
 		this.rsize = rsize;
 		this.csize = csize;
 		equivalence = new Dictionary<int,int>();
+        this.mapWorld = mapWorld;
 	}
 
 	/**
 	 * Return true if and only if the char `c` is a door.
 	 */
 	private bool isDoor(char c) {
-		return doors.IndexOf(c) != -1;
+		return mapWorld.ElementIs("doors",c);
 	}
 
 	/**
 	 * Return true if and only if the char `c` is a walkable.
 	 */
 	private bool isWalkable(char c) {
-		return walkable.IndexOf(c) != -1;
+		return mapWorld.ElementIs("walkable",c);
 	}
 
 	/**

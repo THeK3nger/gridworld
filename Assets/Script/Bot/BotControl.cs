@@ -12,37 +12,34 @@ using System.Collections.Generic;
  * \version 1.0
  * \date 2013
  */
-public class BotControl : MonoBehaviour {
+public class BotControl : GridWorldBehaviour
+{
 
 	// CONTROL INSPECTOR PARAMETERS
 	public float thinkTick = 1;				//Time interval between a think cicle.
 	public string deliberatorName;			//Name of the IBotDeliberator implementation.
-	public bool deliberatorOn;				//True if deliberator is ON. 
 
 	private char[] myMap;					//Store local map perception.
 	private int rsize, csize;				//Map size.
-	private GridWorldMap mapworld;			//A reference to the original map.
 	private BotActions botActions;  		//Reference to the BotAction component.
 	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
+    private bool deliberatorOn;				//True if deliberator is ON. 
 	
 	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
-
-	// CONDITIONS TODO: to be defined
-	private bool grabbing = false;
-	private bool test1 = true;
 
 	// STATE
 	private enum Status { IDLE, EXECUTING };
 	private Status controlStatus;			// Controller Status.
 
 	// Use this for initialization
-	void Awake() {
-		controlStatus = Status.IDLE;
-		mapworld = GameObject.Find("MapGenerator").GetComponent<GridWorldMap>();
-		int[] sizes = mapworld.GetMapSize ();
-		rsize = sizes [0];
-		csize = sizes [1];
-		myMap = new char[rsize * csize];
+    protected override void Awake()
+    {
+        base.Awake();
+        controlStatus = Status.IDLE;
+        int[] sizes = mapWorld.GetMapSize();
+        rsize = sizes[0];
+        csize = sizes[1];
+        myMap = new char[rsize * csize];
         // Initialize to " " space.
         for (int i = 0; i < rsize; i++)
         {
@@ -52,16 +49,21 @@ public class BotControl : MonoBehaviour {
             }
         }
         // --
-		objectInFov = new List<GameObject>();
-		botActions = gameObject.GetComponent<BotActions> ();
-		deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
+        objectInFov = new List<GameObject>();
+        botActions = gameObject.GetComponent<BotActions>();
+        deliberator = gameObject.GetComponent(deliberatorName) as IBotDeliberator;
+        // Disable deliberator if deliberator exist or manual control is enabled.
+        ManualControl mc = gameObject.GetComponent<ManualControl>();
+        deliberatorOn = (deliberator != null) &&
+            (mc != null) &&
+            !gameObject.GetComponent<ManualControl>().enabled;
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
-        int[] idxs = mapworld.GetIndexesFromWorld(current.x, current.z);
-        mapworld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
-		// Run Thread Function Every `n` second
-		InvokeRepeating("ThinkLoop", 3, thinkTick);
-	}
+        int[] idxs = mapWorld.GetIndexesFromWorld(current.x, current.z);
+        mapWorld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
+        // Run Thread Function Every `n` second
+        InvokeRepeating("ThinkLoop", 3, thinkTick);
+    }
 
 	/**
 	 * Callback function called by the Perception component
@@ -73,7 +75,7 @@ public class BotControl : MonoBehaviour {
 	 	// Extract Type and update the map.
 		SmartObjects attributes = obj.GetComponent<SmartObjects> ();
 		char type = attributes.type[0];
-		int idx = mapworld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
+		int idx = mapWorld.GetArrayIndex (obj.transform.position.x, obj.transform.position.z);
 		objectInFov.Add (obj);
 		myMap [idx] = type;
         attributes.AddObserver(this);
@@ -122,10 +124,6 @@ public class BotControl : MonoBehaviour {
 		bool not = condition.StartsWith("!");
 		if (not) condition = condition.Substring(1);
 		switch (condition) {
-		case "grabbing" :
-			return not ^ grabbing;
-		case "test1" :
-			return not ^ test1;
 		default :
 			return false; //TODO: Default true or default false?
 		}
@@ -136,14 +134,15 @@ public class BotControl : MonoBehaviour {
 		if (controlStatus == Status.IDLE && deliberatorOn) {
             printMap();
 			string nextaction = deliberator.GetNextAction();
-			Debug.Log("Get " + nextaction);
 			controlStatus = Status.EXECUTING;
 			botActions.DoAction(nextaction);
 		}
-		//Debug.Log(objectInFov.Count);
-		//botActions.DoAction ("move");
-		//botActions.DoAction ("grab");
 	}
+
+    public void DoAction(string command)
+    {
+        botActions.DoAction(command);
+    }
 
 	/**
 	 * Used by BotAction to notify the controller about the success of the given action.
@@ -152,14 +151,14 @@ public class BotControl : MonoBehaviour {
 	 */
 	public void NotifyAction(string action) {
 		controlStatus = Status.IDLE;
-		switch (action) {
-		case "grab":
-			grabbing = true;
-			Debug.Log("Grab Completed");
-			break;
-		default :
-			break;
-		}
+        switch (action)
+        {
+            case "grab":
+                Debug.Log("Grab Completed");
+                break;
+            default:
+                break;
+        }
 	}
 
     /**

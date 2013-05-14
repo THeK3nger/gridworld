@@ -45,6 +45,7 @@
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_bot_perception-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">BotPerception Class Reference</div>  </div>
@@ -54,7 +55,7 @@
 <p>Implement a perception by collision system for the attached object.  
  <a href="class_bot_perception.html#details">More...</a></p>
 
-<p>Inherits MonoBehaviour.</p>
+<p>Inherits <a class="el" href="class_grid_world_behaviour.html">GridWorldBehaviour</a>.</p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -62,6 +63,17 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ab4eecd9ff9c397e467edcb71acce00d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a375ae909c7c050f27a1be6e0bfe64b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_perception.html#a3a375ae909c7c050f27a1be6e0bfe64b">rasterTest</a> = true</td></tr>
 <tr class="separator:a3a375ae909c7c050f27a1be6e0bfe64b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a288731a194466cc6a3f8fcc903ae6112"><td class="memItemLeft" align="right" valign="top">override void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bot_perception.html#a288731a194466cc6a3f8fcc903ae6112">Awake</a> ()</td></tr>
+<tr class="separator:a288731a194466cc6a3f8fcc903ae6112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pro_attribs_class_grid_world_behaviour"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_grid_world_behaviour')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_grid_world_behaviour.html">GridWorldBehaviour</a></td></tr>
+<tr class="memitem:a524b9f96c63ff0deb2b6692d67fd001a inherit pro_attribs_class_grid_world_behaviour"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grid_world_map.html">GridWorldMap</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_world_behaviour.html#a524b9f96c63ff0deb2b6692d67fd001a">mapWorld</a></td></tr>
+<tr class="separator:a524b9f96c63ff0deb2b6692d67fd001a inherit pro_attribs_class_grid_world_behaviour"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Implement a perception by collision system for the attached object. </p>
@@ -69,7 +81,33 @@ Public Attributes</h2></td></tr>
 <dl class="section version"><dt>Version</dt><dd>1.0 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2013 </dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>This component must be attached to a <em>perception mesh</em> attached to the bot. The bot must have a <a class="el" href="class_bot_control.html" title="The main brain of a Bot.">BotControl</a> instance attached to itself. </dd></dl>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a288731a194466cc6a3f8fcc903ae6112"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">override void BotPerception.Awake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented from <a class="el" href="class_grid_world_behaviour.html#abdf044f83ce797b5bce9aafa2a1ac447">GridWorldBehaviour</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a class="anchor" id="a3a375ae909c7c050f27a1be6e0bfe64b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -100,7 +138,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 26 2013 19:34:31 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

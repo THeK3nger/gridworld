@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_3_5_7;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_STANDALONE_WIN;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_3_5_7;UNITY_3_5;UNITY_EDITOR;ENABLE_PROFILER;UNITY_WEBPLAYER;ENABLE_GENERICS;ENABLE_DUCK_TYPING;ENABLE_TERRAIN;ENABLE_MOVIES;ENABLE_WEBCAM;ENABLE_MICROPHONE;ENABLE_NETWORK;ENABLE_CLOTH;ENABLE_WWW;ENABLE_SUBSTANCE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -98,20 +98,30 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\PathUtilities.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\SizeProfiler.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
-     <Compile Include="Assets\Script\BotActions.cs" />
-     <Compile Include="Assets\Script\BotControl.cs" />
-     <Compile Include="Assets\Script\BotPerception.cs" />
+     <Compile Include="Assets\Script\Bot\BotActions.cs" />
+     <Compile Include="Assets\Script\Bot\BotAttributes.cs" />
+     <Compile Include="Assets\Script\Bot\BotControl.cs" />
+     <Compile Include="Assets\Script\Bot\BotPerception.cs" />
+     <Compile Include="Assets\Script\Bot\IBotDeliberator.cs" />
+     <Compile Include="Assets\Script\Bot\ManualControl.cs" />
+     <Compile Include="Assets\Script\CameraScript.cs" />
      <Compile Include="Assets\Script\ClickListener.cs" />
-     <Compile Include="Assets\Script\Door.cs" />
+     <Compile Include="Assets\Script\FPSCounter.cs" />
+     <Compile Include="Assets\Script\GridWorldBehaviour.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
-     <Compile Include="Assets\Script\IBotDeliberator.cs" />
+     <Compile Include="Assets\Script\Objects\Door.cs" />
+     <Compile Include="Assets\Script\Objects\Gold.cs" />
+     <Compile Include="Assets\Script\Objects\SmartObjects.cs" />
+     <Compile Include="Assets\Script\Objects\Spawner.cs" />
+     <Compile Include="Assets\Script\Player\PlayerAction.cs" />
      <Compile Include="Assets\Script\RandomAreaWalker.cs" />
      <Compile Include="Assets\Script\RandomWalker.cs" />
-     <Compile Include="Assets\Script\SmartObjects.cs" />
      <Compile Include="Assets\Script\Utility\AreaFinder.cs" />
      <Compile Include="Assets\Script\iTween.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
+     <None Include="Assets\Maps\shortcut.txt" />
+     <None Include="Assets\Maps\doors_hell.txt" />
      <None Include="Assets\Doxygen\Editor\Resources\BaseDoxyfile.txt" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\dependencies.txt" />

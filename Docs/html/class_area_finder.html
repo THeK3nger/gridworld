@@ -56,9 +56,9 @@
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a97832504f9d7b85ef3790d95e944b1cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a97832504f9d7b85ef3790d95e944b1cf">AreaFinder</a> (char[] input, int rsize, int csize)</td></tr>
-<tr class="memdesc:a97832504f9d7b85ef3790d95e944b1cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a97832504f9d7b85ef3790d95e944b1cf">More...</a><br/></td></tr>
-<tr class="separator:a97832504f9d7b85ef3790d95e944b1cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bddb62005409d3450a1b8f885f7852b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a4bddb62005409d3450a1b8f885f7852b">AreaFinder</a> (char[] input, int rsize, int csize, <a class="el" href="class_grid_world_map.html">GridWorldMap</a> mapWorld)</td></tr>
+<tr class="memdesc:a4bddb62005409d3450a1b8f885f7852b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a4bddb62005409d3450a1b8f885f7852b">More...</a><br/></td></tr>
+<tr class="separator:a4bddb62005409d3450a1b8f885f7852b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a53850abe9c16bbae078dc9eeef8fe93d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_area_finder.html#a53850abe9c16bbae078dc9eeef8fe93d">GetArrayIndex</a> (int i, int j)</td></tr>
 <tr class="memdesc:a53850abe9c16bbae078dc9eeef8fe93d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a pair of matrix indexes &lt;i,j&gt; in the corresponding index of the linearized array associated to the map matrix.  <a href="#a53850abe9c16bbae078dc9eeef8fe93d">More...</a><br/></td></tr>
 <tr class="separator:a53850abe9c16bbae078dc9eeef8fe93d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -76,7 +76,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2013</dd></dl>
 <p>TODO: The argument should be a <a class="el" href="class_grid_world_map.html" title="Loads and stores information about the world map.">GridWorldMap</a> instance. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a97832504f9d7b85ef3790d95e944b1cf"></a>
+<a class="anchor" id="a4bddb62005409d3450a1b8f885f7852b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -96,7 +96,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>csize</em>&#160;</td>
+          <td class="paramname"><em>csize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_grid_world_map.html">GridWorldMap</a>&#160;</td>
+          <td class="paramname"><em>mapWorld</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -107,7 +113,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>/param input The input chars map. /param rsize The number of rows in the map. /param csize The number of columns in the map. </p>
+<p>/param input The input chars map. /param rsize The number of rows in the map. /param csize The number of columns in the map. /param mapWorld A link to the original <a class="el" href="class_grid_world_map.html" title="Loads and stores information about the world map.">GridWorldMap</a> class. </p>
 
 </div>
 </div>
@@ -200,7 +206,7 @@ Public Member Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Apr 19 2013 12:12:29 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Apr 26 2013 19:34:30 for SimpleGridWorld by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.3.1
 </small></address>

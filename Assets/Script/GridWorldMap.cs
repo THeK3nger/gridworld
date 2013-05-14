@@ -32,6 +32,16 @@ public class GridWorldMap : MonoBehaviour
 	private int rsize;			/**< Number of rows. **/
 	private int csize;			/**< Number of columns. **/
 
+    /**< Catalogue of the various chars categories in the map textual description. */
+    private Dictionary<string, string> itemsCatalogue = new Dictionary<string, string>() 
+    {
+        {"opaque","@D"},
+        {"walls","@"},
+        {"doors","D"},
+        {"walkable",".XGKS"},
+        {"collectable","GKS"}
+    };
+
 	// Use this for initialization
 	void Start () {
 		BuildMap();
@@ -52,8 +62,8 @@ public class GridWorldMap : MonoBehaviour
 		int obstacles = 1 << LayerMask.NameToLayer ("Obstacles");
 		int walkable = 1 << LayerMask.NameToLayer ("Walkable");
 		// GridGraph Configuration
-		gridgraph.width = csize;
-		gridgraph.depth = rsize;
+		gridgraph.width = rsize;
+		gridgraph.depth = csize;
 		gridgraph.nodeSize = gridSize;
 		gridgraph.UpdateSizeFromWidthDepth ();
 		gridgraph.center = new Vector3 (rsize * gridSize / 2.0f, -0.2f, csize * gridSize / 2.0f);
@@ -106,7 +116,7 @@ public class GridWorldMap : MonoBehaviour
         if (i < rsize * csize - 1) throw new Exception("Invalid Map File!");
 
 		// Find Areas
-		AreaFinder af = new AreaFinder(staticMap,rsize,csize);
+		AreaFinder af = new AreaFinder(staticMap,rsize,csize, this);
 		this.areasMap = af.FindAreas();
 		this.doors = af.FindAreaDoors(areasMap);
         ///* TMP */
@@ -169,12 +179,13 @@ public class GridWorldMap : MonoBehaviour
 	 * \param z World z coordinate
 	 * \return A size two array with the <i,j> indexes.
 	 */
-	public int[] GetIndexesFromWorld(float x, float z) {
-		int i = (int) (x/gridSize - 0.5);
-		int j = (int) (z/gridSize - 0.5);
-		int[] res = {i,j};
-		return res;
-	}
+    public int[] GetIndexesFromWorld(float x, float z)
+    {
+        int i = (int)Math.Round(x / gridSize - 0.5);
+        int j = (int)Math.Round(z / gridSize - 0.5);
+        int[] res = { i, j };
+        return res;
+    }
 
 	/**
 	 * Returns the world position <x,z> given the index position <i,j>.
@@ -354,6 +365,17 @@ public class GridWorldMap : MonoBehaviour
         return areasMap[idx];
     }
 
+    /**
+     * Snap the given coordinate to the nearest grid center.
+     * 
+     * \param x The give coordinate.
+     * \return The coordinate of the nearest grid center.
+     */
+    public float SnapCoord(float x)
+    {
+        return (float) (Math.Round(x / gridSize - 0.5f) + 0.5f) * gridSize;
+    }
+
 	/**
 	 * Return the areas connected by the given door.
 	 *
@@ -363,6 +385,11 @@ public class GridWorldMap : MonoBehaviour
 	public List<int> GetAreasByDoor(int door) {
 		return doors[door];
 	}
+
+    public List<int> GetDoors()
+    {
+        return new List<int>(doors.Keys);
+    }
 
     /**
      * Return the nearest door that connect a1 with a2 (if any).
@@ -410,7 +437,6 @@ public class GridWorldMap : MonoBehaviour
      */
     public void CopyRegion(char[] dest, int i, int j, int width, int height)
     {
-        Debug.Log("Copy " + i + " " + j + " - " + width + " " + height);
         // If dest size is not valid do nothing.
         if (dest.Length != staticMap.Length) return;
         // If i or j are out of bound the whole region is out of bound.
@@ -441,5 +467,72 @@ public class GridWorldMap : MonoBehaviour
                 dest[GetArrayIndex(p, q)] = staticMap[GetArrayIndex(p, q)];
             }
         }
+    }
+
+    /**
+     * Check if a given elements belongs to a desired category.
+     * 
+     * \param type The category name.
+     * \param element The element to be checked.
+     * \return True if element belong to type. False otherwise.
+     */
+    public bool ElementIs(string type, char element)
+    {
+        string elementsList = itemsCatalogue[type];
+        return elementsList.IndexOf(element) != -1;
+    }
+
+    /**
+     * Check if a given poisition contains an element that belongs to a 
+     * desired category.
+     * 
+     * \param type The category name.
+     * \param i The element row.
+     * \param j The element column.
+     * \return True if element belong to type. False otherwise.
+     */
+    public bool ElementIs(string type, int i, int j)
+    {
+        string elementsList = itemsCatalogue[type];
+        return elementsList.IndexOf(GetMapElement(i,j)) != -1;
+    }
+
+    /**
+     * Select a random position in the given area.
+     * 
+     * \param area The desired area.
+     * \return A random position index.
+     */
+    public int SelectRandomAreaPosition(int area)
+    {
+        int chosenIdx = -1;
+        int areaCount = 1;
+        int totalSize = csize * rsize;
+        for (int idx = 0; idx < totalSize; idx++)
+        {
+            if (areasMap[idx] == area)
+            {
+                if (UnityEngine.Random.Range(0, areaCount) == 0)
+                {
+                    chosenIdx = idx;
+                }
+                areaCount++;
+            }
+        }
+        return chosenIdx;
+    }
+
+    /**
+     * Select a random area.
+     * 
+     * \return A random chosen aresa.
+     */
+    public int SelectRandomArea()
+    {
+        HashSet<int> areas = new HashSet<int>(areasMap);
+        areas.Remove(0);
+        int[] areaArray = new int[areas.Count];
+        areas.CopyTo(areaArray);
+        return areaArray[UnityEngine.Random.Range(0, areaArray.Length)];
     }
 }
