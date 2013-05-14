@@ -139,6 +139,11 @@ public class BotControl : GridWorldBehaviour
 		}
 	}
 
+    public void DoAction(string command)
+    {
+        botActions.DoAction(command);
+    }
+
 	/**
 	 * Used by BotAction to notify the controller about the success of the given action.
 	 * 

@@ -386,6 +386,11 @@ public class GridWorldMap : MonoBehaviour
 		return doors[door];
 	}
 
+    public List<int> GetDoors()
+    {
+        return new List<int>(doors.Keys);
+    }
+
     /**
      * Return the nearest door that connect a1 with a2 (if any).
      * 

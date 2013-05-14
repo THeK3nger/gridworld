@@ -18,38 +18,55 @@ public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
     private Dictionary<int, bool> doorsState;   // Contains the doors status (open or closed).
 
 	private Queue<string> commandBuffer;
+    private BotControl control;
 
     public string interestType { get { return "D"; } }
 
 	// Use this for initialization
 	protected override void Awake () {
         base.Awake();
-		//control = gameObject.GetComponent<BotControl>();
+		control = gameObject.GetComponent<BotControl>();
         doorsState = new Dictionary<int, bool>();
 		commandBuffer = new Queue<string>();
+        // Initialize closed doors.
+        List<int> doors = mapWorld.GetDoors();
+        foreach (int d in doors)
+        {
+            doorsState[d] = false;
+        }
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+	    
 	}
+
+//    void UpdateGUI()
+//    {
+//        GameObject d12 = GameObject.Find("D12_State");
+//        GameObject d13 = GameObject.Find("D13_State");
+//        GameObject d32 = GameObject.Find("D32_State");
+//        d12.guiText.text = "D_12 = " + doorsState[108];
+//        d13.guiText.text = "D_13 = " + doorsState[67];
+//        d32.guiText.text = "D_32 = " + doorsState[131];
+//    }
 
 	public string GetNextAction() {
 		if (commandBuffer.Count != 0) {
 			return commandBuffer.Dequeue();
 		}
-        Debug.Log("Buffer empty! Search for new action.");
+        //Debug.Log("Buffer empty! Search for new action.");
 		Vector3 current = gameObject.transform.position;
 		int[] currentGrid = mapWorld.GetIndexesFromWorld(current.x,current.z);
 		int currentArea = mapWorld.GetArea(currentGrid[0],currentGrid[1]);
-        Debug.Log("Current Area = " + currentArea);
+        //Debug.Log("Current Area = " + currentArea);
 		HashSet<int> connectedAreas = ConnectedAreas(currentArea);
-        Debug.Log("Found " + connectedAreas.Count + " connected areas.");
+        //Debug.Log("Found " + connectedAreas.Count + " connected areas.");
 		// Pick a random area.
         int[] areaArray = new int[connectedAreas.Count];
         connectedAreas.CopyTo(areaArray);
 		int randomArea = areaArray[Random.Range(0,areaArray.Length)];
-        Debug.Log("I choose " + randomArea);
+        //Debug.Log("I choose " + randomArea);
 		// Move to door and then to target position.
         int door = mapWorld.GetDoorByAreas(currentArea, randomArea, currentGrid[0], currentGrid[1]);
         if (door == -1)
@@ -59,7 +76,7 @@ public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
         }
         else
         {
-            Debug.Log("Connected by " + door);
+            //Debug.Log("Connected by " + door);
             // Else move to the door and then to the next area.
             commandBuffer.Enqueue(MoveToDoor(door));
             commandBuffer.Enqueue(MoveToRandomAreaPoint(randomArea));
@@ -69,10 +86,12 @@ public class RandomAreaWalker : GridWorldBehaviour, IBotDeliberator {
 
     public void NotifyObjectChange(GameObject obj, char type)
     {
-        Debug.Log("Deliberator Notified!");
+        //Debug.Log("Deliberator Notified!");
         Door door = obj.GetComponent<Door>();
         Vector3 doorPos = obj.transform.position;
         int idx = mapWorld.GetArrayIndex(doorPos.x, doorPos.z);
+        if (!door.isOpen && doorsState[idx]) control.DoAction("stop");
+        commandBuffer.Clear();
         doorsState[idx] = door.isOpen;
     }
 
