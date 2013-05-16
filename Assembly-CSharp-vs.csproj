@@ -110,6 +110,7 @@
      <Compile Include="Assets\Script\GridWorldBehaviour.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
      <Compile Include="Assets\Script\NetDeliberator.cs" />
+     <Compile Include="Assets\Script\Network\GridWorldClient.cs" />
      <Compile Include="Assets\Script\Objects\Door.cs" />
      <Compile Include="Assets\Script\Objects\Gold.cs" />
      <Compile Include="Assets\Script\Objects\SmartObjects.cs" />
