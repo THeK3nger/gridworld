@@ -5,14 +5,19 @@ public class NetDeliberator : GridWorldBehaviour, IBotDeliberator {
 
     public bool averaging = false;
     public bool useAction = true;
+    public float tileSize; // In mm
+    public float xOffset;
+    public float yOffset;
 
     private bool needNewPos;
     private float myX;
     private float myY;
 
+    GameObject guiAlarm1;
+
 	// Use this for initialization
 	void Start () {
-	
+        guiAlarm1 = GameObject.Find("Receiving");
 	}
 	
 	// Update is called once per frame
@@ -22,9 +27,12 @@ public class NetDeliberator : GridWorldBehaviour, IBotDeliberator {
 
     public string GetNextAction()
     {
-        needNewPos = true;
-        // TODO: Do some tricks on myX and myY
-        return "move " + myX + " " + myY;
+        float xtmp = (myX-xOffset) / tileSize;
+        float ytmp = (myY-yOffset) / tileSize;
+        float xGrid = mapWorld.SnapCoord(xtmp);
+        float yGrid = mapWorld.SnapCoord(ytmp);
+        Debug.Log("Camera X: " + myX + " Camera Y: " + myY + "Grid X: " + xGrid + " Grid Y: " + yGrid);
+        return "move " + xGrid + " " + yGrid;
     }
 
     public void NotifyObjectChange(GameObject obj, char type)
@@ -39,16 +47,9 @@ public class NetDeliberator : GridWorldBehaviour, IBotDeliberator {
 
     public void newPosition(float x, float y)
     {
-        if (averaging || !needNewPos)
-        {
-            myX = (myX + x) * 0.5f;
-            myY = (myY + y) * 0.5f;
-        }
-        else
-        {
-            myX = x;
-            myY = y;
-            if (needNewPos) needNewPos = false;
-        }
+        myX = x;
+        myY = y;
+        Redfy red = guiAlarm1.GetComponent<Redfy>();
+        red.receivingTimeout = 0.5f;
     }
 }

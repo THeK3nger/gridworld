@@ -19,6 +19,8 @@ public class GridWorldClient : MonoBehaviour
     StreamReader theReader;
     private bool socketReady;
 
+    private GameObject bot;
+    private NetDeliberator netDelib;
 
     void Awake()
     {
@@ -34,18 +36,25 @@ public class GridWorldClient : MonoBehaviour
         {
             Debug.Log("Socket error: " + e);
         }
+        //InvokeRepeating("emptySocket", 3, 1);
     }
 
     void Update()
     {
+        if (bot == null)
+        {
+            bot = GameObject.Find("BotDiag(Clone)");
+            if (bot == null) return;
+            netDelib = bot.GetComponent<NetDeliberator>();
+        }
         string receivedText = readSocket();
         if (receivedText != "")
         {
             string[] foo = receivedText.Split('(');
             string[] bar = foo[1].Split(',');
             float x = float.Parse(bar[0]);
-            float y = float.Parse(bar[1].Remove(bar[1].Length));
-            Debug.Log("X: " + x + "; Y: " + y + ";");
+            float y = float.Parse(bar[1].Remove(bar[1].Length-1));
+            netDelib.newPosition(x, y);
         }
     }
 
@@ -65,6 +74,11 @@ public class GridWorldClient : MonoBehaviour
         String foo = theLine + "\r\n";
         theWriter.Write(foo);
         theWriter.Flush();
+    }
+
+    public void emptySocket()
+    {
+
     }
 
     void OnApplicationQuit()

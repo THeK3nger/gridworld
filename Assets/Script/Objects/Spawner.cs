@@ -27,6 +27,7 @@ public class Spawner : GridWorldBehaviour {
         {
             int randomArea = mapWorld.SelectRandomArea();
             int randomIdx = mapWorld.SelectRandomAreaPosition(randomArea);
+            if (mapWorld.GetMapElement(randomIdx) == 'G') return;
             int[] idx = mapWorld.GetPositionFromArrayIndex(randomIdx);
             float[] idxWorld = mapWorld.GetWorldFromIndexes(idx[0], idx[1]);
             Instantiate(obj, new Vector3(idxWorld[0], 0.5f, idxWorld[1]), Quaternion.Euler(rotation));

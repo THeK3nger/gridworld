@@ -1,5 +1,5 @@
-height 8
-width 10
+height 16
+width 20
 map
 ..........
 .X....LLL.

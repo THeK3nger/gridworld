@@ -12,7 +12,7 @@ using Pathfinding;
  *  - `drop` : Unload the gold in the area (if the area is valid).
  */
 [RequireComponent(typeof(BotActions))]
-public class PlayerAction : GridWorldBehaviour
+public class DiagAction : GridWorldBehaviour
 {
 
     private BotAttributes attributes;
@@ -20,6 +20,8 @@ public class PlayerAction : GridWorldBehaviour
 
     public float moveBaseSpeed = 2; 		/**< Walk speed in m/s. */
     public float speedDecreaseRate;         /**< Speed decrease rate by gold. */
+
+    public AudioClip goldGrab;
 
 	// Use this for initialization
     protected override void Awake()
@@ -33,13 +35,11 @@ public class PlayerAction : GridWorldBehaviour
     {
         parentAction.RegisterAbortAction(AbortCurrentAction);
         parentAction.RegisterNewAction("move", MoveTo);
-        parentAction.RegisterNewAction("grab", Grab);
-        parentAction.RegisterNewAction("drop", Drop);
     }
 	
 	// Update is called once per frame
 	void Update () {
-
+	
 	}
 
     public void AbortCurrentAction()
@@ -76,6 +76,29 @@ public class PlayerAction : GridWorldBehaviour
         float x = float.Parse(moveCommand[1]);
         float z = float.Parse(moveCommand[2]);
         MoveTo(x, z);
+        //MoveToWithoutPathfinding(x, z);
+    }
+
+    void MoveToWithoutPathfinding(float x, float z)
+    {
+        Vector3 target = new Vector3(x, 0, z);
+        int[] sizes = mapWorld.GetMapSize();
+        if (x < 0 || x > sizes[0]) return;
+        if (z < 0 || z > sizes[1]) return;
+        float moveSpeed = moveBaseSpeed * (float)System.Math.Exp(-speedDecreaseRate * attributes.goldCarrying);
+        animation.CrossFade("walk");
+        iTween.MoveTo(gameObject, iTween.Hash
+              (
+            "position", target,
+            "orienttopath", true,
+            "looktime", 1.0,
+            "lookahead", 0.05,
+            "axis", "y",
+            "y", 1,
+            "easetype", iTween.EaseType.linear,
+            "time", 1 / moveSpeed,
+            "oncomplete", "onMoveToPathComplete"
+            ));
     }
 
     /**
@@ -87,7 +110,7 @@ public class PlayerAction : GridWorldBehaviour
     {
         float moveSpeed = moveBaseSpeed * (float)System.Math.Exp(-speedDecreaseRate * attributes.goldCarrying);
         moveSpeed = System.Math.Max(0.5f, moveSpeed);
-        animation.CrossFade("zombi_walk");
+        animation.CrossFade("walk");
         Vector3[] array_path = path.vectorPath.ToArray();
         iTween.MoveTo(gameObject, iTween.Hash
                       (
@@ -109,18 +132,7 @@ public class PlayerAction : GridWorldBehaviour
     void onMoveToPathComplete()
     {
         animation.CrossFade("idle1");
-        /** DIAG EDIT **/
-        Vector3 position = gameObject.transform.position;
-        Collider[] hitColliders = Physics.OverlapSphere(position, 1.5f);
-        foreach (Collider c in hitColliders)
-        {
-            if (c.gameObject.name == "BotDiag(Clone)")
-            {
-                BotAttributes at = c.gameObject.GetComponent<BotAttributes>();
-                at.life = at.life -= 5;
-            }
-        }
-        /** END **/
+        Grab(null);
         parentAction.NotifyActionComplete();
         parentAction.NotifyActionSuccess();
         parentAction.NotifyAction("move");
@@ -154,8 +166,9 @@ public class PlayerAction : GridWorldBehaviour
         if (mapWorld.ElementIs("collectable", currentItem))
         {
             DestroyGameObjectByPosition(current, 'G');
-            attributes.goldCarrying += 100;
+            attributes.goldCarrying += 1;
             mapWorld.SetMapElement(current.x, current.z, '.');
+            AudioSource.PlayClipAtPoint(goldGrab, transform.position);
             parentAction.NotifyAction("grab");
             parentAction.NotifyActionSuccess();
         }
@@ -163,7 +176,6 @@ public class PlayerAction : GridWorldBehaviour
         {
             Debug.Log("Nothing to Grab!!!");
         }
-        parentAction.NotifyActionComplete();
         // TODO: How to invoke a return value?
     }
 
