@@ -12,7 +12,7 @@ using Pathfinding;
  *  - `drop` : Unload the gold in the area (if the area is valid).
  */
 [RequireComponent(typeof(BotActions))]
-public class PlayerAction : GridWorldBehaviour
+public class ZombieAction : GridWorldBehaviour
 {
 
     private BotAttributes attributes;
@@ -20,6 +20,8 @@ public class PlayerAction : GridWorldBehaviour
 
     public float moveBaseSpeed = 2; 		/**< Walk speed in m/s. */
     public float speedDecreaseRate;         /**< Speed decrease rate by gold. */
+
+    public AudioClip attack;
 
 	// Use this for initialization
     protected override void Awake()
@@ -39,6 +41,7 @@ public class PlayerAction : GridWorldBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+
 	}
 
     public void AbortCurrentAction()
@@ -86,7 +89,7 @@ public class PlayerAction : GridWorldBehaviour
     {
         float moveSpeed = moveBaseSpeed * (float)System.Math.Exp(-speedDecreaseRate * attributes.goldCarrying);
         moveSpeed = System.Math.Max(0.5f, moveSpeed);
-        animation.CrossFade("walk");
+        animation.CrossFade("zombi_walk");
         Vector3[] array_path = path.vectorPath.ToArray();
         iTween.MoveTo(gameObject, iTween.Hash
                       (
@@ -108,6 +111,19 @@ public class PlayerAction : GridWorldBehaviour
     void onMoveToPathComplete()
     {
         animation.CrossFade("idle1");
+        /** DIAG EDIT **/
+        Vector3 position = gameObject.transform.position;
+        Collider[] hitColliders = Physics.OverlapSphere(position, 1.5f);
+        foreach (Collider c in hitColliders)
+        {
+            if (c.gameObject.name == "BotDiag(Clone)")
+            {
+                BotAttributes at = c.gameObject.GetComponent<BotAttributes>();
+                AudioSource.PlayClipAtPoint(attack, transform.position);
+                at.life = at.life -= 5;
+            }
+        }
+        /** END **/
         parentAction.NotifyActionComplete();
         parentAction.NotifyActionSuccess();
         parentAction.NotifyAction("move");

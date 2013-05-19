@@ -24,6 +24,8 @@ public class GridWorldMap : MonoBehaviour
 	public GameObject floor;	/**< The object prebab used as "floor". */
 	public GameObject bot;		/**< The object prefab used as "bot". */
 	public GameObject door;		/**< The object prefab used as "door". */
+    public GameObject lava;		/**< The object prefab used as "lava". */
+    public GameObject enemy;
 
 	private GameObject astar;	/**< A reference to the A* object (for pathfinding). */
 	private char[] staticMap;	/**< The global representation of the world map. */
@@ -160,6 +162,9 @@ public class GridWorldMap : MonoBehaviour
 				case '.' :
 					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
 					break;
+                case 'L':
+                    Instantiate(lava, new Vector3(x, 0.05f, z), Quaternion.identity);
+                    break;
 				case 'X' :
 					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
 					Instantiate(bot, new Vector3(x,0.1f,z),Quaternion.Euler(Vector3.up * 90));
@@ -169,7 +174,7 @@ public class GridWorldMap : MonoBehaviour
 					break;
 				}
 			}
-		}	
+		}
 	}
 
 	/**

@@ -8,6 +8,7 @@ public class BotAttributes : GridWorldBehaviour {
     public bool speedBoost;
     public int keys { get; set; }
     public int spawnArea { get; set; }
+    public int life { get; set; }
 
 	// Use this for initialization
 	protected override void Awake () {

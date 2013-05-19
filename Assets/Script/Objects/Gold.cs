@@ -21,5 +21,4 @@ public class Gold : GridWorldBehaviour {
         goldSpawner.KillItem();
     }
 
-
 }
