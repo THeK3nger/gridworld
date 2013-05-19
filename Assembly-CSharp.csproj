@@ -99,9 +99,12 @@
      <Compile Include="Assets\AstarPathfindingProject\Utilities\SizeProfiler.cs" />
      <Compile Include="Assets\AstarPathfindingProject\Utilities\UnityReferenceHelper.cs" />
      <Compile Include="Assets\OpenDIAG\Scripts\DiagAction.cs" />
+     <Compile Include="Assets\OpenDIAG\Scripts\DiagBotAttributes.cs" />
      <Compile Include="Assets\OpenDIAG\Scripts\DiagGuiUpdater.cs" />
      <Compile Include="Assets\OpenDIAG\Scripts\NetDeliberator.cs" />
+     <Compile Include="Assets\OpenDIAG\Scripts\Network\GridWorldClient.cs" />
      <Compile Include="Assets\OpenDIAG\Scripts\Redfy.cs" />
+     <Compile Include="Assets\OpenDIAG\Scripts\ZombieAction.cs" />
      <Compile Include="Assets\Script\Bot\BotActions.cs" />
      <Compile Include="Assets\Script\Bot\BotAttributes.cs" />
      <Compile Include="Assets\Script\Bot\BotControl.cs" />
@@ -113,7 +116,6 @@
      <Compile Include="Assets\Script\FPSCounter.cs" />
      <Compile Include="Assets\Script\GridWorldBehaviour.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
-     <Compile Include="Assets\Script\Network\GridWorldClient.cs" />
      <Compile Include="Assets\Script\Objects\Door.cs" />
      <Compile Include="Assets\Script\Objects\Gold.cs" />
      <Compile Include="Assets\Script\Objects\SmartObjects.cs" />
@@ -125,15 +127,13 @@
      <Compile Include="Assets\Script\iTween.cs" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh2.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\DotNetZip\License.txt" />
-     <None Include="Assets\Maps\diag20x16.txt" />
      <None Include="Assets\Maps\shortcut.txt" />
-     <None Include="Assets\Maps\diag10x8.txt" />
+     <None Include="Assets\OpenDIAG\diag10x8.txt" />
      <None Include="Assets\Maps\doors_hell.txt" />
      <None Include="Assets\Doxygen\Editor\Resources\BaseDoxyfile.txt" />
      <None Include="Assets\AstarPathfindingProject\Editor\EditorAssets\Materials\Navmesh.shader" />
      <None Include="Assets\AstarPathfindingProject\Plugins\dependencies.txt" />
      <None Include="Assets\Maps\simple_map.txt" />
-     <None Include="Assets\Maps\diag.txt" />
      <None Include="Assets\AstarPathfindingProject\Plugins\JsonFx\License.txt" />
      <None Include="Assets\AstarPathfindingProject\Plugins\JsonFx\Readme.txt" />
      <None Include="Assets\AstarPathfindingProject\link.xml" />

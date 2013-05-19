@@ -175,8 +175,6 @@ public class GridWorldMap : MonoBehaviour
 				}
 			}
 		}
-        /** DIAG EDIT **/
-        Instantiate(enemy, new Vector3(0.5f, 0.1f, 7.5f), Quaternion.identity);
 	}
 
 	/**
