@@ -21,6 +21,8 @@ public class PlayerAction : GridWorldBehaviour
     public float moveBaseSpeed = 2; 		/**< Walk speed in m/s. */
     public float speedDecreaseRate;         /**< Speed decrease rate by gold. */
 
+    public AudioClip attack;
+
 	// Use this for initialization
     protected override void Awake()
     {
@@ -117,6 +119,7 @@ public class PlayerAction : GridWorldBehaviour
             if (c.gameObject.name == "BotDiag(Clone)")
             {
                 BotAttributes at = c.gameObject.GetComponent<BotAttributes>();
+                AudioSource.PlayClipAtPoint(attack, transform.position);
                 at.life = at.life -= 5;
             }
         }

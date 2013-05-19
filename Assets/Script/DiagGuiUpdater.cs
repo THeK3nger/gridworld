@@ -9,9 +9,11 @@ public class DiagGuiUpdater : MonoBehaviour {
     GameObject timerText;
 
     public AudioClip playerDeath;
+    public AudioClip timeIsrunningOut;
 
     public float timer = 90;
     public GameObject enemy;
+    private bool timeLow = false;
 
 	// Use this for initialization
 	void Awake () {
@@ -35,6 +37,12 @@ public class DiagGuiUpdater : MonoBehaviour {
         timer -= Time.deltaTime;
         if (timer > 0)
         {
+            if (timer < 15 && !timeLow)
+            {
+                AudioSource.PlayClipAtPoint(timeIsrunningOut, transform.position);
+                audio.pitch = 1.2f;
+                timeLow = true;
+            }
             score.guiText.text = "SCORE: " + botAtt.goldCarrying;
             life.guiText.text = "LIFE: " + botAtt.life;
             timerText.guiText.text = "TIME: " + Mathf.Round(timer*10)/10;
@@ -44,6 +52,7 @@ public class DiagGuiUpdater : MonoBehaviour {
             GameObject gameover = GameObject.Find("GAMEOVER");
             gameover.guiText.text = "TIME OUT!";
             AudioSource.PlayClipAtPoint(playerDeath, transform.position);
+            audio.Stop();
             Destroy(bot);
         }
 	}
