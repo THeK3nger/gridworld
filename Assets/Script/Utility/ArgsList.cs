@@ -57,6 +57,11 @@ public class ArgsList {
         this.args = args.Split(separator);
     }
 
+    public string[] ToStringArray()
+    {
+        return args.Clone() as string[];
+    }
+
     public override bool Equals(object obj)
     {
         // If parameter is null return false.
