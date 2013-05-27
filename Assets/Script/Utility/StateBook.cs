@@ -38,15 +38,18 @@ public class StateBook : MonoBehaviour {
 
     public bool Query(string name, string[] args) 
     {
+        if (!conditionsDB.ContainsKey(name)) return false;
         return conditionsDB[name].Contains(new ArgsList(args)); 
     }
 
     public bool Query(string name, string args)
     {
+        if (!conditionsDB.ContainsKey(name)) return false;
         return conditionsDB[name].Contains(new ArgsList(args));
     }
 
     // INDEXERS
+    // Query string is in the form: "condition_name:arg1 arg2 arg3 ..."
     public bool this[string query]
     {
         get
@@ -61,13 +64,17 @@ public class StateBook : MonoBehaviour {
             string theName = splitted[0];
             string args = splitted[1];
             int argsNum = args.Split(' ').Length;
+            // If true add the arglist to the list. If false remove it.
             if (value == true)
             {
+                // If the condition do not exist, create it.
                 if (!conditionsDB.ContainsKey(theName))
                 {
                     conditionsDB.Add(theName,new HashSet<ArgsList>());
                     predicatesArity.Add(theName, argsNum);
                 }
+                // You cannot add an arglist with different number of arguments for
+                // an existent condition.
                 if (argsNum != predicatesArity[theName])
                 {
                     throw new System.InvalidOperationException("Invalid arguments number!");
