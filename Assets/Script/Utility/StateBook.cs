@@ -126,6 +126,9 @@ public class StateBook : MonoBehaviour {
     }
 
     // ENUMERATORS
+    /*!
+     * Enumerator for the properties name in the database.
+     */
     public System.Collections.IEnumerable GetConditionsEnumerator()
     {
         foreach (KeyValuePair<string, HashSet<ArgsList>> entry in conditionsDB)
@@ -134,6 +137,14 @@ public class StateBook : MonoBehaviour {
         }
     }
 
+    /*!
+     * Enumerator for a given property.
+     * 
+     * This enumerator return all the argument tuple associated to a given
+     * condition.
+     * 
+     * /param name The condition name.
+     */
     public System.Collections.IEnumerable GetEnumerator(string name)
     {
         foreach (ArgsList al in conditionsDB[name])
@@ -142,6 +153,19 @@ public class StateBook : MonoBehaviour {
         }
     }
 
+    /*
+     * Enumerator for selective query.
+     * 
+     * This enumerator return all the argument tuple associated to a given 
+     * condition that match the given template.
+     * 
+     * A template is a string of the form "$var1 fixed1 fixed2 $var2 ..." where
+     * the element starting with the $ symbol are variable and the fixed
+     * ones must match the database argument.
+     * 
+     * \param name The property name.
+     * \param template The template string.     * 
+     */
     public System.Collections.IEnumerable GetEnumerator(string name, string template)
     {
         int unknow = 0;

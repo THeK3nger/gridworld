@@ -113,6 +113,9 @@
      <Compile Include="Assets\Script\Bot\ManualControl.cs" />
      <Compile Include="Assets\Script\CameraScript.cs" />
      <Compile Include="Assets\Script\ClickListener.cs" />
+     <Compile Include="Assets\Script\Deliberators\RandomAreaWalker.cs" />
+     <Compile Include="Assets\Script\Deliberators\RandomWalker.cs" />
+     <Compile Include="Assets\Script\Deliberators\SimpleCondition.cs" />
      <Compile Include="Assets\Script\FPSCounter.cs" />
      <Compile Include="Assets\Script\GridWorldBehaviour.cs" />
      <Compile Include="Assets\Script\GridWorldMap.cs" />
@@ -121,8 +124,6 @@
      <Compile Include="Assets\Script\Objects\SmartObjects.cs" />
      <Compile Include="Assets\Script\Objects\Spawner.cs" />
      <Compile Include="Assets\Script\Player\PlayerAction.cs" />
-     <Compile Include="Assets\Script\RandomAreaWalker.cs" />
-     <Compile Include="Assets\Script\RandomWalker.cs" />
      <Compile Include="Assets\Script\Utility\AreaFinder.cs" />
      <Compile Include="Assets\Script\Utility\ArgsList.cs" />
      <Compile Include="Assets\Script\Utility\StateBook.cs" />
