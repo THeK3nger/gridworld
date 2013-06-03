@@ -167,7 +167,7 @@ public class GridWorldMap : MonoBehaviour
                     break;
 				case 'X' :
 					Instantiate(floor,new Vector3(x,0.05f,z),Quaternion.identity);
-					Instantiate(bot, new Vector3(x,0.1f,z),Quaternion.Euler(Vector3.up * 90));
+					Instantiate(bot, new Vector3(x,0.1f,z),Quaternion.identity);
                     staticMap[i * csize + j] = '.';
 					break;
 				default:

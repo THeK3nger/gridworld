@@ -23,7 +23,7 @@ public class BotControl : GridWorldBehaviour
 	private int rsize, csize;				//Map size.
 	private BotActions botActions;  		//Reference to the BotAction component.
 	private IBotDeliberator deliberator;	//Reference to a IBotDeliberator interface.
-    private bool deliberatorOn;				//True if deliberator is ON. 
+    private bool deliberatorOn;				//True if deliberator is ON.
 	
 	private List<GameObject> objectInFov; 	// Contains the list of object in the FOV.
 
@@ -31,10 +31,13 @@ public class BotControl : GridWorldBehaviour
 	private enum Status { IDLE, EXECUTING };
 	private Status controlStatus;			// Controller Status.
 
+    public StateBook internalKnowledge;
+
 	// Use this for initialization
     protected override void Awake()
     {
         base.Awake();
+        internalKnowledge = gameObject.GetComponent<StateBook>();
         controlStatus = Status.IDLE;
         int[] sizes = mapWorld.GetMapSize();
         rsize = sizes[0];

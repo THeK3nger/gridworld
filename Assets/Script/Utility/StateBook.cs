@@ -94,6 +94,7 @@ public class StateBook : MonoBehaviour {
      */
     public void SetValue(string query, bool value)
     {
+        Debug.Log(query);
         string[] splitted = query.Split(':');
         string theName = splitted[0];
         string args = splitted[1];
@@ -168,35 +169,38 @@ public class StateBook : MonoBehaviour {
      */
     public System.Collections.IEnumerable GetEnumerator(string name, string template)
     {
-        int unknow = 0;
-        string[] splitted = template.Split(' ');
-        foreach (string s in splitted)
+        if (conditionsDB.ContainsKey(name))
         {
-            if (s.StartsWith("$"))
+            int unknow = 0;
+            string[] splitted = template.Split(' ');
+            foreach (string s in splitted)
             {
-                unknow++;
-            }
-        }
-        foreach (ArgsList al in conditionsDB[name])
-        {
-            string[] result = new string[unknow];
-            int idx = 0;
-            bool iPickThis = true;
-            for (int i = 0; i < al.Length; ++i)
-            {
-                if (splitted[i].StartsWith("$"))
+                if (s.StartsWith("$"))
                 {
-                    result[idx] = al[i];
-                    idx++;
-                }
-                else
-                {
-                    // If one item is 
-                    iPickThis = iPickThis && (splitted[i] == al[i]);
-                    if (!iPickThis) break;
+                    unknow++;
                 }
             }
-            if (iPickThis) yield return result;
+            foreach (ArgsList al in conditionsDB[name])
+            {
+                string[] result = new string[unknow];
+                int idx = 0;
+                bool iPickThis = true;
+                for (int i = 0; i < al.Length; ++i)
+                {
+                    if (splitted[i].StartsWith("$"))
+                    {
+                        result[idx] = al[i];
+                        idx++;
+                    }
+                    else
+                    {
+                        // If one item is 
+                        iPickThis = iPickThis && (splitted[i] == al[i]);
+                        if (!iPickThis) break;
+                    }
+                }
+                if (iPickThis) yield return result;
+            }
         }
     }
 
