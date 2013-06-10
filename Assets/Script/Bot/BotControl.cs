@@ -58,12 +58,12 @@ public class BotControl : GridWorldBehaviour
         // Disable deliberator if deliberator exist or manual control is enabled.
         ManualControl mc = gameObject.GetComponent<ManualControl>();
         deliberatorOn = (deliberator != null) &&
-            (mc != null) &&
-            !gameObject.GetComponent<ManualControl>().enabled;
+            ((mc == null) ||
+            !gameObject.GetComponent<ManualControl>().enabled);
         // Update current position in myMap
         Vector3 current = gameObject.transform.position;
         int[] idxs = mapWorld.GetIndexesFromWorld(current.x, current.z);
-        mapWorld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
+        //mapWorld.CopyRegion(myMap, idxs[0] - 1, idxs[1] - 1, 3, 3);
         // Run Thread Function Every `n` second
         InvokeRepeating("ThinkLoop", 0, thinkTick);
     }
@@ -137,6 +137,7 @@ public class BotControl : GridWorldBehaviour
 		if (controlStatus == Status.IDLE && deliberatorOn) {
             printMap();
 			string nextaction = deliberator.GetNextAction();
+			Debug.Log("NEXT ACTION: " + nextaction);
             if (nextaction != "")
             {
                 controlStatus = Status.EXECUTING;

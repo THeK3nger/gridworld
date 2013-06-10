@@ -7,7 +7,7 @@ public class SimpleCondition : GridWorldBehaviour, IBotDeliberator
     private BotControl control;
     private RandomWalker randomWalker;
 
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         control = gameObject.GetComponent<BotControl>();
