@@ -21,6 +21,7 @@ public class RoombaAction : GridWorldBehaviour
     public float moveBaseSpeed = 2; 		/**< Walk speed in m/s. */
     public float speedDecreaseRate;         /**< Speed decrease rate by gold. */
 	public int batteryLevel = 100;
+	public string TAG;
 	
 	private Dictionary<string,int[]> rooms;
 	public string currentRoom;
@@ -83,6 +84,10 @@ public class RoombaAction : GridWorldBehaviour
      */
     void MoveTo(string[] moveCommand)
     {
+		if (batteryLevel<=0) {
+			Debug.Log("BATTERY TOO LOW");
+			return;
+		}
         string new_room = moveCommand[1];
 		bool start_left = currentRoom == "A" || currentRoom == "F" || currentRoom == "E";
 		bool end_left = new_room == "A" || new_room == "F" || new_room == "E";
@@ -92,6 +97,7 @@ public class RoombaAction : GridWorldBehaviour
 			batteryLevel=100;
 		}
 		float[] dest = mapWorld.GetWorldFromIndexes(rooms[new_room][1],rooms[new_room][0]);
+		currentRoom = new_room;
         MoveTo(dest[0], dest[1]);
     }
 
@@ -149,5 +155,11 @@ public class RoombaAction : GridWorldBehaviour
 	
 	public void Clean(string[] param) {
 			
+	}
+	
+	public string GetState() {
+		string batteryState = "HIGH";
+		if (batteryLevel<50) batteryState = "LOW"; 
+		return TAG + " " + currentRoom + " " + batteryState;
 	}
 }

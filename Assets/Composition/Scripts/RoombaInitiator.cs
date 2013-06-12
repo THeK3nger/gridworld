@@ -13,6 +13,8 @@ public class RoombaInitiator : MonoBehaviour {
 		roomba2.name = "Roomba2";
 		GameObject.Find("Roomba1").GetComponent<RoombaAction>().currentRoom = "A";
 		GameObject.Find("Roomba2").GetComponent<RoombaAction>().currentRoom = "B";
+		GameObject.Find("Roomba1").GetComponent<RoombaAction>().TAG = "ROOMBA1";
+		GameObject.Find("Roomba2").GetComponent<RoombaAction>().TAG = "ROOMBA2";
 	}
 	
 	// Update is called once per frame
